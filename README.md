@@ -1,17 +1,21 @@
-# Проект: Место
+# **Проект 3: Mesto**  
 
-### Обзор
 
-* Figma
-* Картинки
+## **Содержание проекта**  
+<br>  
 
-**Figma**
++ ul На текущий момент сайт представляет коллекцию карточек
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
++ ul Проект адаптирован под мобильные устройства  
 
-**Картинки**
++ ul скрытые попапы(задел на будущие изменение)  
+___
+## **Cтек технологий применённый в данном проекте**  
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
 
-Удачи!
+![](https://img.shields.io/badge/&zwnj;-HTML5-informational?style=flat&logo=HTML5&logoColor=yellowwhite&color=2bbc8a) ![](https://img.shields.io/badge/&zwnj;-CSS3-informational?style=flat&logo=CSS3&logoColor=00aeff&color=2bbc8a) ![](https://img.shields.io/badge/&zwnj;-BEM____Nested-informational?style=flat&logo=BEM&logoColor=white&color=2bbc8a)  
+
+
+___
+**GitHub Pages** 
+https://zheniaeu.github.io/Mesto/
