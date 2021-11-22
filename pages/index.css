@@ -4,14 +4,35 @@
 /*Шрифтируем*/
 @import url(../vendors/fonts.css);
 
-/*Подключаю боди*/
+/*бодируем*/
 @import url(../blocks/root/root.css);
 
-/*Подключаю header*/
+/*хэдируем*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
-/*main*/
+/*мейнируем*/
 @import url(../blocks/main/content.css);
 
+/*профилируем*/
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__main/profile__main.css);
+@import url(../blocks/profile/__botton-edit/profile__botton-edit.css);
+@import url(../blocks/profile/__text/profile__text.css);
+@import url(../blocks/profile/__botton-add/profile__botton-add.css);
+
+
+/*элементируем*/
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/elements/__list/element__list.css);
+@import url(../blocks/elements/__card/element__card.css);
+@import url(../blocks/elements/__cards-item/element__cards-item.css);
+@import url(../blocks/elements/__font/element__font.css);
+@import url(../blocks/elements/__titel/element__titel.css);
+@import url(../blocks/elements/__heart-botton/element__heart-botton.css);
+
+/*футурируем*/
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
