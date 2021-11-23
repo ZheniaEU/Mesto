@@ -1,5 +1,5 @@
 .profile__info{
    display: flex;
-   justify-content: space-between;
-   outline: darkviolet 2px solid;
+   flex-wrap: wrap;
+   width: 100%;
 }

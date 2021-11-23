@@ -1,0 +1,12 @@
+.element__card{
+   display: block;
+   flex-wrap: wrap;
+   align-content: start;
+   width: 282px;
+   height: 361px;
+   padding: 0;
+   list-style: none;
+   background-color: white;
+   
+   outline: green 2px solid;
+}

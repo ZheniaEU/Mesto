@@ -1,9 +1,9 @@
+/* Почему? почему этот блок имеет столько пространство под собой? что его создаёт? */
 .profile__name{
    font-size: 42px;
    line-height: 48px;
    font-weight: 500;
-
-   padding: 22px 18px 0 0;
-   margin: 0;
+   white-space: nowrap;
+   margin: 22px 0 0;
    color: #fff;
 }

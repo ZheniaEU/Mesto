@@ -1,0 +1,12 @@
+.profile__botton-add{
+   align-self: center;
+   width: 150px;
+   height: 50px;
+   margin-bottom: 0;
+   margin-left: auto; /*ааа какое хитрое свойство позволяет отодвинуть 4ый блок без дополнительной обёртки 1 2 3 элемента флекс блока! https://i.imgur.com/0xqcqyo.png*/
+   padding: 0;
+   background-color: #000;
+   background-image: url(../../../images/Button-add.svg);
+   background-size: cover;
+   border: none;
+}
