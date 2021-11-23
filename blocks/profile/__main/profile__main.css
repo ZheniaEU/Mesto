@@ -1,0 +1,6 @@
+.profile__main{
+   display: flex;
+   flex-wrap: wrap;
+   width: 336px;
+   outline: green 2px solid;
+}
