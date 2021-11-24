@@ -33,6 +33,7 @@
 @import url(../blocks/elements/__font/element__font.css);
 @import url(../blocks/elements/__titel/element__titel.css);
 @import url(../blocks/elements/__heart-botton/element__heart-botton.css);
+@import url(../blocks/elements/__heart-botton/_active/element__heart-botton_active.css);
 
 /*футурируем*/
 @import url(../blocks/footer/footer.css);
@@ -41,6 +42,7 @@
 /*хммм а я ведь это изначально самая такая часть которая меня привлекает и я не мог её дождатся когда же появятся попапы*/
 /*попапируем!*/
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__titel/popup__titel.css);

@@ -19,3 +19,11 @@
       margin-top: 34px;
    }
 }
+
+.profile__botton-edit:hover{
+   opacity: 60%;
+}
+
+.profile__botton-edit:focus{
+   outline: 3px solid dodgerblue;
+}

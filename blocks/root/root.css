@@ -11,3 +11,19 @@
    -ms-text-size-adjust: 100%;
    -moz-text-size-adjust: 100%;
 }
+
+input::-webkit-input-placeholder{
+   font-family: 'Inter', Tahoma, sans-serif;
+}
+
+input::-moz-placeholder{
+   font-family: 'Inter', Tahoma, sans-serif;
+}
+
+input::-ms-input-placeholder{
+   font-family: 'Inter', Tahoma, sans-serif;
+}
+
+input::placeholder{
+   font-family: 'Inter', Tahoma, sans-serif;
+}

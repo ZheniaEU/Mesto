@@ -7,7 +7,6 @@
    background: #fff;
    border-radius: 10px;
    position: relative;
-   outline: 2px red solid;
 }
 
 @media screen and (max-width: 596px){   /*прям на той же точке где и карточки слохопываются до 1*/

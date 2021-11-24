@@ -1,5 +1,5 @@
 .popup{
-   display: flex;  /* о да, оно!*/
+   display: none;  /* о да, оно!*/
    max-width: 880px;
    max-height: 100%;
    margin: 0 auto;
@@ -12,5 +12,4 @@
    /* background-color: black; */
    /* opacity: 50%; выгнал товыгнал, но он дверь входную не закрыл, нужно закрыть */
    background-color: rgba(0, 0, 0, 0.5) ;
-   outline: 2px sandybrown solid;
 }

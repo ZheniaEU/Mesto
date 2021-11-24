@@ -18,3 +18,11 @@
       background-image: url(../../../images/Button-add2.svg);
    }
 }
+
+.profile__botton-add:hover{
+   opacity: 60%;
+}
+
+.profile__botton-add:focus{
+   outline: 3px solid dodgerblue;
+}

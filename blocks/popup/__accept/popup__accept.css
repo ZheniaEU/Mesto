@@ -7,6 +7,7 @@
    padding: 0;
    background-color: black;
    color: white;
+   border-radius: 2px;
    border: none; /* заметил какую-то окантовку вокруг кнопки, хоп и нет её в фигме её нет*/
 
 }
@@ -19,4 +20,12 @@
       font-size: 14px;
       line-height: 17px;
    }
+}
+
+.popup__accept:hover{
+   opacity: 60%;
+}
+
+.popup__accept:focus{
+   outline: 3px solid dodgerblue; /*ну почему бы и нет?*/ /*я вот люблю жамкать табом*/ /*и цвет мне такой тоже нравится в аутлайне на кнопках*/
 }

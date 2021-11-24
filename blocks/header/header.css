@@ -3,7 +3,7 @@
    margin: 0 auto;
    padding-top: 45px;
    display: flex;
-   border-bottom: 1px solid darkslategray;
+   border-bottom: 1px solid #545454;
 }
 
 @media screen and (max-width: 651px){
