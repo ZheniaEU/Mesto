@@ -3,24 +3,27 @@
    grid-template-columns: repeat(1, 282px);
    grid-template-rows: repeat(6, auto);
    gap: 20px 17px;
-   margin: 0;
+   justify-content: center;
+   margin: 0 auto;
    padding: 0;
-} */
+   width: 288px;
+} 
 
-/* @media screen and (min-width: 596px){
+@media screen and (min-width: 596px){
    .element__list{
       grid-template-columns: repeat(2, 282px);
       grid-template-rows: repeat(3, auto);
    }
 }
 
-@media screen and (min-width: 880px){
+@media screen and (min-width: 900px){
    .element__list{
      grid-template-columns: repeat(3, 282px);
    }
  } */
 
 /*мои попытки сверстать дестоп фёрст*/
+
 .element__list{
    display: grid;
    grid-template-columns: repeat(3, 282px);
@@ -30,7 +33,7 @@
    justify-content: center;
 }
 
-@media screen and (max-width: 880px){
+@media screen and (max-width: 900px){
    .element__list{
       grid-template-columns: repeat(2, 282px);
       grid-template-rows: repeat(3, auto);

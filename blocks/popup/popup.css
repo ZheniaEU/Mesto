@@ -1,0 +1,16 @@
+.popup{
+   display: flex;  /* о да, оно!*/
+   max-width: 880px;
+   max-height: 100%;
+   margin: 0 auto;
+   position: fixed;
+   top: 0;
+   right: 0;
+   left: 0;
+   bottom: 0; /* какие-то титанические усилия потребывались выгнать попа наулицу погулять за пределы квартиры, я ему даже денег давал он отказывался*/
+   /* border-radius: 10px; ошибся контейнером, но эфект получился неплохой в купе с outline: 2px sandybrown solid; */
+   /* background-color: black; */
+   /* opacity: 50%; выгнал товыгнал, но он дверь входную не закрыл, нужно закрыть */
+   background-color: rgba(0, 0, 0, 0.5) ;
+   outline: 2px sandybrown solid;
+}

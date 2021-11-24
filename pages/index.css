@@ -25,7 +25,6 @@
 @import url(../blocks/profile/__text/profile__text.css);
 @import url(../blocks/profile/__botton-add/profile__botton-add.css);
 
-
 /*элементируем*/
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/element__list.css);
@@ -38,3 +37,13 @@
 /*футурируем*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+/*хммм а я ведь это изначально самая такая часть которая меня привлекает и я не мог её дождатся когда же появятся попапы*/
+/*попапируем!*/
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__titel/popup__titel.css);
+@import url(../blocks/popup/__edit-name/popup__edit-name.css);
+@import url(../blocks/popup/__edit-description/popup__edit-description.css);
+@import url(../blocks/popup/__accept/popup__accept.css);
