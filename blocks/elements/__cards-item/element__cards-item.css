@@ -4,4 +4,6 @@
    display: block;
    margin: 0;
    padding: 0;
+   border-top-left-radius: 12px; /* вот жеж я крысавчег обошлись без overflow: hidden; в карточке 🐀*/
+   border-top-right-radius: 12px;
 }

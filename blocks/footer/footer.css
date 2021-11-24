@@ -2,5 +2,11 @@
    max-width: 880px;
    margin: 66px auto 0;
    padding-bottom: 60px;
-   outline: deepskyblue 2px solid;
+}
+
+@media screen and (max-width: 651px){
+   .footer{
+      margin: 48px auto 0;
+      padding-bottom: 36px;
+   }
 }

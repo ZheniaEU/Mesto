@@ -5,3 +5,9 @@
    display: flex;
    border-bottom: 1px solid darkslategray;
 }
+
+@media screen and (max-width: 651px){
+   .header{
+      padding-top: 28px;
+   }
+}

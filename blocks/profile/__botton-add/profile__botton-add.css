@@ -10,3 +10,11 @@
    background-size: cover;
    border: none;
 }
+
+@media screen and (max-width: 651px){
+   .profile__botton-add{
+      margin: 34px auto 0;
+      width: 282px;
+      background-image: url(../../../images/Button-add2.svg);
+   }
+}
