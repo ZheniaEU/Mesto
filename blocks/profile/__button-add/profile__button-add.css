@@ -1,4 +1,4 @@
-.profile__botton-add{
+.profile__button-add{
    align-self: center;
    width: 150px;
    height: 50px;
@@ -12,17 +12,17 @@
 }
 
 @media screen and (max-width: 651px){
-   .profile__botton-add{
+   .profile__button-add{
       margin: 34px auto 0;
       width: 282px;
       background-image: url(../../../images/Button-add2.svg);
    }
 }
 
-.profile__botton-add:hover{
+.profile__button-add:hover{
    opacity: 60%;
 }
 
-.profile__botton-add:focus{
+.profile__button-add:focus{
    outline: 3px solid dodgerblue;
 }

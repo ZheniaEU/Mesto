@@ -1,9 +1,10 @@
 .element__cards-item{
+   display: block;
    width: 282px;
    height: 282px;
-   display: block;
    margin: 0;
    padding: 0;
-   border-top-left-radius: 12px; /* вот жеж я крысавчег обошлись без overflow: hidden; в карточке 🐀*/
-   border-top-right-radius: 12px;
+   border-top-left-radius: 10px; /* вот жеж я крысавчег обошлись без overflow: hidden; в карточке 🐀*/
+   border-top-right-radius: 10px;
+   overflow: hidden;
 }

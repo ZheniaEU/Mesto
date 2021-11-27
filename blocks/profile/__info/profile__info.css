@@ -6,7 +6,6 @@
 
 @media screen and (max-width: 651px){
    .profile__info{
-
       min-width: none;
       flex-direction: column;
       flex-wrap: none;

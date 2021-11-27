@@ -1,10 +1,13 @@
 .popup__close{
    width: 32px;
    height: 32px;
+   background-color: rgba(0, 0, 0, 0);
    background-image: url(../../../images/Close-Icon.svg);
+   cursor: pointer;
    position: absolute;
    right: -40px;
-   top: -40px
+   top: -40px;
+   border: none;
 }
 
 @media screen and (max-width: 596px){
@@ -19,4 +22,8 @@
 
 .popup__close:hover{
    opacity: 60%;
+}
+
+.popup__close:focus{
+   outline: 3px solid dodgerblue; /*ну почему бы и нет?*/ /*я вот люблю жамкать табом*/ /*и цвет мне такой тоже нравится в аутлайне на кнопках*/
 }

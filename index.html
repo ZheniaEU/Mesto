@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,10 +14,11 @@
 </head>
 
 <!-- Нет времени на раскачку, делаем сразу быстро и качественно -->
+
 <body class="root">
 
    <header class="header">
-      <img class="header__logo" src="images/logo/logo.svg" alt="изобретатель акваланга">
+      <img class="header__logo" src="images/logo/logo.svg" alt="логотип">
    </header>
 
    <main class="content">
@@ -32,52 +34,55 @@
                   <h1 class="profile__name">Жак-Ив Кусто</h1>
                   <p class="profile__text">Исследователь океана</p>
                </div>
-               <button class="profile__botton-edit" type="button" ></button>
+               <button class="profile__button-edit" type="button"></button>
             </div>
-            <button class="profile__botton-add" type="button"></button>
+            <button class="profile__button-add" type="button"></button>
          </article>
       </section>
 
-      <section class="popup">  <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
-         <form class="popup__container">
-            <div class="popup__close"></div>
-               <h2 class="popup__titel">Редактировать профиль</h2>
-               <input class="popup__edit-name" type="text" value="Жак-Ив Кусто">
-               <input class="popup__edit-description" type="text" value="Исследователь океана">
-               <button class="popup__accept">Сохранить</button>
+      <section class="popup popup_opened  ">
+         <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
+         <form class="popup__container" name="">
+            <button class="popup__close"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input class="popup__edit-name" type="text" value="Жак-Ив Кусто">
+            <input class="popup__edit-description" type="text" value="Исследователь океана">
+            <button class="popup__accept">Сохранить</button>
          </form>
       </section>
 
-      <section class="elements"> <!--  это не ошибка это так задумано! всё по БЭМ! -->
+      <section class="elements">
+         <!--  это не ошибка это так задумано! всё по БЭМ! -->
          <ul class="element__list">
             <li class="element__card">
-               <img class="element__cards-item" src="./images/place/kirill-pershin.jpg" alt="не понял">
-               <h2 class="element__titel">Карачаевск</h2>
+               <img class="element__cards-item" src="images/place/Big-Blue-Hole.jpg" alt="не понял">
+               <h2 class="element__title">Большая голубая дыра</h2>
                <button class="element__heart-botton element__heart-botton_active"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="./images/place/kirill-pershin.jpg" alt="подумал">
-               <h2 class="element__titel">Карачаевск</h2>
+               <img class="element__cards-item" src="images/place/Amazonka.jpg" alt="подумал">
+               <h2 class="element__title">Амазонка</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="./images/place/kirill-pershin.jpg" alt="опять не понял">
-               <h2 class="element__titel">Карачаевск</h2>
+               <img class="element__cards-item" src="/images/place/Great_Barrier_Reef.jpg" alt="опять не понял">
+               <h2 class="element__title">Большой Барьерный риф</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="./images/place/kirill-pershin.jpg" alt="потом ещё раз подумал">
-               <h2 class="element__titel">Карачаевск</h2>
+               <img class="element__cards-item" src="/images/place/Wharariki.jpg" alt="потом ещё раз подумал">
+               <h2 class="element__title">Варарики</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="./images/place/kirill-pershin.jpg" alt="и потом не понял">
-               <h2 class="element__titel">Карачаевск</h2>
+               <img class="element__cards-item" src="/images/place/Moraine_Lake.jpg" alt="и потом не понял">
+               <h2 class="element__title">Морейн</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="./images/place/kirill-pershin.jpg" alt="а потом как понял, что не понял">
-               <h2 class="element__titel">Карачаевск</h2>
+               <img class="element__cards-item" src="/images/place/Great-Barrier-Reef.jpg"
+                  alt="а потом как понял, что не понял">
+               <h2 class="element__title">что-то</h2>
                <button class="element__heart-botton"></button>
             </li>
          </ul>
@@ -90,4 +95,5 @@
    </footer>
 
 </body>
+
 </html>

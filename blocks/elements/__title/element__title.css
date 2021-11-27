@@ -1,5 +1,4 @@
-.element__titel{
-   display: inline-block;
+.element__title{
    font-size: 24px;
    line-height: 29px;
    text-overflow: ellipsis; /*чуть не забыл*/

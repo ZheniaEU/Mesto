@@ -1,13 +1,17 @@
 .element__card{
-   display: block;
+   display: flex;
    flex-wrap: wrap;
    align-content: start;
-   width: 282px;
-   height: 361px;
-   padding: 0;
    list-style: none;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   width: 282px;
+   /* height: 361px; */
+   min-height: 361px;
+   padding: 0;
    background-color: white;
    margin: 0 auto;
-   /* overflow: hidden; */
-   border-radius: 12px; /*  его посмотреть но оно точно больше чем 10px, я проверил через пиксель пёрфект и жмакнул 12px https://i.imgur.com/xXve71u.png верхняя оригинал в фигме, снизу моё с 10px*/
+   overflow: hidden;
+   border-radius: 10px;
+   /* border-radius: 13px;  его посмотреть но оно точно больше чем 10px, я проверил через пиксель пёрфект и жмакнул 13px https://i.imgur.com/xXve71u.png верхняя оригинал в фигме, снизу моё с 10px */
 }
