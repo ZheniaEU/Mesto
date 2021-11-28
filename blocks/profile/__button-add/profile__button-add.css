@@ -8,6 +8,7 @@
    background-color: #000;
    background-image: url(../../../images/Button-add.svg);
    background-size: cover;
+   cursor: pointer;
    border: none;
 }
 

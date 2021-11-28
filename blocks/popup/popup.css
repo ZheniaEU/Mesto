@@ -2,7 +2,6 @@
    display: none;  /* о да, оно!*/
    align-items: center; /*удалить этоту дичь после ревью и по человечьи выровнить контент, а не по центру*/
    justify-content: center; /* :?%;№%; *?:;%?*:%"№;, чтоб у дизайнера дети в магазин через соседний город ходили за хлебом с таким дизайном https://i.imgur.com/zODBg8z.png*/
-   max-width: 880px;
    max-height: 100%;
    margin: 0 auto;
    position: fixed;

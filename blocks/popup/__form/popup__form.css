@@ -1,4 +1,4 @@
-.popup__form-kashpirovsky{
+.popup__form{
    display: flex;
    flex-direction: column; /*уже на середине вёрстки заметил, что выронить можно не по левому краю контент, а нетрировав его, конечно же цетриру через флекс бокс*/
    /* width: 430px; */

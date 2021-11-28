@@ -14,7 +14,6 @@
 </head>
 
 <body class="root">
-
    <header class="header">
       <img class="header__logo" src="images/logo/logo.svg" alt="логотип">
    </header>
@@ -24,7 +23,7 @@
       <!-- шикарно, шикарно, написав предыдущий комментарий и не закоментировав его, я искал какой же это крот даёт даёт растояние между хедером и профилем, вот оно как чёрный крот, на чёрном фоне 👀 -->
       <section class="profile">
          <article class="profile__info">
-            <img class="profile__avatar" src="images/avatar/avatar.png" alt="avatar">
+            <img class="profile__avatar" src="images/avatar/avatar.png" alt="аватар">
             <!-- ох уж этот флекс бокс, в нём живут кроты:( ну почему мне так сложно передти на гриды? чтоб верстать, а не гонятся за кротами 😿 -->
             <div class="profile__box-text">
                <div class="profile__main">
@@ -37,54 +36,53 @@
          </article>
       </section>
 
-      <section class="popup popup_opened"> <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
+      <div class="popup popup_opened"> <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
          <div class="popup__container">
-            <button class="popup__close"></button>
+            <button class="popup__close" type="button"></button>
             <!--  это же тайтл модального окна? мы из него ничего не собираем? ничего не отправляем? значит в форм не вносим -->
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form-kashpirovsky" name="form">
+            <form class="popup__form" name="form">
                <input class="popup__edit" type="text" placeholder="Ведите своё имя" name="user-name">
                <input class="popup__edit" type="text" placeholder="Описание деятельности" name="user-description">
-               <button class="popup__accept">Сохранить</button>
+               <button class="popup__accept" type="submit">Сохранить</button>
             </form>
         </div>
-      </section>
+      </div>
 
-      <section class="element"> <!--  это не ошибка это так задумано! всё по БЭМ! -->
+      <section class="element">
          <ul class="element__list">
             <li class="element__card">
-               <img class="element__cards-item" src="images/place/Big-Blue-Hole.jpg" alt="не понял">
+               <img class="element__cards-item" src="images/place/Big-Blue-Hole.jpg" alt="Большой голубой дыры">
                <h2 class="element__title">Большая голубая дыра</h2>
-               <button class="element__heart-botton element__heart-botton_active"></button>
+               <button class="element__heart-botton element__heart-botton_active" type="button"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="images/place/Amazonka.jpg" alt="подумал">
+               <img class="element__cards-item" src="images/place/Amazonka.jpg" alt="река Амазонка">
                <h2 class="element__title">Амазонка</h2>
-               <button class="element__heart-botton"></button>
+               <button class="element__heart-botton" type="button"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="images/place/Great_Barrier_Reef.jpg" alt="опять не понял">
+               <img class="element__cards-item" src="images/place/Great_Barrier_Reef.jpg" alt="Больщой Барьерный риф">
                <h2 class="element__title">Большой Барьерный риф</h2>
-               <button class="element__heart-botton"></button>
+               <button class="element__heart-botton" type="button"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="images/place/клуб-орлиного-глаза.jpg" alt="потом ещё раз подумал">
+               <img class="element__cards-item" src="images/place/клуб-орлиного-глаза.jpg" alt="В таверне">
                <h2 class="element__title">Клуб Орлиного глаза</h2>
-               <button class="element__heart-botton"></button>
+               <button class="element__heart-botton" type="button"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="images/place/Moraine_Lake.jpg" alt="и потом не понял">
+               <img class="element__cards-item" src="images/place/Moraine_Lake.jpg" alt="озеро Морейн">
                <h2 class="element__title">Морейн</h2>
-               <button class="element__heart-botton"></button>
+               <button class="element__heart-botton" type="button"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="images/place/Great-Barrier-Reef.jpg" alt="а потом как понял, что не понял">
+               <img class="element__cards-item" src="images/place/Great-Barrier-Reef.jpg" alt="эта карточка ещё не заполнена">
                <h2 class="element__title">что-то</h2>
-               <button class="element__heart-botton"></button>
+               <button class="element__heart-botton" type="button"></button>
             </li>
          </ul>
       </section>
-
    </main>
 
    <footer class="footer">
@@ -92,3 +90,5 @@
    </footer>
 
 </body>
+
+</html>
