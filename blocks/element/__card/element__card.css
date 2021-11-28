@@ -1,6 +1,7 @@
 .element__card{
    display: flex;
    flex-wrap: wrap;
+   justify-content: space-between;
    align-content: start;
    list-style: none;
    white-space: nowrap;

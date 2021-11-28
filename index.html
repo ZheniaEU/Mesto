@@ -13,8 +13,6 @@
    <title>Mesto</title>
 </head>
 
-<!-- Нет времени на раскачку, делаем сразу быстро и качественно -->
-
 <body class="root">
 
    <header class="header">
@@ -22,7 +20,6 @@
    </header>
 
    <main class="content">
-      <!-- что не так с этой сраной фигмой почему размеры указаны одни, а она с этими размерами вообще не алло?-->
       <!-- в пень флек, делаем секцию гридом, а то в флексе водится слишком много кротов -->
       <!-- шикарно, шикарно, написав предыдущий комментарий и не закоментировав его, я искал какой же это крот даёт даёт растояние между хедером и профилем, вот оно как чёрный крот, на чёрном фоне 👀 -->
       <section class="profile">
@@ -40,19 +37,20 @@
          </article>
       </section>
 
-      <section class="popup popup_opened  ">
-         <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
-         <form class="popup__container" name="">
+      <section class="popup popup_opened"> <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
+         <div class="popup__container">
             <button class="popup__close"></button>
+            <!--  это же тайтл модального окна? мы из него ничего не собираем? ничего не отправляем? значит в форм не вносим -->
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__edit-name" type="text" value="Жак-Ив Кусто">
-            <input class="popup__edit-description" type="text" value="Исследователь океана">
-            <button class="popup__accept">Сохранить</button>
-         </form>
+            <form class="popup__form-kashpirovsky" name="form">
+               <input class="popup__edit" type="text" placeholder="Ведите своё имя" name="user-name">
+               <input class="popup__edit" type="text" placeholder="Описание деятельности" name="user-description">
+               <button class="popup__accept">Сохранить</button>
+            </form>
+        </div>
       </section>
 
-      <section class="elements">
-         <!--  это не ошибка это так задумано! всё по БЭМ! -->
+      <section class="element"> <!--  это не ошибка это так задумано! всё по БЭМ! -->
          <ul class="element__list">
             <li class="element__card">
                <img class="element__cards-item" src="images/place/Big-Blue-Hole.jpg" alt="не понял">
@@ -65,23 +63,22 @@
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="/images/place/Great_Barrier_Reef.jpg" alt="опять не понял">
+               <img class="element__cards-item" src="images/place/Great_Barrier_Reef.jpg" alt="опять не понял">
                <h2 class="element__title">Большой Барьерный риф</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="/images/place/Wharariki.jpg" alt="потом ещё раз подумал">
-               <h2 class="element__title">Варарики</h2>
+               <img class="element__cards-item" src="images/place/клуб-орлиного-глаза.jpg" alt="потом ещё раз подумал">
+               <h2 class="element__title">Клуб Орлиного глаза</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="/images/place/Moraine_Lake.jpg" alt="и потом не понял">
+               <img class="element__cards-item" src="images/place/Moraine_Lake.jpg" alt="и потом не понял">
                <h2 class="element__title">Морейн</h2>
                <button class="element__heart-botton"></button>
             </li>
             <li class="element__card">
-               <img class="element__cards-item" src="/images/place/Great-Barrier-Reef.jpg"
-                  alt="а потом как понял, что не понял">
+               <img class="element__cards-item" src="images/place/Great-Barrier-Reef.jpg" alt="а потом как понял, что не понял">
                <h2 class="element__title">что-то</h2>
                <button class="element__heart-botton"></button>
             </li>
@@ -95,5 +92,3 @@
    </footer>
 
 </body>
-
-</html>

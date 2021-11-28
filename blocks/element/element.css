@@ -1,9 +1,9 @@
-.elements{
+.element{
    margin-top: 51px;
 }
 
 @media screen and (max-width: 651px){
-   .elements{
+   .element{
       margin-top: 28px;
    }
 }

@@ -7,4 +7,5 @@
    border-top-left-radius: 10px; /* вот жеж я крысавчег обошлись без overflow: hidden; в карточке 🐀*/
    border-top-right-radius: 10px;
    overflow: hidden;
+   object-fit: cover;
 }

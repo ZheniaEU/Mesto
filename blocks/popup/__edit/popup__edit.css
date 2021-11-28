@@ -1,4 +1,4 @@
-.popup__edit-name{
+.popup__edit{
    font-size: 14px;
    line-height: 17px;
    font-weight: 500; /* вот хоть бейте меня сапогом в фигме в описании указан 400, но пофакту там 500, я поставил 500. Вот сравнения толщены шрифта https://i.imgur.com/S7AxYEh.png верхняя 400 нижняя это макет фигмы. */ /*но может есть какой-то крот который подгрызает каким-то свойством шрифт о котором я не знаю*/
@@ -11,8 +11,30 @@
 }
 
 @media screen and (max-width: 596px){
-   .popup__edit-name{
+   .popup__edit{
       width: 238px;
       margin-top: 75px; /* мне не нравится как это сделал дизайнер, я бы сделал карточку меньше, ну что за 75px он что на этом поле коней собрался пасти? 🐴*/
    }
+}
+
+
+.popup__edit:not(:first-child){
+   margin: 30px auto 0;
+}
+
+/* стилизовал чутка плейсхолдер*/
+.popup__edit::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+   font-family: 'Inter', Tahoma, sans-serif;
+   opacity: 100%; /* Firefox */
+   color: black;
+}
+ 
+.popup__edit:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   font-family: 'myFont', 'Inter', Tahoma, sans-serif;
+   color: black;
+}
+ 
+.popup__edit::-ms-input-placeholder { /* Microsoft Edge */
+   font-family: 'myFont', 'Inter', Tahoma, sans-serif;
+   color: black;
 }
