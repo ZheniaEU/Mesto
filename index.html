@@ -39,23 +39,24 @@
       <div class="popup">
          <div class="popup__container">
             <button class="popup__close" type="button"></button>
-            <!--  это же тайтл модального окна? мы из него ничего не собираем? ничего не отправляем? значит в форм не вносим -->
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="form">
-               <input class="popup__edit" type="text" placeholder="Жак-Ив Кусто" name="user-name">
-               <input class="popup__edit" type="text" placeholder="Исследователь океана" name="user-description">
+            <form class="popup__form" name="character">
+               <input class="popup__edit popup__edit_user_name" type="text" placeholder="Жак-Ив Кусто" name="user-name">
+               <input class="popup__edit popup__edit_user_description" type="text" placeholder="Исследователь океана" name="user-description">
                <button class="popup__accept" type="submit">Сохранить</button>
             </form>
         </div>
       </div>
-      <div class="popup">
+
+      <!-- popup__accept_image и popup_images вот этот класс пока не засан, ни в бэм ни в путях если не понадобится, удалить -->
+      <div class="popup popup_images">
          <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="form">
-               <input class="popup__edit" type="text" placeholder="Название" name="user-name">
-               <input class="popup__edit" type="text" placeholder="Ссылка на картинку" name="user-description">
-               <button class="popup__accept" type="submit">Создать</button>
+            <form class="popup__form" name="palace-image">
+               <input class="popup__edit popup__edit_image_place" type="text" placeholder="Название" name="image-place">
+               <input class="popup__edit popup__edit_image_url" type="text" placeholder="Ссылка на картинку" name="image-url">
+               <button class="popup__accept popup__accept_image" type="submit">Создать</button> 
             </form>
         </div>
       </div>
