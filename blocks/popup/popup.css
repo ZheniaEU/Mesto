@@ -12,5 +12,6 @@
    /* border-radius: 10px; ошибся контейнером, но эфект получился неплохой в купе с outline: 2px sandybrown solid; */
    /* background-color: black; */
    /* opacity: 50%; выгнал товыгнал, но он дверь входную не закрыл, нужно закрыть */
-   background-color: rgba(0, 0, 0, 0.5) ;
+   background-color: rgba(0, 0, 0, 0.5);
+   z-index: 1;
 }
