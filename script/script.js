@@ -16,7 +16,8 @@ const editButton = document.querySelector(".profile__button-edit") // Кнопк
 
 // как то странна я пока ощущаю 2 места где оно будет использоваться, а кнопка одна, где тот тут ползает крот
 const closeButton = document.querySelector(".popup__close") // Кнопка закрытие попаппа
-const addButtonPlace = document.querySelector("profile__button-add") // кнопка открытия профиля
+const addButtonPlace = document.querySelector(".profile__button-add") // кнопка открытия профиля
+// дописав 55 строчку кода я наконец-то добрался до первого крота, на все 55 строчек кода у меня была одна ошибка я не поставил ("profile__button-add") точку и часа наверное 4 тупил не понимая что делать с этим кротом. Ну чтож FIRST BLOOD первый крот уничтожен, раскоментирую один из методов слухатеря, остальные оставлю закоментироваными 
 
 // ога у нас же ещё есть кнопан внутри попапа который добавляет картинку
 //const vypuskajteKrakena = document.querySelector(".popup__accept") ладно ладно, назовём по другому а то я чувствую что ревьюер кракенов не любит, как и класс с названием Kashpirovsky, да а я предвидел что такое не понравится же...
@@ -37,10 +38,18 @@ function closePopup() {
 
 addButtonPlace.addEventListener("click", () => openPopup());
 
-addButtonPlace.onclick = function () {
-   popupContainer.classList.add("popup_opened")
-}
+//addButtonPlace.onclick = function () {
+//   popupContainer.classList.add("popup_opened")
+//}
 
-addButtonPlace.onclick = function() {
-   popupContainer.style.display = "flex";
-}
+//addButtonPlace.onclick = function() {
+//   popupContainer.style.display = "flex";
+//}
+
+//addButtonPlace.addEventListener('click', function () {
+//   openPopup();
+//})
+
+//editButton.addEventListener('click', function () {
+//   popupContainer.classList.add("popup_opened");
+//  });
