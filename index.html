@@ -36,20 +36,31 @@
          </article>
       </section>
 
-      <div class="popup"> <!-- ⬅️ ⬅️ ⬅️popup_opened вписывать сюда ⬅️ ⬅️ ⬅️ -->
+      <div class="popup">
          <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <!--  это же тайтл модального окна? мы из него ничего не собираем? ничего не отправляем? значит в форм не вносим -->
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="form">
-               <input class="popup__edit" type="text" placeholder="Ведите своё имя" name="user-name">
-               <input class="popup__edit" type="text" placeholder="Описание деятельности" name="user-description">
+               <input class="popup__edit" type="text" placeholder="Жак-Ив Кусто" name="user-name">
+               <input class="popup__edit" type="text" placeholder="Исследователь океана" name="user-description">
                <button class="popup__accept" type="submit">Сохранить</button>
             </form>
         </div>
       </div>
+      <div class="popup">
+         <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="form">
+               <input class="popup__edit" type="text" placeholder="Название" name="user-name">
+               <input class="popup__edit" type="text" placeholder="Ссылка на картинку" name="user-description">
+               <button class="popup__accept" type="submit">Создать</button>
+            </form>
+        </div>
+      </div>
 
-      <section class="elements"> <!--ну так как ревью я пошёл, назову я это как мне удобно секция elements, внутри в единственном числе-->
+      <section class="elements"> <!--ну так как ревью я пошёл, назову я это как мне удобно секция elements, внутри в единственном числе,-->
          <ul class="element__list">
             <li class="element__card">
                <img class="element__cards-item" src="images/place/Big-Blue-Hole.jpg" alt="Большой голубой дыры">
