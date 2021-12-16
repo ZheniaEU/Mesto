@@ -1,6 +1,6 @@
 // ДА наконец-то JS, наконец-то я смогу бороться с кротами которые обладают не человеческими свойствами.
 // Здесь я буду создавать таких чудовищ Myкрича("🐉" $[`+`] }🦛{)! что последние творения профессора Преображенского будет завидовать мне!
-// P.S они даже будут петь лук эт ми айем а бьютифал крича.
+// P.S они даже будут петь "лук эт ми айем а бьютифал крича". https://www.youtube.com/watch?v=84LBjXaeKk4
 
 // Открытие и закрытие popup
 // нам нужно добовлять и удалять стиль в диве с классом попап
@@ -48,63 +48,67 @@
 
 //прошла рестуктуризация кода, а то я уже путаюсь, вобъяление  переменных в самом верху, а не походу кода, потом функции потом вызов, нупока я так это вижу
 
-const popupContainer = document.querySelector(".popup"); // Контейнер где лежит папап профиля
-const imageContainer = document.querySelector(".popup_images"); //контейнер где лежит попап картинок
-
-const editButton = document.querySelector(".profile__button-edit") // Кнопка редактирования профиля
-const closeButton = document.querySelector(".popup__close") // Кнопка закрытие попаппа
-const addButtonPlace = document.querySelector(".profile__button-add") // кнопка открытия профиля
-const submitButtonPlace = document.querySelector(".popup__accept") // кнопка отправки картинки
-
-
-
-// так я поидеи должен открыть попап
-function openPopup() {
-   popupContainer.classList.add("popup_opened")
-}
-
 // давайте тут же рядом закроем попап
-function closePopup() {
-   popupContainer.classList.remove("popup_opened");
-   imageContainer.classList.remove("popup_opened");
-}
+//function closePopup() {
+//   popupContainer.classList.remove("popup_opened");
+//   imageContainer.classList.remove("popup_opened");
+//}
 
-addButtonPlace.addEventListener("click", () => openImagePopup()); // мне если честно стрелочные функции не нравятся они выглядят для меня плохо читаемые пока, а что скажит ревьюер по поводу читаемости стрелочной функции? там чуть ниже есть такая же но не простая 
+//addButtonPlace.addEventListener("click", () => openImagePopup()); // мне если честно стрелочные функции не нравятся они выглядят для меня плохо читаемые пока, а что скажит ревьюер по поводу читаемости стрелочной функции? там чуть ниже есть такая же но не простая 
 
 // откроем ещё этот же попап через кнопку едит, пока это один и тот же попап но в будущем я продам шкуру с крота и куплю ещё один попап.
-editButton.addEventListener("click", () => openPopup());
+// editButton.addEventListener("click", () => openPopup());
 
 // закроем попап // пока всё работает красота, кроты пока не мешают.
-closeButton.addEventListener("click", () => closePopup());
+//closeButton.addEventListener("click", () => closePopup());
 
 // наш слухатерь пришёл к нас с докладом что кротов он не обнаружил и высказал своё подозрение что кроты в песке не водятся, поставим его на обнаружение у озера!
-function openImagePopup() {
-   imageContainer.classList.add("popup_opened")
-}
+
 
 //function closeImagePopup() {
 //   imageContainer.classList.remove("popup_opened")
 //}
 
 // // открываю попап с профилем
-// function openPopup() {
-//    popupContainer.classList.add("popup_opened")
-// }
+//function openPopup() {
+//   popupContainer.classList.add("popup_opened")
+//}
 
 // // открываю попап с картинками
-// function openImagePopup() {
-//    imageContainer.classList.add("popup_opened")
-// }
+//function openImagePopup() {
+//   imageContainer.classList.add("popup_opened")
+//}
 
-// // давайте тут же рядом закроем попап
-// function closePopup(popup) {
-//    popup.classList.remove("popup_opened")
-// }
+//весь легаси код едит наверх
 
-// closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает закрытие попапов
-// closeButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает закрытие попапов
+// попапы
+const popupContainer = document.querySelector(".popup"); // контейнер где лежит папап профиля
+const imageContainer = document.querySelector(".popup_images"); //контейнер где лежит попап картинок
+
+//кнопки
+const editButton = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
+const closeButton = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
+const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
+const addButtonPlace = document.querySelector(".profile__button-add") // кнопка открытия профиля
+const submitButtonPlace = document.querySelector(".popup__accept") // кнопка отправки картинки
 
 
-// editButton.addEventListener("click", () => openPopup()); // слухатерь открывает попап с  профилем
-// addButtonPlace.addEventListener("click", () => openImagePopup()); // слухатерь открывае попап с картинками
+function openPopup() { // так я поидеи должен открыть попап
+   popupContainer.classList.add("popup_opened")
+}
+
+function openImagePopup() { // так я поидеи должен открыть попап картинками
+   imageContainer.classList.add("popup_opened")
+}
+
+function closePopup(popup) { // давайте тут же рядом закроем попап
+   popup.classList.remove("popup_opened")
+}
+
+closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает закрытие попапов
+closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает закрытие попапов
+
+
+editButton.addEventListener("click", () => openPopup()); // слухатерь открывает попап с  профилем
+addButtonPlace.addEventListener("click", () => openImagePopup()); // слухатерь открывае попап с картинками
 
