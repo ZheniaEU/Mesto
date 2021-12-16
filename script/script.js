@@ -94,6 +94,10 @@
 //    profileText.textContent = editUserDescription.value;
 //    closePopup(popupContainer);
 
+//formProfile.addEventListener("submit", formSubmitHandler)
+//submitProfileButton.addEventListener("click", formSubmitHandler, closePopup(popupContainer))
+// я вот прям так с ходу навешать не могу, мало практили хотел чтоб и сохранял и закрывал форму, но при такой записи у меня обновляется страница, придётся по тупому закрывать попа в теле функции
+//submitProfileButton.addeventlistener("submit", () => {formSubmitHandler; closePopup(popupContainer)})
 
 // попапы
 const popupContainer = document.querySelector(".popup") // контейнер где лежит папап профиля
@@ -124,6 +128,19 @@ const submitButtonImage = document.querySelector(".popup__accept_image") // са
 const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
 const editImagePlace = document.querySelector(".popup__edit_image_place")
 const editImageUrl = document.querySelector(".popup__edit_image_url")
+const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
+//темплейт картинок, вначале тяпну всё потом что не нужно сотрём
+const teplate = document.querySelector(".template")
+const templateCard = document.querySelector(".template__card")
+const templateItem = document.querySelector(".template__item")
+const templateTitel = document.querySelector(".template__title")
+const templateBin = document.querySelector(".template__bin")
+const templateHeart = document.querySelector(".template__heart-botton")
+
+// насколько я понимаю мы сюда должны скидывать массив заранее подготовленных карточек
+const elementsCard = document.querySelector(".elements")
+
+
 
 
 function openPopup() { // так я поидеи должен открыть попап
@@ -134,7 +151,7 @@ function openImagePopup() { // так я поидеи должен открыт�
    imageContainer.classList.add("popup_opened")
 }
 
-function closePopup(popup) { // давайте тут же рядом закроем попап
+function closePopup(popup) { // давайте тут же рядом закроем попапы, одна функция на все попапы, в аргумент я передаю, что я хочу закрыть
    popup.classList.remove("popup_opened")
 }
 
@@ -142,19 +159,55 @@ closeButton.addEventListener("click", () => closePopup(popupContainer)); //сл�
 closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает попап картинок
 
 
-editButton.addEventListener("click", () => openPopup()); // слухатерь открывает попап с  профилем
-addButtonImage.addEventListener("click", () => openImagePopup()); // слухатерь открывае попап с картинками
+editButton.addEventListener("click", () => openPopup()) // слухатерь открывает попап с  профилем
+addButtonImage.addEventListener("click", () => openImagePopup()) // слухатерь открывае попап с картинками
 
-//formProfile.addEventListener("submit", formSubmitHandler)
-//submitProfileButton.addEventListener("click", formSubmitHandler, closePopup(popupContainer))
-//вопщем оставлю этот способ, мыж за единобразие, у нас в HTML висит тип submit по этому мы может шмалять по кротам из/со всех орудий
+//вобщем оставлю этот способ, мыж за единобразие, у нас в HTML висит тип submit по этому мы может шмалять по кротам из/со всех орудий
 submitProfileButton.addEventListener("click", formSubmitHandler)
-// я вот прям так с ходу навешать не могу, мало практили хотел чтоб и сохранял и закрывал форму, но при такой записи у меня обновляется страница, придётся по тупому закрывать попа в теле функции
-//submitProfileButton.addeventlistener("submit", () => {formSubmitHandler; closePopup(popupContainer)})
 
 function formSubmitHandler(evt) {
    evt.preventDefault();
    profileName.textContent = editUserName.value;
    profileText.textContent = editUserDescription.value;
-   closePopup(popupContainer);
+   closePopup(popupContainer)
+}
+
+// если я пишу массив я оставляю висячую зяпятую
+const initialCards = [
+   {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+   },
+   {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+   },
+   {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+   },
+   {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+   },
+   {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+   },
+   {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+   },
+]
+
+// и что? что дальше то я вот эту вот байду скопировал, делать то? я чёто не понимаю, эх пойду спрошу в чате
+// и так у нас есть темплейти мы должны передать в него из массива описание  и ссылку, вопрос что с альтом? куда денутся мои альты
+
+function showCards() {
+   initialCards.forEach(card => {
+      templateItem.alt = card.item;
+      templateItem.src = card.link;
+      templateTitel.textContent = card.item;
+      elementsCard.append;
+   })
 }

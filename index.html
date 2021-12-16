@@ -41,8 +41,8 @@
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form popup__form_character" name="character">
-               <input class="popup__edit popup__edit_user_name" type="text"  value="" placeholder="Жак-Ив Кусто" name="user-name">
-               <input class="popup__edit popup__edit_user_description" value="" type="text" placeholder="Исследователь океана" name="user-description">
+               <input class="popup__edit popup__edit_user_name" type="text" placeholder="Жак-Ив Кусто" name="user-name">
+               <input class="popup__edit popup__edit_user_description" type="text" placeholder="Исследователь океана" name="user-description">
                <button class="popup__accept popup__accept_profile" type="submit">Сохранить</button>
             </form>
         </div>
@@ -54,15 +54,15 @@
             <button class="popup__close popup__close_images" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__form popup__form_image" name="palace-image">
-               <input class="popup__edit popup__edit_image_place" type="text" value="" placeholder="Название" name="image-place">
-               <input class="popup__edit popup__edit_image_url" type="text" value="" placeholder="Ссылка на картинку" name="image-url">
+               <input class="popup__edit popup__edit_image_place" type="text" placeholder="Название" name="image-place">
+               <input class="popup__edit popup__edit_image_url" type="text" placeholder="Ссылка на картинку" name="image-url">
                <button class="popup__accept popup__accept_image" type="button">Создать</button> 
             </form>
         </div>
       </div>
 
       <section class="elements"> <!--ну так как ревью я пошёл, назову я это как мне удобно секция elements, внутри в единственном числе,-->
-         <ul class="element__list">
+         <!-- <ul class="element__list">
             <li class="element__card">
                <img class="element__cards-item" src="images/place/Big-Blue-Hole.jpg" alt="Большой голубой дыры">
                <h2 class="element__title">Большая голубая дыра</h2>
@@ -99,8 +99,18 @@
                <button class="element__bin" type="button"></button>
                <button class="element__heart-botton" type="button"></button>
             </li>
-         </ul>
+         </ul> -->
       </section>
+
+      <template class="template">
+         <div class="element__card template__card">
+            <img class="element__cards-item template__item" src="#" alt="эта карточка ещё не заполнена">
+            <h2 class="element__title template__title"></h2>
+            <button class="element__bin template__bin" type="button"></button>
+            <button class="element__heart-botton template__heart-botton" type="button"></button>
+         </div>
+      </template>
+
    </main>
 
    <footer class="footer">
