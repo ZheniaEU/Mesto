@@ -28,15 +28,15 @@
 
 
 
-//addButtonPlace.onclick = function () {
+//addButtonImge.onclick = function () {
 //   popupContainer.classList.add("popup_opened")
 //}
 
-//addButtonPlace.onclick = function() {
+//addButtonImge.onclick = function() {
 //   popupContainer.style.display = "flex";
 //}
 
-//addButtonPlace.addEventListener('click', function () {
+//addButtonImge.addEventListener('click', function () {
 //   openPopup();
 //})
 
@@ -54,7 +54,7 @@
 //   imageContainer.classList.remove("popup_opened");
 //}
 
-//addButtonPlace.addEventListener("click", () => openImagePopup()); // мне если честно стрелочные функции не нравятся они выглядят для меня плохо читаемые пока, а что скажит ревьюер по поводу читаемости стрелочной функции? там чуть ниже есть такая же но не простая 
+//addButtonImge.addEventListener("click", () => openImagePopup()); // мне если честно стрелочные функции не нравятся они выглядят для меня плохо читаемые пока, а что скажит ревьюер по поводу читаемости стрелочной функции? там чуть ниже есть такая же но не простая 
 
 // откроем ещё этот же попап через кнопку едит, пока это один и тот же попап но в будущем я продам шкуру с крота и куплю ещё один попап.
 // editButton.addEventListener("click", () => openPopup());
@@ -79,18 +79,34 @@
 //   imageContainer.classList.add("popup_opened")
 //}
 
-//весь легаси код едит наверх
+//весь легаси код едит наверх, первый мой JS а у же легаси код 🤪
 
 // попапы
-const popupContainer = document.querySelector(".popup"); // контейнер где лежит папап профиля
-const imageContainer = document.querySelector(".popup_images"); //контейнер где лежит попап картинок
+const popupContainer = document.querySelector(".popup") // контейнер где лежит папап профиля
+const imageContainer = document.querySelector(".popup_images") //контейнер где лежит попап картинок
 
-//кнопки
+
+//_______________________________óÔÔò ʕ·͡ᴥ·ʔ óÔÔò____________________________________________________//
+//кнопки профиля
 const editButton = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
 const closeButton = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
+const submitProfileButton = document.querySelector(".popup__accept_profile") // сабмит профиля
+//инпуты профиля
+const formProfile = document.querySelector(".popup__form_character") // форма профиля пока х3 зачем она мне но пусть будет
+const editUserName = document.querySelector(".popup__edit_user_name")
+const editUserDescription = document.querySelector(".popup__edit_user_description")
+
+
+
+//____________________________̿' ̿'\̵͇̿̿\з=(◕_◕)=ε/̵͇̿̿/'̿'̿ ̿__все кроты будут наказаны_________________________//
+//кнопки картинок
+const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
 const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
-const addButtonPlace = document.querySelector(".profile__button-add") // кнопка открытия профиля
-const submitButtonPlace = document.querySelector(".popup__accept") // кнопка отправки картинки
+const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки
+//инпуты картинок
+const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
+const editImagePlace = document.querySelector(".popup__edit_image_place")
+const editImageUrl = document.querySelector(".popup__edit_image_url")
 
 
 function openPopup() { // так я поидеи должен открыть попап
@@ -110,5 +126,42 @@ closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //
 
 
 editButton.addEventListener("click", () => openPopup()); // слухатерь открывает попап с  профилем
-addButtonPlace.addEventListener("click", () => openImagePopup()); // слухатерь открывае попап с картинками
+addButtonImage.addEventListener("click", () => openImagePopup()); // слухатерь открывае попап с картинками
 
+// пока на вид как не понятная хрень / Находим форму в DOM
+// посути как я понимаю мне нужно 2 функции с формомй которые будут вызыватся при нажатии сабмита и сабмит им должен передавать значение? или или там как то по другому значение передаётся, должно вроде по другому... 
+const formElement = a;
+// Воспользуйтесь методом querySelector()
+
+// Находим поля формы в DOM
+
+const nameInput = b;
+// Воспользуйтесь инструментом .querySelector()
+
+const jobInput = c;
+// Воспользуйтесь инструментом .querySelector()
+
+
+// Обработчик «отправки» формы, хотя пока
+
+// она никуда отправляться не будет
+
+function formSubmitHandler (evt) {
+  evt.preventDefault(); 
+
+  
+// Получите значение полей jobInput и nameInput из свойства value
+
+  
+// Выберите элементы, куда должны быть вставлены значения полей
+
+  
+// Вставьте новые значения с помощью textContent
+
+}
+
+// Прикрепляем обработчик к форме:
+
+// он будет следить за событием “submit” - «отправка»
+
+formElement.addEventListener('submit', formSubmitHandler);

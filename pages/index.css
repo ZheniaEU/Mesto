@@ -55,3 +55,6 @@
 @import url(../blocks/popup/__edit/_user/popup__edit_user_description.css);
 @import url(../blocks/popup/__edit/_image/popup__edit_image_place.css);
 @import url(../blocks/popup/__edit/_image/popup__edit_image_url.css);
+
+/* ещё кнопка для второго попапа*/
+@import url(../blocks/popup/__close/_images/popup__close_images.css);
