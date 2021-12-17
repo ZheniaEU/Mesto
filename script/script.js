@@ -102,6 +102,17 @@
 // и что? что дальше то я вот эту вот байду скопировал, делать то? я чёто не понимаю, эх пойду спрошу в чате
 // и так у нас есть темплейти мы должны передать в него из массива описание  и ссылку, вопрос что с альтом? куда денутся мои альты
 
+// ооо вот это чудовище!, есть одна проблема оно не работает
+// function showCards() {
+//    initialCards.forEach(card => {
+//       templateItem.alt = card["name"]
+//       templateItem.src = card["link"]
+//       templateTitel.textContent = card["name"]
+//       elementsCard.appendChild(templateCard.cloneNode(true))
+//    })
+// }
+
+
 // попапы
 const popupContainer = document.querySelector(".popup") // контейнер где лежит папап профиля
 const imageContainer = document.querySelector(".popup_images") //контейнер где лежит попап картинок
@@ -133,15 +144,15 @@ const editImagePlace = document.querySelector(".popup__edit_image_place")
 const editImageUrl = document.querySelector(".popup__edit_image_url")
 const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
 //темплейт картинок, вначале тяпну всё потом что не нужно сотрём
-const teplate = document.querySelector(".template")
-const templateCard = document.querySelector(".template__card")
-const templateItem = document.querySelector(".template__item")
-const templateTitel = document.querySelector(".template__title")
+const template = document.querySelector(".template")
+const templateCard = document.querySelector(".element__card") // див карточки
+const templateItem = document.querySelector(".element__cards-item") //сама картинка
+const templateTitel = document.querySelector(".element__title") //тайтл
 const templateBin = document.querySelector(".template__bin")
 const templateHeart = document.querySelector(".template__heart-botton")
 
 // насколько я понимаю мы сюда должны скидывать массив заранее подготовленных карточек
-const elementsCard = document.querySelector(".elements")
+const elementsCard = document.querySelector(".elements") //контейнер для подготовленых картинок
 
 
 
@@ -179,36 +190,45 @@ function formSubmitHandler(evt) {
 // если я пишу массив я оставляю висячую зяпятую
 const initialCards = [
    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      name: 'Большая голубая дыра',
+      link: 'images/place/Big-Blue-Hole.jpg',
+      alt: "Большa голубоa дырa"
    },
    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+      name: 'Амазонка',
+      link: 'images/place/mole.jpg',
+      alt: "данный участок кода захвачен кротами которые прошли вакцинацию от covid-19"
    },
    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      name: 'Большой Барьерный риф',
+      link: 'images/place/Great_Barrier_Reef.jpg',
+      alt: "Больщой Барьерный риф"
    },
    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      name: 'Клуб Орлиного глаза',
+      link: 'images/place/клуб-орлиного-глаза.jpg',
+      alt: "В таверне"
    },
    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      name: 'Морейн',
+      link: 'images/place/Moraine_Lake.jpg',
+      alt: "озеро Морейн"
    },
    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      name: 'что-то',
+      link: 'images/place/Great-Barrier-Reef.jpg',
+      alt: "эта карточка ещё не заполнена"
    },
 ]
 
 function showCards() {
    initialCards.forEach(card => {
-      templateItem.alt = card[item];
-      templateItem.src = card[link];
-      templateTitel.textContent = card[item];
-      elementsCard.append(templateCard.cloneNode(true));
+      const img = template.content.querySelector(".element__card").cloneNode(true)
+      img.querySelector(".element__cards-item").alt = card["alt"]
+      img.querySelector(".element__cards-item").src = card["link"]
+      img.querySelector(".element__title").textContent = card["name"]
+      elementsCard.appendChild(img)
    })
 }
+
+showCards()
