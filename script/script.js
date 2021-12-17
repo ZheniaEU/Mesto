@@ -112,6 +112,15 @@
 //    })
 // }
 
+// ещё одно не рабочие чудовище, чувствую что подсосал не правильно
+// function addCards() {
+//    const addimg = template.content.querySelector(".element__card").cloneNode(true)
+//    addimg.querySelector(".popup__edit_image_place").alt = card["alt"]
+//    addimg.querySelector(".popup__edit_image_url").src = card["link"]
+//    addimg.querySelector(".popup__edit_image_place").textContent = card["name"]
+//    elementsCard.prependChild(addimg)
+//    closePopup(imageContainer)
+// }
 
 // попапы
 const popupContainer = document.querySelector(".popup") // контейнер где лежит папап профиля
@@ -188,36 +197,38 @@ function formSubmitHandler(evt) {
 }
 
 // если я пишу массив я оставляю висячую зяпятую
+// ША! это мои альты никто не смеит их трогать! меня уже разок похвалили за то как я их заполняю, будем держать марку. https://i.imgur.com/dxgpYLQ.png
+
 const initialCards = [
    {
       name: 'Большая голубая дыра',
       link: 'images/place/Big-Blue-Hole.jpg',
-      alt: "Большa голубоa дырa"
+      alt: "Большa голубоa дырa",
    },
    {
       name: 'Амазонка',
       link: 'images/place/mole.jpg',
-      alt: "данный участок кода захвачен кротами которые прошли вакцинацию от covid-19"
+      alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
    },
    {
       name: 'Большой Барьерный риф',
       link: 'images/place/Great_Barrier_Reef.jpg',
-      alt: "Больщой Барьерный риф"
+      alt: "Больщой Барьерный риф",
    },
    {
       name: 'Клуб Орлиного глаза',
       link: 'images/place/клуб-орлиного-глаза.jpg',
-      alt: "В таверне"
+      alt: "Вуаэристы",
    },
    {
       name: 'Морейн',
       link: 'images/place/Moraine_Lake.jpg',
-      alt: "озеро Морейн"
+      alt: "озеро Морейн",
    },
    {
       name: 'что-то',
       link: 'images/place/Great-Barrier-Reef.jpg',
-      alt: "эта карточка ещё не заполнена"
+      alt: "эта карточка ещё не заполнена",
    },
 ]
 
@@ -232,3 +243,20 @@ function showCards() {
 }
 
 showCards()
+
+// так следущие добавить карточки, по идеи, по идеи это тоже самое только урлу и название нужно подсосать с велью формы, что должно делать, пока не понятно с кнопкой формы что делать, что она должна делать сабмитить или просто батонить -,-!?
+// но тут конечно ну надо понять и простить, я вчера посматрел первый сезон ведьмак, а сегодня пятница, сегодня вышел второй сезон и я уже покупаю на торренте по дешовке, поймите меня Михаил, войдите в моё положение, а тут ещё эти кроты "зараза, два раза".
+// ну вот когда я начал писать функци я понял что по идеи, по идеи, да, батон должен вызыват функцию добавления карточки
+// P.S в слове бато́н ударение на о́
+
+function addCards() {
+   const addimg = template.content.querySelector(".element__card").cloneNode(true)
+   addimg.querySelector(".popup__edit_image_place").alt = type.value
+   addimg.querySelector(".popup__edit_image_url").src = type.value
+   addimg.querySelector(".popup__edit_image_place").textContent = type.value
+   elementsCard.prependChild(addimg)
+   closePopup(imageContainer)
+}
+// я чувствую что на прямую я это как не сделаю придётся брать селекторы опять в обход..... да как жеж мне получить эти поля уууууу чёртов DOM! в нём водятся кроты...
+
+submitButtonImage.addEventListener("click", () => addCards());
