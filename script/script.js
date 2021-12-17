@@ -99,6 +99,9 @@
 // я вот прям так с ходу навешать не могу, мало практили хотел чтоб и сохранял и закрывал форму, но при такой записи у меня обновляется страница, придётся по тупому закрывать попа в теле функции
 //submitProfileButton.addeventlistener("submit", () => {formSubmitHandler; closePopup(popupContainer)})
 
+// и что? что дальше то я вот эту вот байду скопировал, делать то? я чёто не понимаю, эх пойду спрошу в чате
+// и так у нас есть темплейти мы должны передать в него из массива описание  и ссылку, вопрос что с альтом? куда денутся мои альты
+
 // попапы
 const popupContainer = document.querySelector(".popup") // контейнер где лежит папап профиля
 const imageContainer = document.querySelector(".popup_images") //контейнер где лежит попап картинок
@@ -164,6 +167,7 @@ addButtonImage.addEventListener("click", () => openImagePopup()) // слухат
 
 //вобщем оставлю этот способ, мыж за единобразие, у нас в HTML висит тип submit по этому мы может шмалять по кротам из/со всех орудий
 submitProfileButton.addEventListener("click", formSubmitHandler)
+//submitProfileButton.addeventlistener("click", () => {formSubmitHandler(event); closePopup(popupContainer)}) не забыть потыкать
 
 function formSubmitHandler(evt) {
    evt.preventDefault();
@@ -200,14 +204,11 @@ const initialCards = [
    },
 ]
 
-// и что? что дальше то я вот эту вот байду скопировал, делать то? я чёто не понимаю, эх пойду спрошу в чате
-// и так у нас есть темплейти мы должны передать в него из массива описание  и ссылку, вопрос что с альтом? куда денутся мои альты
-
 function showCards() {
    initialCards.forEach(card => {
-      templateItem.alt = card.item;
-      templateItem.src = card.link;
-      templateTitel.textContent = card.item;
-      elementsCard.append;
+      templateItem.alt = card[item];
+      templateItem.src = card[link];
+      templateTitel.textContent = card[item];
+      elementsCard.append(templateCard.cloneNode(true));
    })
 }
