@@ -147,6 +147,7 @@ const editUserDescription = document.querySelector(".popup__edit_user_descriptio
 const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
 const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
 const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки
+
 //инпуты картинок
 const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
 const editImagePlace = document.querySelector(".popup__edit_image_place")
@@ -286,4 +287,22 @@ submitButtonImage.addEventListener("click", () => addCards());
 //    console.log(evt)
 //    evt.target.classList.toggle("element__heart-botton_active")
 
+// Ну чтож Михаил бины? на моё удивление в лайках кротов совсем небыло, может они сидят в бинах?
+// Надо прикинуть логику, жмяшим в батон, помним да ? ударение на о́, почему на о́, да потому-что боевой батон рвётся к власти! https://www.youtube.com/watch?v=Itoy8pOPsTc
+// И так жмякаем в батон происходит вызов функции которая удаляет потомка, прям как во стором сезоне ведьмака, Сир Ёж конечно "дал пенки" 😀
 
+
+// const img = template.content.querySelector(".element__card").cloneNode(true)
+
+// const binButton = img.querySelector(".element__bin") // кнопка корзины
+// console.log(binButton)
+
+// binButton.addEventListener("click", () => deleteImg());
+
+// function deleteImg(img) {
+//    console.log(deleteImg)
+//    img.target.closest(".element__card").remove()
+// }
+
+//не получается осилить пока кнопку корзины, залезу в цсс где голова не нужна, сделаю там попап для развёрнутой картинки
+//чам нужно, при клике по картинке передать инфу, и чё куда передаём? ааа пойду досплю
