@@ -112,7 +112,7 @@
 //    })
 // }
 
-// ещё одно не рабочие чудовище, чувствую что подсосал не правильно
+// ещё одно не рабочие чудовище, но не рабочие, чувствую что подсосал не правильно
 // function addCards() {
 //    const addimg = template.content.querySelector(".element__card").cloneNode(true)
 //    addimg.querySelector(".popup__edit_image_place").alt = card["alt"]
@@ -251,12 +251,17 @@ showCards()
 
 function addCards() {
    const addimg = template.content.querySelector(".element__card").cloneNode(true)
-   addimg.querySelector(".popup__edit_image_place").alt = type.value
-   addimg.querySelector(".popup__edit_image_url").src = type.value
-   addimg.querySelector(".popup__edit_image_place").textContent = type.value
-   elementsCard.prependChild(addimg)
+   addimg.querySelector(".element__cards-item").alt = editImagePlace.value
+   addimg.querySelector(".element__cards-item").src = editImageUrl.value
+   addimg.querySelector(".element__title").textContent = editImagePlace.value
+   elementsCard.prepend(addimg)
    closePopup(imageContainer)
 }
 // я чувствую что на прямую я это как не сделаю придётся брать селекторы опять в обход..... да как жеж мне получить эти поля уууууу чёртов DOM! в нём водятся кроты...
+// норм ща сезончик оказался ведьмачка, ждём продолжение.
+// я всё напутал все теже самые констатнты, а то что я взял из них нужно присваивать. Кстати Михаил если вы ещё не посмотрели, то Геральд искал кошку, а ищу кротов
 
 submitButtonImage.addEventListener("click", () => addCards());
+
+//так сделать лайко карточки, хм, сделал себе кофе и даже не знаю как подступится, чувствую в лайке будет дофигище кротов.
+//Я раньше думал что самый действенный способ борьбы с кротами это строить платины и разводить бобров, а оно вон чё "Михалыч" они плавать умеют, да и ведьмак тому подтверждение, там такое в канализациях водится -,-!
