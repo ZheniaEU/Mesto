@@ -243,11 +243,28 @@ function showCards() {
       img.querySelector(".element__title").textContent = card["name"]
 
 
+
+
+      const openIMG = img.querySelector(".element__cards-item")
+
+openIMG.addEventListener("click", function(e) {
+   a = e.target.closest(".element__cards-item")
+   b = e.target.closest(".element__title")
+   console.log("click on image", a, b)
+
+
+})
+
+
+
+
+
+
 // это удаляет
 
       const binButton = img.querySelector(".element__bin")
 
-      binButton.addEventListener("click", function(){
+      binButton.addEventListener("click", () => {
          console.log("click")
          img.remove()
       })
@@ -280,7 +297,7 @@ function addCards() {
 
    const binButton = addimg.querySelector(".element__bin")
 
-   binButton.addEventListener("click", function(){
+   binButton.addEventListener("click", () => {
       console.log("click")
       addimg.remove()
    })
@@ -344,4 +361,10 @@ submitButtonImage.addEventListener("click", () => addCards());
 // но есть проблемка, я то хотел это сделать за пределами функции отрисовки карточки, чтобы код и рендер новых падал и в отрисовку, а не получается! придётся код дублировать и в начальные карточки в новые которые добавляют. А главная проблема что я даже не понимаю с какого края начать кусать его чтоб за пределы вынести
 
 // Так ну и что там у нас осталось попап с раскрытие картинки
-// Берём сначало укропу, потом кротовью жопу, 25 картошек, 15 кротовошек, ведро вода, крота туда, охапку дров и крот готов.
+// ну не удачное чудовище
+
+      // const cEL = img.querySelector(".element__cards-item").src
+      // const cEL =initialCards
+      // img.querySelector(".element__cards-item").src.addEventListener("click", function() {
+      //    console.log("click on image")
+      // })
