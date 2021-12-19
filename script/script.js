@@ -235,10 +235,25 @@ const initialCards = [
 
 function showCards() {
    initialCards.forEach(card => {
+
+// это отрисовывает
       const img = template.content.querySelector(".element__card").cloneNode(true)
       img.querySelector(".element__cards-item").alt = card["alt"]
       img.querySelector(".element__cards-item").src = card["link"]
       img.querySelector(".element__title").textContent = card["name"]
+
+
+// это удаляет
+
+      const binButton = img.querySelector(".element__bin")
+
+      binButton.addEventListener("click", function(){
+         console.log("click")
+         img.remove()
+      })
+
+
+// это лайкает
 
       img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
          console.log(evt)
@@ -260,6 +275,18 @@ function addCards() {
    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
    addimg.querySelector(".element__cards-item").src = editImageUrl.value
    addimg.querySelector(".element__title").textContent = editImagePlace.value
+
+// это удаляет
+
+   const binButton = addimg.querySelector(".element__bin")
+
+   binButton.addEventListener("click", function(){
+      console.log("click")
+      addimg.remove()
+   })
+
+
+
 
    addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
       console.log(evt)
@@ -306,3 +333,15 @@ submitButtonImage.addEventListener("click", () => addCards());
 
 //не получается осилить пока кнопку корзины, залезу в цсс где голова не нужна, сделаю там попап для развёрнутой картинки
 //чам нужно, при клике по картинке передать инфу, и чё куда передаём? ааа пойду досплю
+// const img = template.content.querySelector(".element__card").cloneNode(true)
+// const binButton = img.querySelector(".element__bin")
+
+// binButton.addEventListener("click", function(){
+//    console.log("click")
+// })
+
+// проспавшись я решил покавырять всётаки корзину, краем глаза я пока засыпал увидел прямую трансляцию на ютубе, проснувшись я глянул а не обманули ли меня и там была запись на 6 часов вау подумал я. посмотрел тайм коды ткнул в прослушку событий и обана работает. "А в переди веселое море, а с зади попутный ветер, а к вечеру родится такое чудовище, что просто ураган"
+// но есть проблемка, я то хотел это сделать за пределами функции отрисовки карточки, чтобы код и рендер новых падал и в отрисовку, а не получается! придётся код дублировать и в начальные карточки в новые которые добавляют. А главная проблема что я даже не понимаю с какого края начать кусать его чтоб за пределы вынести
+
+// Так ну и что там у нас осталось попап с раскрытие картинки
+// Берём сначало укропу, потом кротовью жопу, 25 картошек, 15 кротовошек, ведро вода, крота туда, охапку дров и крот готов.
