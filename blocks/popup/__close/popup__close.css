@@ -8,6 +8,7 @@
    right: -40px;
    top: -40px;
    border: none;
+   z-index: 3;
 }
 
 @media screen and (max-width: 596px){
