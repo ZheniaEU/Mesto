@@ -153,7 +153,9 @@ const formImage = document.querySelector(".popup__edit_image_place") // форм
 const editImagePlace = document.querySelector(".popup__edit_image_place")
 const editImageUrl = document.querySelector(".popup__edit_image_url")
 const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
-//темплейт картинок, вначале тяпну всё потом что не нужно сотрём
+
+//______________________________(⌐■_■)--︻╦╤─ - - -____________________________________________________//
+// темплейты
 const template = document.querySelector(".template")
 const templateCard = document.querySelector(".element__card") // див карточки
 const templateItem = document.querySelector(".element__cards-item") //сама картинка
@@ -164,8 +166,23 @@ const templateHeart = document.querySelector(".template__heart-botton")
 // насколько я понимаю мы сюда должны скидывать массив заранее подготовленных карточек
 const elementsCard = document.querySelector(".elements") //контейнер для подготовленых картинок
 
+// фулл попап
+const f = document.querySelector(".popup_images_open")
 
 
+
+function openImagageFullPopup() { // так я поидеи должен открыть попап
+   f.classList.add("popup_opened")
+}
+// кнопка фулл
+const closeImageFullButton = document.querySelector(".popup__close_images_full")
+//слухатерь фулки
+closeImageFullButton.addEventListener("click", () => closePopup(f));
+
+//селкеторы полного попапа
+
+const imagePopup = document.querySelector(".popup__image")
+const captionPopup = document.querySelector(".popup__caption")
 
 function openPopup() { // так я поидеи должен открыть попап
    popupContainer.classList.add("popup_opened")
@@ -243,15 +260,22 @@ function showCards() {
       img.querySelector(".element__title").textContent = card["name"]
 
 
+      const openImg = img.querySelector(".element__cards-item")
+
+openImg.addEventListener("click", () => {
+   // AAAAAA Жёванный крот!!!! чтож так сложно добратся до этой норы
+   // a = e.target.closest(".element__cards-item").attr('src')
+   // b = e.target.closest(".element__title")
+   // console.log("click on image", a, b)
+   // imagePopup.src = a;
+   // captionPopup.textContent = b;
+   imagePopup.src = card["link"]
+   imagePopup.alt = card["alt"]
+   captionPopup.textContent = card["name"]
 
 
-      const openIMG = img.querySelector(".element__cards-item")
 
-openIMG.addEventListener("click", function(e) {
-   a = e.target.closest(".element__cards-item")
-   b = e.target.closest(".element__title")
-   console.log("click on image", a, b)
-
+   openImagageFullPopup()
 
 })
 
@@ -293,8 +317,16 @@ function addCards() {
    addimg.querySelector(".element__cards-item").src = editImageUrl.value
    addimg.querySelector(".element__title").textContent = editImagePlace.value
 
-// это удаляет
+   const openImg = addimg.querySelector(".element__cards-item")
 
+   openImg.addEventListener("click", () => {
+      imagePopup.src = editImageUrl.value
+      imagePopup.alt = editImagePlace.value
+      captionPopup.textContent = editImagePlace.value
+      openImagageFullPopup()
+   })
+
+// это удаляет карточку
    const binButton = addimg.querySelector(".element__bin")
 
    binButton.addEventListener("click", () => {
@@ -302,9 +334,7 @@ function addCards() {
       addimg.remove()
    })
 
-
-
-
+// лайкает
    addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
       console.log(evt)
       evt.target.classList.toggle("element__heart-botton_active")
@@ -368,3 +398,11 @@ submitButtonImage.addEventListener("click", () => addCards());
       // img.querySelector(".element__cards-item").src.addEventListener("click", function() {
       //    console.log("click on image")
       // })
+
+// openIMG.addEventListener("click", function(e) {
+//    a = e.target.closest(".element__cards-item").attr('src')
+//    b = e.target.closest(".element__title")
+//    console.log("click on image", a, b)
+//    imagePopup.src = a;
+//    captionPopup.textContent = b;
+// })
