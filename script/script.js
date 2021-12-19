@@ -169,6 +169,8 @@ const elementsCard = document.querySelector(".elements") //контейнер д
 // фулл попап
 const f = document.querySelector(".popup_images_open")
 
+const form = document.querySelectorAll(".popup__form")
+
 
 
 function openImagageFullPopup() { // так я поидеи должен открыть попап
@@ -194,6 +196,7 @@ function openImagePopup() { // так я поидеи должен открыт�
 
 function closePopup(popup) { // давайте тут же рядом закроем попапы, одна функция на все попапы, в аргумент я передаю, что я хочу закрыть
    popup.classList.remove("popup_opened")
+   // form.reset()
 }
 
 closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает попап профиля
@@ -273,29 +276,17 @@ openImg.addEventListener("click", () => {
    imagePopup.alt = card["alt"]
    captionPopup.textContent = card["name"]
 
-
-
    openImagageFullPopup()
-
 })
 
-
-
-
-
-
 // это удаляет
-
       const binButton = img.querySelector(".element__bin")
-
       binButton.addEventListener("click", () => {
-         console.log("click")
          img.remove()
       })
 
 
 // это лайкает
-
       img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
          console.log(evt)
          evt.target.classList.toggle("element__heart-botton_active")
@@ -311,12 +302,16 @@ showCards()
 // ну вот когда я начал писать функци я понял что по идеи, по идеи, да, батон должен вызыват функцию добавления карточки
 // P.S в слове бато́н ударение на о́
 
+
+
+// отображает добавленые карточки
 function addCards() {
    const addimg = template.content.querySelector(".element__card").cloneNode(true)
    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
    addimg.querySelector(".element__cards-item").src = editImageUrl.value
    addimg.querySelector(".element__title").textContent = editImagePlace.value
 
+//открывает на фулл
    const openImg = addimg.querySelector(".element__cards-item")
 
    openImg.addEventListener("click", () => {
@@ -330,7 +325,6 @@ function addCards() {
    const binButton = addimg.querySelector(".element__bin")
 
    binButton.addEventListener("click", () => {
-      console.log("click")
       addimg.remove()
    })
 
@@ -339,9 +333,10 @@ function addCards() {
       console.log(evt)
       evt.target.classList.toggle("element__heart-botton_active")
    })
-
    elementsCard.prepend(addimg)
    closePopup(imageContainer)
+   // editImageUrl.value = ""
+   // editImagePlace.value = ""
 }
 // я чувствую что на прямую я это как не сделаю придётся брать селекторы опять в обход..... да как жеж мне получить эти поля уууууу чёртов DOM! в нём водятся кроты...
 // норм ща сезончик оказался ведьмачка, ждём продолжение.
@@ -364,7 +359,6 @@ submitButtonImage.addEventListener("click", () => addCards());
 // Ну чтож Михаил бины? на моё удивление в лайках кротов совсем небыло, может они сидят в бинах?
 // Надо прикинуть логику, жмяшим в батон, помним да ? ударение на о́, почему на о́, да потому-что боевой батон рвётся к власти! https://www.youtube.com/watch?v=Itoy8pOPsTc
 // И так жмякаем в батон происходит вызов функции которая удаляет потомка, прям как во стором сезоне ведьмака, Сир Ёж конечно "дал пенки" 😀
-
 
 // const img = template.content.querySelector(".element__card").cloneNode(true)
 
@@ -406,3 +400,39 @@ submitButtonImage.addEventListener("click", () => addCards());
 //    imagePopup.src = a;
 //    captionPopup.textContent = b;
 // })
+
+// function addCards() {
+//    const addimg = template.content.querySelector(".element__card").cloneNode(true)
+//    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
+//    addimg.querySelector(".element__cards-item").src = editImageUrl.value
+//    addimg.querySelector(".element__title").textContent = editImagePlace.value
+
+// //открывает на фулл
+//    const openImg = addimg.querySelector(".element__cards-item")
+
+//    openImg.addEventListener("click", () => {
+//       imagePopup.src = editImageUrl.value
+//       imagePopup.alt = editImagePlace.value
+//       captionPopup.textContent = editImagePlace.value
+//       openImagageFullPopup()
+//    })
+
+// // это удаляет карточку
+//    const binButton = addimg.querySelector(".element__bin")
+
+//    binButton.addEventListener("click", () => {
+//       addimg.remove()
+//    })
+
+// // лайкает
+//    addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+//       console.log(evt)
+//       evt.target.classList.toggle("element__heart-botton_active")
+//    })
+//    elementsCard.prepend(addimg)
+//    closePopup(imageContainer)
+//    // editImageUrl.value = ""
+//    // editImagePlace.value = ""
+// }
+// при сбросе формы,я  не могу открыть попап картинки так как я его сбрасываю
+//ну вот я в логове кротов, они лезут отовсюду, Убить всех кротов!!!
