@@ -2,6 +2,224 @@
 // Здесь я буду создавать таких чудовищ Myкрича("🐉" $[`+`] }🦛{)! что последние творения профессора Преображенского будет завидовать мне!
 // P.S они даже будут петь "лук эт ми айем а бьютифал крича". https://www.youtube.com/watch?v=84LBjXaeKk4
 
+//░░░░░░░░░░░░░░░░░░░░ПЕРЕМЕННЫЕ░░░░░░░░░░░░░░░░░░░░
+// попапы
+const popupContainer = document.querySelector(".popup__profile") // модалка профиля
+const imageContainer = document.querySelector(".popup_images") // модалка добавления карточек
+const fullImagespopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
+
+const elementsCard = document.querySelector(".elements") //контейнер для подготовленых картинок 
+
+//_____________________Профиль_____________________________________________
+const profileName = document.querySelector(".profile__name") // Имя в профиле
+const profileText = document.querySelector(".profile__text") // Описание в профиле
+
+//кнопки профиля
+const editButton = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
+const closeButton = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
+const submitProfileButton = document.querySelector(".popup__accept_profile") // сабмит профиля
+
+//инпуты профиля
+const formProfile = document.querySelector(".popup__form_character") // форма профиля пока х3 зачем она мне но пусть будет
+const editUserName = document.querySelector(".popup__edit_user_name")
+const editUserDescription = document.querySelector(".popup__edit_user_description")
+
+//______________________Добавление новых карточек____________________________
+//кнопки картинок
+const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
+const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
+const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки
+
+//инпуты картинок
+const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
+const editImagePlace = document.querySelector(".popup__edit_image_place")
+const editImageUrl = document.querySelector(".popup__edit_image_url")
+const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
+
+//_______________________Темплейты___________________________________________
+const template = document.querySelector(".template")
+const templateCard = document.querySelector(".element__card") // див карточки
+const templateItem = document.querySelector(".element__cards-item") //сама картинка
+const templateTitel = document.querySelector(".element__title") //тайтл
+const templateBin = document.querySelector(".template__bin")
+const templateHeart = document.querySelector(".template__heart-botton")
+
+// кнопка фулл
+const closeImageFullButton = document.querySelector(".popup__close_images_full")
+
+//селкеторы полного попапа
+const imagePopup = document.querySelector(".popup__image")
+const captionPopup = document.querySelector(".popup__caption")
+// const form = document.querySelectorAll(".popup__form")
+
+//________________________Массивы________________________________________________
+//временные массивы
+let newRenderArray = [] // массив где хранятся добавленные карточки
+
+// массив подготовленных карточек
+// ША! это мои альты никто не смеит их трогать! меня уже разок похвалили за то как я их заполняю, будем держать марку. https://i.imgur.com/dxgpYLQ.png
+const initialCards = [
+   {
+      name: 'Большая голубая дыра',
+      link: 'images/place/Big-Blue-Hole.jpg',
+      alt: "Большa голубоa дырa",
+   },
+   {
+      name: 'Амазонка',
+      link: 'images/place/mole.jpg',
+      alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
+   },
+   {
+      name: 'Большой Барьерный риф',
+      link: 'images/place/Great_Barrier_Reef.jpg',
+      alt: "Больщой Барьерный риф",
+   },
+   {
+      name: 'Клуб Орлиного глаза',
+      link: 'images/place/клуб-орлиного-глаза.jpg',
+      alt: "Вуаэристы",
+   },
+   {
+      name: 'Морейн',
+      link: 'images/place/Moraine_Lake.jpg',
+      alt: "озеро Морейн",
+   },
+   {
+      name: 'что-то',
+      link: 'images/place/Great-Barrier-Reef.jpg',
+      alt: "эта карточка ещё не заполнена",
+   },
+]
+
+//░░░░░░░░░░░░░░КОД░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+//_________Открытие и закрытие модальных окон____________________
+function openImagageFullPopup() { // так я поидеи должен открыть фулку попап
+   fullImagespopup.classList.add("popup_opened")
+}
+
+function openPopup() { // так я поидеи должен открыть попап
+   popupContainer.classList.add("popup_opened")
+}
+
+function openImagePopup() { // так я поидеи должен открыть попап картинками
+   imageContainer.classList.add("popup_opened")
+}
+
+function closePopup(popup) { // давайте тут же рядом закроем попапы, одна функция на все попапы, в аргумент я передаю, что я хочу закрыть
+   popup.classList.remove("popup_opened")
+   // form.reset()
+}
+
+// слушатели
+closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает попап профиля
+closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает попап картинок
+editButton.addEventListener("click", () => openPopup()) // слухатерь открывает попап с  профилем
+addButtonImage.addEventListener("click", () => openImagePopup()) // слухатерь открывае попап с картинкам
+submitProfileButton.addEventListener("click", formSubmitHandler)
+//submitProfileButton.addeventlistener("click", () => {formSubmitHandler(event); closePopup(popupContainer)}) не забыть потыкать
+submitButtonImage.addEventListener("click", () => intermediateArray()); // слухатерь сабмита добавления картинок
+closeImageFullButton.addEventListener("click", () => closePopup(fullImagespopup)); //слухатерь фулки
+
+function formSubmitHandler(evt) {
+   evt.preventDefault()
+   profileName.textContent = editUserName.value;
+   profileText.textContent = editUserDescription.value;
+   closePopup(popupContainer)
+}
+
+
+// работа с подготовленными карточками
+function showCards() {
+   initialCards.forEach(card => {
+
+// это отрисовывает
+      const img = template.content.querySelector(".element__card").cloneNode(true)
+      img.querySelector(".element__cards-item").alt = card["alt"]
+      img.querySelector(".element__cards-item").src = card["link"]
+      img.querySelector(".element__title").textContent = card["name"]
+
+// открывает на фулл
+      const openImg = img.querySelector(".element__cards-item")
+
+      openImg.addEventListener("click", () => {
+      imagePopup.src = card["link"]
+      imagePopup.alt = card["alt"]
+      captionPopup.textContent = card["name"]
+
+      openImagageFullPopup()
+      })
+
+// это удаляет
+      const binButton = img.querySelector(".element__bin")
+      binButton.addEventListener("click", () => {
+         img.remove()
+      })
+
+
+// это лайкает
+      img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+         evt.target.classList.toggle("element__heart-botton_active")
+      })
+      elementsCard.appendChild(img)
+   })
+}
+
+// работа с новым массивом для рендера пользовательских карточек
+function intermediateArray(evt) {
+   // evt.preventDefault();
+   const addimg = template.content.querySelector(".element__card").cloneNode(true)
+   addimg.querySelector(".element__cards-item").alt = editImagePlace.value
+   addimg.querySelector(".element__cards-item").src = editImageUrl.value
+   addimg.querySelector(".element__title").textContent = editImagePlace.value
+   let alt = addimg.querySelector(".element__cards-item").alt
+   let link  = addimg.querySelector(".element__cards-item").src
+   let name = addimg.querySelector(".element__title").textContent
+   newRenderArray.push({name, link, alt})
+   newRenderArray = [newRenderArray.pop()]
+   addCards()
+   editImageUrl.value = ""
+   editImagePlace.value = ""
+}
+
+// отображает добавленые карточки
+function addCards() {
+   newRenderArray.map(card => {
+      const addimg = template.content.querySelector(".element__card").cloneNode(true)
+      addimg.querySelector(".element__cards-item").alt = card["alt"]
+      addimg.querySelector(".element__cards-item").src = card["link"]
+      addimg.querySelector(".element__title").textContent = card["name"]
+
+//открывает на фулл
+   const openImg = addimg.querySelector(".element__cards-item")
+
+   openImg.addEventListener("click", () => {
+      imagePopup.alt = card["alt"]
+      imagePopup.src = card["link"]
+      captionPopup.textContent = card["name"]
+      openImagageFullPopup()
+   })
+
+// это удаляет карточку
+   const binButton = addimg.querySelector(".element__bin")
+
+   binButton.addEventListener("click", () => {
+      addimg.remove()
+   })
+
+// лайкает
+   addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+      evt.target.classList.toggle("element__heart-botton_active")
+   })
+
+   elementsCard.prepend(addimg)
+   closePopup(imageContainer)
+
+   })
+}
+
+showCards()
+
 // Открытие и закрытие popup
 // нам нужно добовлять и удалять стиль в диве с классом попап
 // ААААА, чтож так сложно то ещё ничё не начал делать, а эти кроты бегают повсюду и ты даже не знаешь с какого начать, ну пожалуй начну с того который поближе...
@@ -12,7 +230,6 @@
 // соталось то совсем нехрена да? создать функци которая бы дописывала сюды popup_opened когда я жмякаю на кнопку и уписывла когда я жмякаю на другую кнопку, что нет такого слово жмякать? это JS в нём есть всё!
 // мож ей надо было id пришпандорить а?
 
-
 // как то странна я пока ощущаю 2 места где оно будет использоваться, а кнопка одна, где тот тут ползает крот
 
 // дописав 55 строчку кода я наконец-то добрался до первого крота, на все 55 строчек кода у меня была одна ошибка(ну конечно с комментариями) я не поставил ("profile__button-add") точку и часа наверное 4 тупил не понимая что делать с этим кротом, а главное во всех других местах поставил. Ну чтож FIRST BLOOD первый крот уничтожен, раскоментирую один из методов слухатеря, остальные оставлю закоментироваными 
@@ -20,13 +237,7 @@
 // ога у нас же ещё есть кнопан внутри попапа который добавляет картинку
 //const vypuskajteKrakena = document.querySelector(".popup__accept") ладно ладно, назовём по другому а то я чувствую что ревьюер кракенов не любит, как и класс с названием Kashpirovsky, да а я предвидел что такое не понравится же...
 
-
-
-
-
 //так теперь нам нужно определить место где больше всего сконцентрированы эти кроты, для этого мы говорим слухатерю, чтоб он со скоростью махал кадилом со скоростью 60 герц в минут, а не не рано ещё кротов отпевать, пусть определяет точку наибольшую с концентрацией кротов уткнувшись мордой в песок.
-
-
 
 //addButtonImge.onclick = function () {
 //   popupContainer.classList.add("popup_opened")
@@ -122,270 +333,12 @@
 //    closePopup(imageContainer)
 // }
 
-// попапы
-const popupContainer = document.querySelector(".popup") // контейнер где лежит папап профиля
-const imageContainer = document.querySelector(".popup_images") //контейнер где лежит попап картинок
-
-
-//_______________________________óÔÔò ʕ·͡ᴥ·ʔ óÔÔò____________________________________________________//
-//заголовки профиля, бам бам бам кроту по ушам, чтоб такого я больше не писал editUserName.textContent = editUserName.value;
-const profileName = document.querySelector(".profile__name")
-const profileText = document.querySelector(".profile__text")
-//кнопки профиля
-const editButton = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
-const closeButton = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
-const submitProfileButton = document.querySelector(".popup__accept_profile") // сабмит профиля
-//инпуты профиля
-const formProfile = document.querySelector(".popup__form_character") // форма профиля пока х3 зачем она мне но пусть будет
-const editUserName = document.querySelector(".popup__edit_user_name")
-const editUserDescription = document.querySelector(".popup__edit_user_description")
-
-
-
-//____________________________̿' ̿'\̵͇̿̿\з=(◕_◕)=ε/̵͇̿̿/'̿'̿ ̿__все кроты будут наказаны_________________________//
-//кнопки картинок
-const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
-const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
-const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки
-
-//инпуты картинок
-const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
-const editImagePlace = document.querySelector(".popup__edit_image_place")
-const editImageUrl = document.querySelector(".popup__edit_image_url")
-const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
-
-//______________________________(⌐■_■)--︻╦╤─ - - -____________________________________________________//
-// темплейты
-const template = document.querySelector(".template")
-const templateCard = document.querySelector(".element__card") // див карточки
-const templateItem = document.querySelector(".element__cards-item") //сама картинка
-const templateTitel = document.querySelector(".element__title") //тайтл
-const templateBin = document.querySelector(".template__bin")
-const templateHeart = document.querySelector(".template__heart-botton")
-
-// насколько я понимаю мы сюда должны скидывать массив заранее подготовленных карточек
-const elementsCard = document.querySelector(".elements") //контейнер для подготовленых картинок
-
-// фулл попап
-const f = document.querySelector(".popup_images_open")
-
-const form = document.querySelectorAll(".popup__form")
-
-
-
-function openImagageFullPopup() { // так я поидеи должен открыть попап
-   f.classList.add("popup_opened")
-}
-// кнопка фулл
-const closeImageFullButton = document.querySelector(".popup__close_images_full")
-//слухатерь фулки
-closeImageFullButton.addEventListener("click", () => closePopup(f));
-
-//селкеторы полного попапа
-
-const imagePopup = document.querySelector(".popup__image")
-const captionPopup = document.querySelector(".popup__caption")
-
-function openPopup() { // так я поидеи должен открыть попап
-   popupContainer.classList.add("popup_opened")
-}
-
-function openImagePopup() { // так я поидеи должен открыть попап картинками
-   imageContainer.classList.add("popup_opened")
-}
-
-function closePopup(popup) { // давайте тут же рядом закроем попапы, одна функция на все попапы, в аргумент я передаю, что я хочу закрыть
-   popup.classList.remove("popup_opened")
-   // form.reset()
-}
-
-closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает попап профиля
-closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает попап картинок
-
-
-editButton.addEventListener("click", () => openPopup()) // слухатерь открывает попап с  профилем
-addButtonImage.addEventListener("click", () => openImagePopup()) // слухатерь открывае попап с картинками
-
-//вобщем оставлю этот способ, мыж за единобразие, у нас в HTML висит тип submit по этому мы может шмалять по кротам из/со всех орудий
-submitProfileButton.addEventListener("click", formSubmitHandler)
-//submitProfileButton.addeventlistener("click", () => {formSubmitHandler(event); closePopup(popupContainer)}) не забыть потыкать
-
-function formSubmitHandler(evt) {
-   evt.preventDefault();
-   profileName.textContent = editUserName.value;
-   profileText.textContent = editUserDescription.value;
-   closePopup(popupContainer)
-}
-
-// если я пишу массив руками, я оставляю висячую зяпятую
-// ША! это мои альты никто не смеит их трогать! меня уже разок похвалили за то как я их заполняю, будем держать марку. https://i.imgur.com/dxgpYLQ.png
-
-const initialCards = [
-   {
-      name: 'Большая голубая дыра',
-      link: 'images/place/Big-Blue-Hole.jpg',
-      alt: "Большa голубоa дырa",
-   },
-   {
-      name: 'Амазонка',
-      link: 'images/place/mole.jpg',
-      alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
-   },
-   {
-      name: 'Большой Барьерный риф',
-      link: 'images/place/Great_Barrier_Reef.jpg',
-      alt: "Больщой Барьерный риф",
-   },
-   {
-      name: 'Клуб Орлиного глаза',
-      link: 'images/place/клуб-орлиного-глаза.jpg',
-      alt: "Вуаэристы",
-   },
-   {
-      name: 'Морейн',
-      link: 'images/place/Moraine_Lake.jpg',
-      alt: "озеро Морейн",
-   },
-   {
-      name: 'что-то',
-      link: 'images/place/Great-Barrier-Reef.jpg',
-      alt: "эта карточка ещё не заполнена",
-   },
-]
-
-function showCards() {
-   initialCards.forEach(card => {
-      
-
-// это отрисовывает
-      const img = template.content.querySelector(".element__card").cloneNode(true)
-      img.querySelector(".element__cards-item").alt = card["alt"]
-      img.querySelector(".element__cards-item").src = card["link"]
-      img.querySelector(".element__title").textContent = card["name"]
-
-
-      const openImg = img.querySelector(".element__cards-item")
-
-      openImg.addEventListener("click", () => {
-      // AAAAAA Жёванный крот!!!! чтож так сложно добратся до этой норы
-      // a = e.target.closest(".element__cards-item").attr('src')
-      // b = e.target.closest(".element__title")
-      // console.log("click on image", a, b)
-      // imagePopup.src = a;
-      // captionPopup.textContent = b;
-      imagePopup.src = card["link"]
-      imagePopup.alt = card["alt"]
-      captionPopup.textContent = card["name"]
-
-      openImagageFullPopup()
-      })
-
-// это удаляет
-      const binButton = img.querySelector(".element__bin")
-      binButton.addEventListener("click", () => {
-         img.remove()
-      })
-
-
-// это лайкает
-      img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-         evt.target.classList.toggle("element__heart-botton_active")
-      })
-      elementsCard.appendChild(img)
-   })
-}
-
-showCards()
-
-// так следущие добавить карточки, по идеи, по идеи это тоже самое только урлу и название нужно подсосать с велью формы, что должно делать, пока не понятно с кнопкой формы что делать, что она должна делать сабмитить или просто батонить -,-!?
-// но тут конечно ну надо понять и простить, я вчера посматрел первый сезон ведьмак, а сегодня пятница, сегодня вышел второй сезон и я уже покупаю на торренте по дешовке, поймите меня Михаил, войдите в моё положение, а тут ещё эти кроты "зараза, два раза".
-// ну вот когда я начал писать функци я понял что по идеи, по идеи, да, батон должен вызыват функцию добавления карточки
-// P.S в слове бато́н ударение на о́
-
-
-let newRenderArray = []
-
-function intermediateArray() {
-   const addimg = template.content.querySelector(".element__card").cloneNode(true)
-   addimg.querySelector(".element__cards-item").alt = editImagePlace.value
-   addimg.querySelector(".element__cards-item").src = editImageUrl.value
-   addimg.querySelector(".element__title").textContent = editImagePlace.value
-   let alt = addimg.querySelector(".element__cards-item").alt
-   let link  = addimg.querySelector(".element__cards-item").src
-   let name = addimg.querySelector(".element__title").textContent
-   newRenderArray.push({name, link, alt})
-   // последний крот уничтожен, мне нужно было чтобкарточки добавленые рендерились, только с последнего элемента массива, я просто не знал
-   // как вот это    newRenderArray.map(card => прогнать только по последнему элементу массива, выкрутился как смог.
-   newRenderArray = [newRenderArray.pop()]
-   addCards()
-   editImageUrl.value = ""
-   editImagePlace.value = ""
-}
-
-
-// отображает добавленые карточки
-function addCards() {
-   newRenderArray.map(card => {
-      const addimg = template.content.querySelector(".element__card").cloneNode(true)
-      addimg.querySelector(".element__cards-item").alt = card["alt"]
-      addimg.querySelector(".element__cards-item").src = card["link"]
-      addimg.querySelector(".element__title").textContent = card["name"]
-   // const addimg = template.content.querySelector(".element__card").cloneNode(true)
-   // addimg.querySelector(".element__cards-item").alt = editImagePlace.value
-   // addimg.querySelector(".element__cards-item").src = editImageUrl.value
-   // addimg.querySelector(".element__title").textContent = editImagePlace.value
-   // let alt = addimg.querySelector(".element__cards-item").alt
-   // let link  = addimg.querySelector(".element__cards-item").src
-   // let name = addimg.querySelector(".element__title").textContent
-   // test.push({name, link, alt})
-   // alt = editImagePlace.value
-   // link = editImageUrl.value
-   // name = editImagePlace.value
-   // console.log(alt, link, name)
-   // initialCards.push(name, link, alt)
-
-//открывает на фулл
-   const openImg = addimg.querySelector(".element__cards-item")
-
-   // imagePopup.src = card["link"]
-   // imagePopup.alt = card["alt"]
-   // captionPopup.textContent = card["name"]
-   openImg.addEventListener("click", () => {
-      // imagePopup.alt = editImagePlace.value
-      // imagePopup.src = editImageUrl.value
-      // captionPopup.textContent = editImagePlace.value
-      imagePopup.alt = card["alt"]
-      imagePopup.src = card["link"]
-      captionPopup.textContent = card["name"]
-      openImagageFullPopup()
-   })
-
-// это удаляет карточку
-   const binButton = addimg.querySelector(".element__bin")
-
-   binButton.addEventListener("click", () => {
-      addimg.remove()
-   })
-
-// лайкает
-   addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-      evt.target.classList.toggle("element__heart-botton_active")
-   })
-   elementsCard.prepend(addimg)
-   closePopup(imageContainer)
-
-
-   })
-}
 // я чувствую что на прямую я это как не сделаю придётся брать селекторы опять в обход..... да как жеж мне получить эти поля уууууу чёртов DOM! в нём водятся кроты...
 // норм ща сезончик оказался ведьмачка, ждём продолжение.
-// я всё напутал все теже самые констатнты, а то что я взял из них нужно присваивать. Кстати Михаил если вы ещё не посмотрели, то Геральд искал кошку, а ищу кротов
-
-submitButtonImage.addEventListener("click", () => intermediateArray()); // слухатерь сабмита добавления картинок
-
+// я всё напутал все теже самые констатнты, а то что я взял из них нужно присваивать. Кстати Генадий если вы ещё не посмотрели, то Геральд искал кошку, а ищу кротов
 
 //так сделать лайко карточки, хм, сделал себе кофе и даже не знаю как подступится, чувствую в лайке будет дофигище кротов.
-//Я раньше думал что самый действенный способ борьбы с кротами это строить платины и разводить бобров, а оно вон чё "Михалыч" они плавать умеют, да и ведьмак тому подтверждение, там такое в канализациях водится -,-!
+//Я раньше думал что самый действенный способ борьбы с кротами это строить платины и разводить бобров, а оно вон чё Генадий они плавать умеют, да и ведьмак тому подтверждение, там такое в канализациях водится -,-!
 // Ну так вернёмся к нашим сертечкам, как понять на какое сердечко я нажал? этож одна и таже кнопка -,-, всё просто там стиль нарисовать отрисовать, но как понять на какое нажимают? я вообще не вкуриваю этот момент, там же ещё есть бины, как узнать в какой бин тычет крендель? принцып должен быть один осталось напряч лобную мышцу, ну или спросить в чате 🧐
 // текс вот это наш класс element__heart-botton_active , так гррр как я должен вызвать эту функцию ? но как если ты не знаешь по какой кнопке произошёл клик? ну шо опять за ребусы то 🥴
 // так пойду почитаю теория, я помню там чёто с сердечками было.
@@ -396,7 +349,7 @@ submitButtonImage.addEventListener("click", () => intermediateArray()); // сл�
 //    console.log(evt)
 //    evt.target.classList.toggle("element__heart-botton_active")
 
-// Ну чтож Михаил бины? на моё удивление в лайках кротов совсем небыло, может они сидят в бинах?
+// Ну чтож Генадий бины? на моё удивление в лайках кротов совсем небыло, может они сидят в бинах?
 // Надо прикинуть логику, жмяшим в батон, помним да ? ударение на о́, почему на о́, да потому-что боевой батон рвётся к власти! https://www.youtube.com/watch?v=Itoy8pOPsTc
 // И так жмякаем в батон происходит вызов функции которая удаляет потомка, прям как во стором сезоне ведьмака, Сир Ёж конечно "дал пенки" 😀
 
@@ -492,7 +445,7 @@ submitButtonImage.addEventListener("click", () => intermediateArray()); // сл�
 
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-// ░░░░ЗАПУСКАЕМ░ГУСЕЙ-РАЗВЕДЧИКОВ░░
+// ░░░░ЗАПУСКАЕМ ГУСЕЙ-РАЗВЕДЧИКОВ░░
 // ░░░░░▄▀▀▀▄░░░▄▀▀▀▀▄░░░▄▀▀▀▄░░░░░░
 // ▄███▀░◐░░░▌░▐0░░░░0▌░▐░░░◐░▀███▄
 // ░░░░▌░░░░░▐░▌░▐▀▀▌░▐░▌░░░░░▐░░░░░
