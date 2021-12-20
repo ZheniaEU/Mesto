@@ -289,7 +289,6 @@ function showCards() {
 
 // это лайкает
       img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-         console.log(evt)
          evt.target.classList.toggle("element__heart-botton_active")
       })
       elementsCard.appendChild(img)
@@ -304,10 +303,9 @@ showCards()
 // P.S в слове бато́н ударение на о́
 
 
-let test = []
-let test2 = []
+let newRenderArray = []
 
-function taddCards() {
+function intermediateArray() {
    const addimg = template.content.querySelector(".element__card").cloneNode(true)
    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
    addimg.querySelector(".element__cards-item").src = editImageUrl.value
@@ -315,20 +313,19 @@ function taddCards() {
    let alt = addimg.querySelector(".element__cards-item").alt
    let link  = addimg.querySelector(".element__cards-item").src
    let name = addimg.querySelector(".element__title").textContent
-   test.push({name, link, alt})
-   // test2 = test[test.length - 1]
-   test = [test.pop()]
+   newRenderArray.push({name, link, alt})
+   // последний крот уничтожен, мне нужно было чтобкарточки добавленые рендерились, только с последнего элемента массива, я просто не знал
+   // как вот это    newRenderArray.map(card => прогнать только по последнему элементу массива, выкрутился как смог.
+   newRenderArray = [newRenderArray.pop()]
    addCards()
    editImageUrl.value = ""
    editImagePlace.value = ""
-   console.log(test)
 }
 
 
 // отображает добавленые карточки
 function addCards() {
-   test.map(card => {
-      console.log(test)
+   newRenderArray.map(card => {
       const addimg = template.content.querySelector(".element__card").cloneNode(true)
       addimg.querySelector(".element__cards-item").alt = card["alt"]
       addimg.querySelector(".element__cards-item").src = card["link"]
@@ -372,7 +369,6 @@ function addCards() {
 
 // лайкает
    addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-      console.log(evt)
       evt.target.classList.toggle("element__heart-botton_active")
    })
    elementsCard.prepend(addimg)
@@ -385,7 +381,7 @@ function addCards() {
 // норм ща сезончик оказался ведьмачка, ждём продолжение.
 // я всё напутал все теже самые констатнты, а то что я взял из них нужно присваивать. Кстати Михаил если вы ещё не посмотрели, то Геральд искал кошку, а ищу кротов
 
-submitButtonImage.addEventListener("click", () => taddCards());
+submitButtonImage.addEventListener("click", () => intermediateArray()); // слухатерь сабмита добавления картинок
 
 
 //так сделать лайко карточки, хм, сделал себе кофе и даже не знаю как подступится, чувствую в лайке будет дофигище кротов.
@@ -491,3 +487,13 @@ submitButtonImage.addEventListener("click", () => taddCards());
 //       addimg.querySelector(".element__title").textContent = card["name"]
 //    })
 // }
+
+// говорят чем больше программист напишет кода тем лучше, поэтому вот
+
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// ░░░░ЗАПУСКАЕМ░ГУСЕЙ-РАЗВЕДЧИКОВ░░
+// ░░░░░▄▀▀▀▄░░░▄▀▀▀▀▄░░░▄▀▀▀▄░░░░░░
+// ▄███▀░◐░░░▌░▐0░░░░0▌░▐░░░◐░▀███▄
+// ░░░░▌░░░░░▐░▌░▐▀▀▌░▐░▌░░░░░▐░░░░░
+// ░░░░▐░░░░░▐░▌░▌▒▒▐░▐░▌░░░░░▌░░░░░
