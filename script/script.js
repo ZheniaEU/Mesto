@@ -255,6 +255,7 @@ const initialCards = [
 
 function showCards() {
    initialCards.forEach(card => {
+      
 
 // это отрисовывает
       const img = template.content.querySelector(".element__card").cloneNode(true)
@@ -265,19 +266,19 @@ function showCards() {
 
       const openImg = img.querySelector(".element__cards-item")
 
-openImg.addEventListener("click", () => {
-   // AAAAAA Жёванный крот!!!! чтож так сложно добратся до этой норы
-   // a = e.target.closest(".element__cards-item").attr('src')
-   // b = e.target.closest(".element__title")
-   // console.log("click on image", a, b)
-   // imagePopup.src = a;
-   // captionPopup.textContent = b;
-   imagePopup.src = card["link"]
-   imagePopup.alt = card["alt"]
-   captionPopup.textContent = card["name"]
+      openImg.addEventListener("click", () => {
+      // AAAAAA Жёванный крот!!!! чтож так сложно добратся до этой норы
+      // a = e.target.closest(".element__cards-item").attr('src')
+      // b = e.target.closest(".element__title")
+      // console.log("click on image", a, b)
+      // imagePopup.src = a;
+      // captionPopup.textContent = b;
+      imagePopup.src = card["link"]
+      imagePopup.alt = card["alt"]
+      captionPopup.textContent = card["name"]
 
-   openImagageFullPopup()
-})
+      openImagageFullPopup()
+      })
 
 // это удаляет
       const binButton = img.querySelector(".element__bin")
@@ -303,21 +304,62 @@ showCards()
 // P.S в слове бато́н ударение на о́
 
 
+let test = []
+let test2 = []
 
-// отображает добавленые карточки
-function addCards() {
+function taddCards() {
    const addimg = template.content.querySelector(".element__card").cloneNode(true)
    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
    addimg.querySelector(".element__cards-item").src = editImageUrl.value
    addimg.querySelector(".element__title").textContent = editImagePlace.value
+   let alt = addimg.querySelector(".element__cards-item").alt
+   let link  = addimg.querySelector(".element__cards-item").src
+   let name = addimg.querySelector(".element__title").textContent
+   test.push({name, link, alt})
+   // test2 = test[test.length - 1]
+   test = [test.pop()]
+   addCards()
+   editImageUrl.value = ""
+   editImagePlace.value = ""
+   console.log(test)
+}
+
+
+// отображает добавленые карточки
+function addCards() {
+   test.map(card => {
+      console.log(test)
+      const addimg = template.content.querySelector(".element__card").cloneNode(true)
+      addimg.querySelector(".element__cards-item").alt = card["alt"]
+      addimg.querySelector(".element__cards-item").src = card["link"]
+      addimg.querySelector(".element__title").textContent = card["name"]
+   // const addimg = template.content.querySelector(".element__card").cloneNode(true)
+   // addimg.querySelector(".element__cards-item").alt = editImagePlace.value
+   // addimg.querySelector(".element__cards-item").src = editImageUrl.value
+   // addimg.querySelector(".element__title").textContent = editImagePlace.value
+   // let alt = addimg.querySelector(".element__cards-item").alt
+   // let link  = addimg.querySelector(".element__cards-item").src
+   // let name = addimg.querySelector(".element__title").textContent
+   // test.push({name, link, alt})
+   // alt = editImagePlace.value
+   // link = editImageUrl.value
+   // name = editImagePlace.value
+   // console.log(alt, link, name)
+   // initialCards.push(name, link, alt)
 
 //открывает на фулл
    const openImg = addimg.querySelector(".element__cards-item")
 
+   // imagePopup.src = card["link"]
+   // imagePopup.alt = card["alt"]
+   // captionPopup.textContent = card["name"]
    openImg.addEventListener("click", () => {
-      imagePopup.src = editImageUrl.value
-      imagePopup.alt = editImagePlace.value
-      captionPopup.textContent = editImagePlace.value
+      // imagePopup.alt = editImagePlace.value
+      // imagePopup.src = editImageUrl.value
+      // captionPopup.textContent = editImagePlace.value
+      imagePopup.alt = card["alt"]
+      imagePopup.src = card["link"]
+      captionPopup.textContent = card["name"]
       openImagageFullPopup()
    })
 
@@ -335,14 +377,16 @@ function addCards() {
    })
    elementsCard.prepend(addimg)
    closePopup(imageContainer)
-   // editImageUrl.value = ""
-   // editImagePlace.value = ""
+
+
+   })
 }
 // я чувствую что на прямую я это как не сделаю придётся брать селекторы опять в обход..... да как жеж мне получить эти поля уууууу чёртов DOM! в нём водятся кроты...
 // норм ща сезончик оказался ведьмачка, ждём продолжение.
 // я всё напутал все теже самые констатнты, а то что я взял из них нужно присваивать. Кстати Михаил если вы ещё не посмотрели, то Геральд искал кошку, а ищу кротов
 
-submitButtonImage.addEventListener("click", () => addCards());
+submitButtonImage.addEventListener("click", () => taddCards());
+
 
 //так сделать лайко карточки, хм, сделал себе кофе и даже не знаю как подступится, чувствую в лайке будет дофигище кротов.
 //Я раньше думал что самый действенный способ борьбы с кротами это строить платины и разводить бобров, а оно вон чё "Михалыч" они плавать умеют, да и ведьмак тому подтверждение, там такое в канализациях водится -,-!
@@ -436,3 +480,14 @@ submitButtonImage.addEventListener("click", () => addCards());
 // }
 // при сбросе формы,я  не могу открыть попап картинки так как я его сбрасываю
 //ну вот я в логове кротов, они лезут отовсюду, Убить всех кротов!!!
+
+
+// какой синтаксис заставит бежать только по последнему элементу массива? ааааа!!!
+// function addCards() {
+//    test.map(card => {
+//       const addimg = template.content.querySelector(".element__card").cloneNode(true)
+//       addimg.querySelector(".element__cards-item").alt = card["alt"]
+//       addimg.querySelector(".element__cards-item").src = card["link"]
+//       addimg.querySelector(".element__title").textContent = card["name"]
+//    })
+// }
