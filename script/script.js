@@ -15,9 +15,8 @@ const profileName = document.querySelector(".profile__name") // Имя в про
 const profileText = document.querySelector(".profile__text") // Описание в профиле
 
 //кнопки профиля
-const editButton = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
-const closeButton = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
-// const submitProfileButton = document.querySelector(".popup__accept_profile") // сабмит профиля
+const editButtonProfile = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
+const closeButtonProfile = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
 //форма профиля
 const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
 //инпуты профиля
@@ -28,14 +27,12 @@ const editUserDescription = document.querySelector(".popup__edit_user_descriptio
 //кнопки картинок
 const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
 const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
-// const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки // получается не нужная кнопка раз я с помощью события формы отправляю
 //форма пользовательских картинок
 const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
 //инпуты картинок
-const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
-const editImagePlace = document.querySelector(".popup__edit_image_place")
-const editImageUrl = document.querySelector(".popup__edit_image_url")
-const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
+const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
+const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
+// const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
 
 //_____________________Развёрнутое модальное окно(полная картинка)__________
 // кнопка фулл
@@ -44,18 +41,6 @@ const closeImageFullButton = document.querySelector(".popup__close_images_full")
 //селкеторы полного попапа
 const imagePopup = document.querySelector(".popup__image")
 const captionPopup = document.querySelector(".popup__caption")
-
-//_______________________Темплейты___________________________________________
-const template = document.querySelector(".template") // контейнер темплейта
-const templateCard = document.querySelector(".element__card") // див карточки
-const templateItem = document.querySelector(".element__cards-item") //сама картинка
-const templateTitel = document.querySelector(".element__title") //тайтл
-const templateBin = document.querySelector(".template__bin") // бин темплейта
-const templateHeart = document.querySelector(".template__heart-botton") //темплейт лайк
-
-
-
-// const form = document.querySelectorAll(".popup__form")
 
 //________________________Массивы________________________________________________
 //временные массивы
@@ -110,23 +95,21 @@ function closePopup(popup) {
 }
 
 // слушатели
-closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает попап профиля
-closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает попап картинок
-editButton.addEventListener("click", () => openPopup(popupContainer)) // слухатерь открывает попап с  профилем
+closeButtonProfile.addEventListener("click", () => closePopup(popupContainer)) //слухатерь закрывает попап профиля
+closeImageButton.addEventListener("click", () => closePopup(imageContainer)) //слухатерь закрывает попап картинок
+editButtonProfile.addEventListener("click", () => openPopup(popupContainer)) // слухатерь открывает попап с  профилем
 addButtonImage.addEventListener("click", () => openPopup(imageContainer)) // слухатерь открывае попап с картинкам
-closeImageFullButton.addEventListener("click", () => closePopup(fullImagespopup)); //слухатерь фулки
+closeImageFullButton.addEventListener("click", () => closePopup(fullImagespopup)) //слухатерь фулки
 
 // сабмиты форм
-formProfileUser.addEventListener("submit", formSubmitHandler)
-//submitProfileButton.addeventlistener("click", () => {formSubmitHandler(event); closePopup(popupContainer)}) не забыть потыкать
-//formUserAdd.addEventListener("submit", () => {intermediateArray(evt)}); // слухатерь сабмита добавления картинок
-formUserAdd.addEventListener("submit", intermediateArray) //рабочий вариант слухатерь сабмита добавления картинок
+formProfileUser.addEventListener("submit", receiveInputProfile) //слушатель формы профайла
+formUserAdd.addEventListener("submit", intermediateArray) //слушатель формы пользовательской карточки
 
 
-function formSubmitHandler(evt) {
+function receiveInputProfile(evt) {
    evt.preventDefault()
-   profileName.textContent = editUserName.value;
-   profileText.textContent = editUserDescription.value;
+   profileName.textContent = editUserName.value
+   profileText.textContent = editUserDescription.value
    closePopup(popupContainer)
 }
 
@@ -136,7 +119,7 @@ function showCards() {
    initialCards.forEach(card => {
 
 // это отрисовывает
-      const img = template.content.querySelector(".element__card").cloneNode(true)
+      const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
       img.querySelector(".element__cards-item").alt = card["alt"]
       img.querySelector(".element__cards-item").src = card["link"]
       img.querySelector(".element__title").textContent = card["name"]
@@ -169,14 +152,14 @@ function showCards() {
 
 // работа с новым массивом для рендера пользовательских карточек
 function intermediateArray(evt) {
-   evt.preventDefault();
-   const addimg = template.content.querySelector(".element__card").cloneNode(true)
-   addimg.querySelector(".element__cards-item").alt = editImagePlace.value
-   addimg.querySelector(".element__cards-item").src = editImageUrl.value
-   addimg.querySelector(".element__title").textContent = editImagePlace.value
-   let alt = addimg.querySelector(".element__cards-item").alt
-   let link  = addimg.querySelector(".element__cards-item").src
-   let name = addimg.querySelector(".element__title").textContent
+   evt.preventDefault()
+   const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+   img.querySelector(".element__cards-item").alt = editImagePlace.value
+   img.querySelector(".element__cards-item").src = editImageUrl.value
+   img.querySelector(".element__title").textContent = editImagePlace.value
+   let alt = img.querySelector(".element__cards-item").alt
+   let link  = img.querySelector(".element__cards-item").src
+   let name = img.querySelector(".element__title").textContent
    newRenderArray.push({name, link, alt})
    newRenderArray = [newRenderArray.pop()]
    createCard()
@@ -187,13 +170,13 @@ function intermediateArray(evt) {
 // отображает добавленые карточки
 function createCard() {
    newRenderArray.map(card => {
-      const addimg = template.content.querySelector(".element__card").cloneNode(true)
-      addimg.querySelector(".element__cards-item").alt = card["alt"]
-      addimg.querySelector(".element__cards-item").src = card["link"]
-      addimg.querySelector(".element__title").textContent = card["name"]
+      const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+      img.querySelector(".element__cards-item").alt = card["alt"]
+      img.querySelector(".element__cards-item").src = card["link"]
+      img.querySelector(".element__title").textContent = card["name"]
 
 //открывает на фулл
-   const openImg = addimg.querySelector(".element__cards-item")
+   const openImg = img.querySelector(".element__cards-item")
 
    openImg.addEventListener("click", () => {
       imagePopup.alt = card["alt"]
@@ -203,18 +186,18 @@ function createCard() {
    })
 
 // это удаляет карточку
-   const binButton = addimg.querySelector(".element__bin")
+   const binButton = img.querySelector(".element__bin")
 
    binButton.addEventListener("click", () => {
-      addimg.remove()
+      img.remove()
    })
 
 // лайкает
-   addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+   img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
    })
 
-   elementsCard.prepend(addimg)
+   elementsCard.prepend(img)
    closePopup(imageContainer)
 
    })
@@ -253,7 +236,7 @@ showCards()
 //   openPopup();
 //})
 
-//editButton.addEventListener('click', function () {
+//editButtonProfile.addEventListener('click', function () {
 //   popupContainer.classList.add("popup_opened");
 //  });
 
@@ -270,10 +253,10 @@ showCards()
 //addButtonImge.addEventListener("click", () => openImagePopup()); // мне если честно стрелочные функции не нравятся они выглядят для меня плохо читаемые пока, а что скажит ревьюер по поводу читаемости стрелочной функции? там чуть ниже есть такая же но не простая 
 
 // откроем ещё этот же попап через кнопку едит, пока это один и тот же попап но в будущем я продам шкуру с крота и куплю ещё один попап.
-// editButton.addEventListener("click", () => openPopup());
+// editButtonProfile.addEventListener("click", () => openPopup());
 
 // закроем попап // пока всё работает красота, кроты пока не мешают.
-//closeButton.addEventListener("click", () => closePopup());
+//closeButtonProfile.addEventListener("click", () => closePopup());
 
 // наш слухатерь пришёл к нас с докладом что кротов он не обнаружил и высказал своё подозрение что кроты в песке не водятся, поставим его на обнаружение у озера!
 
@@ -299,18 +282,18 @@ showCards()
 
 // ну вот нашёл же водяного крота, а говорил в песке кроты не водятся, в воде водятся же! щас мы подумаем как его уничтожить
 // я должен повешать событие сабмит на форму, а у меня клик на кнопке -,-!
-// submitProfileButton.addEventListener("click", () => formSubmitHandler());
+// submitProfileButton.addEventListener("click", () => receiveInputProfile());
 
-// function formSubmitHandler (evt) {
+// function receiveInputProfile (evt) {
 //    evt.preventDefault();
 //    profileName.textContent = editUserName.value;
 //    profileText.textContent = editUserDescription.value;
 //    closePopup(popupContainer);
 
-//formProfile.addEventListener("submit", formSubmitHandler)
-//submitProfileButton.addEventListener("click", formSubmitHandler, closePopup(popupContainer))
+//formProfile.addEventListener("submit", receiveInputProfile)
+//submitProfileButton.addEventListener("click", receiveInputProfile, closePopup(popupContainer))
 // я вот прям так с ходу навешать не могу, мало практили хотел чтоб и сохранял и закрывал форму, но при такой записи у меня обновляется страница, придётся по тупому закрывать попа в теле функции
-//submitProfileButton.addeventlistener("submit", () => {formSubmitHandler; closePopup(popupContainer)})
+//submitProfileButton.addeventlistener("submit", () => {receiveInputProfile; closePopup(popupContainer)})
 
 // и что? что дальше то я вот эту вот байду скопировал, делать то? я чёто не понимаю, эх пойду спрошу в чате
 // и так у нас есть темплейти мы должны передать в него из массива описание  и ссылку, вопрос что с альтом? куда денутся мои альты
@@ -327,11 +310,11 @@ showCards()
 
 // ещё одно не рабочие чудовище, но не рабочие, чувствую что подсосал не правильно
 // function addCards() {
-//    const addimg = template.content.querySelector(".element__card").cloneNode(true)
-//    addimg.querySelector(".popup__edit_image_place").alt = card["alt"]
-//    addimg.querySelector(".popup__edit_image_url").src = card["link"]
-//    addimg.querySelector(".popup__edit_image_place").textContent = card["name"]
-//    elementsCard.prependChild(addimg)
+//    const img = template.content.querySelector(".element__card").cloneNode(true)
+//    img.querySelector(".popup__edit_image_place").alt = card["alt"]
+//    img.querySelector(".popup__edit_image_url").src = card["link"]
+//    img.querySelector(".popup__edit_image_place").textContent = card["name"]
+//    elementsCard.prependChild(img)
 //    closePopup(imageContainer)
 // }
 
@@ -347,7 +330,7 @@ showCards()
 // ну так это а я если мы будем жмакать лайкос не в темплейте? а в добавленной карточки, что гда? мм? либо мы функцию лайкоса запихиваем в нутрь добавления карточки и зарание подготовленых карточек либо пишем отдельно и дял того и для того, по сути мы пишем всеравно 2 раза, значит не будем усложнять и не будем писать внутри.
 
 //короч поповоду лайкосов я зафигачил вот такую вот штуку как в функцию заранее отрисованых карточек, так и в те которые добавляют, я бы мог эту функцию вытащить за пределы их, но мне кажется так тупо больше работы. всеравно её писать 2 раза, какой я не постоянный хочу снаружи, то в нутри:) 🤭
-// img и addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+// img и img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
 //    console.log(evt)
 //    evt.target.classList.toggle("element__heart-botton_active")
 
@@ -397,13 +380,13 @@ showCards()
 // })
 
 // function addCards() {
-//    const addimg = template.content.querySelector(".element__card").cloneNode(true)
-//    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
-//    addimg.querySelector(".element__cards-item").src = editImageUrl.value
-//    addimg.querySelector(".element__title").textContent = editImagePlace.value
+//    const img = template.content.querySelector(".element__card").cloneNode(true)
+//    img.querySelector(".element__cards-item").alt = editImagePlace.value
+//    img.querySelector(".element__cards-item").src = editImageUrl.value
+//    img.querySelector(".element__title").textContent = editImagePlace.value
 
 // //открывает на фулл
-//    const openImg = addimg.querySelector(".element__cards-item")
+//    const openImg = img.querySelector(".element__cards-item")
 
 //    openImg.addEventListener("click", () => {
 //       imagePopup.src = editImageUrl.value
@@ -413,18 +396,18 @@ showCards()
 //    })
 
 // // это удаляет карточку
-//    const binButton = addimg.querySelector(".element__bin")
+//    const binButton = img.querySelector(".element__bin")
 
 //    binButton.addEventListener("click", () => {
-//       addimg.remove()
+//       img.remove()
 //    })
 
 // // лайкает
-//    addimg.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+//    img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
 //       console.log(evt)
 //       evt.target.classList.toggle("element__heart-botton_active")
 //    })
-//    elementsCard.prepend(addimg)
+//    elementsCard.prepend(img)
 //    closePopup(imageContainer)
 //    // editImageUrl.value = ""
 //    // editImagePlace.value = ""
@@ -436,10 +419,10 @@ showCards()
 // какой синтаксис заставит бежать только по последнему элементу массива? ааааа!!!
 // function addCards() {
 //    test.map(card => {
-//       const addimg = template.content.querySelector(".element__card").cloneNode(true)
-//       addimg.querySelector(".element__cards-item").alt = card["alt"]
-//       addimg.querySelector(".element__cards-item").src = card["link"]
-//       addimg.querySelector(".element__title").textContent = card["name"]
+//       const img = template.content.querySelector(".element__card").cloneNode(true)
+//       img.querySelector(".element__cards-item").alt = card["alt"]
+//       img.querySelector(".element__cards-item").src = card["link"]
+//       img.querySelector(".element__title").textContent = card["name"]
 //    })
 // }
 
