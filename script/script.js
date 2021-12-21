@@ -99,19 +99,12 @@ const initialCards = [
 //░░░░░░░░░░░░░░КОД░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 //_________Открытие и закрытие модальных окон____________________
-function openImagageFullPopup() { // так я поидеи должен открыть фулку попап
-   fullImagespopup.classList.add("popup_opened")
+// одна функция на все открывающиеся модальные окна
+function openPopup(popup) {
+   popup.classList.add("popup_opened")
 }
-
-function openPopup() { // так я поидеи должен открыть попап
-   popupContainer.classList.add("popup_opened")
-}
-
-function openImagePopup() { // так я поидеи должен открыть попап картинками
-   imageContainer.classList.add("popup_opened")
-}
-
-function closePopup(popup) { // давайте тут же рядом закроем попапы, одна функция на все попапы, в аргумент я передаю, что я хочу закрыть
+// одна функция на все закрывающиеся модальные окна
+function closePopup(popup) {
    popup.classList.remove("popup_opened")
    // form.reset()
 }
@@ -119,8 +112,8 @@ function closePopup(popup) { // давайте тут же рядом закро
 // слушатели
 closeButton.addEventListener("click", () => closePopup(popupContainer)); //слухатерь закрывает попап профиля
 closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает попап картинок
-editButton.addEventListener("click", () => openPopup()) // слухатерь открывает попап с  профилем
-addButtonImage.addEventListener("click", () => openImagePopup()) // слухатерь открывае попап с картинкам
+editButton.addEventListener("click", () => openPopup(popupContainer)) // слухатерь открывает попап с  профилем
+addButtonImage.addEventListener("click", () => openPopup(imageContainer)) // слухатерь открывае попап с картинкам
 closeImageFullButton.addEventListener("click", () => closePopup(fullImagespopup)); //слухатерь фулки
 
 // сабмиты форм
@@ -156,7 +149,7 @@ function showCards() {
       imagePopup.alt = card["alt"]
       captionPopup.textContent = card["name"]
 
-      openImagageFullPopup()
+      openPopup(fullImagespopup)
       })
 
 // это удаляет
@@ -186,13 +179,13 @@ function intermediateArray(evt) {
    let name = addimg.querySelector(".element__title").textContent
    newRenderArray.push({name, link, alt})
    newRenderArray = [newRenderArray.pop()]
-   addCards()
+   createCard()
    editImageUrl.value = ""
    editImagePlace.value = ""
 }
 
 // отображает добавленые карточки
-function addCards() {
+function createCard() {
    newRenderArray.map(card => {
       const addimg = template.content.querySelector(".element__card").cloneNode(true)
       addimg.querySelector(".element__cards-item").alt = card["alt"]
@@ -206,7 +199,7 @@ function addCards() {
       imagePopup.alt = card["alt"]
       imagePopup.src = card["link"]
       captionPopup.textContent = card["name"]
-      openImagageFullPopup()
+      openPopup(fullImagespopup)
    })
 
 // это удаляет карточку
