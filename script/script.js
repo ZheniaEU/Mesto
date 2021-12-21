@@ -17,39 +17,44 @@ const profileText = document.querySelector(".profile__text") // Описание
 //кнопки профиля
 const editButton = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
 const closeButton = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
-const submitProfileButton = document.querySelector(".popup__accept_profile") // сабмит профиля
-
+// const submitProfileButton = document.querySelector(".popup__accept_profile") // сабмит профиля
+//форма профиля
+const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
 //инпуты профиля
-const formProfile = document.querySelector(".popup__form_character") // форма профиля пока х3 зачем она мне но пусть будет
-const editUserName = document.querySelector(".popup__edit_user_name")
-const editUserDescription = document.querySelector(".popup__edit_user_description")
+const editUserName = document.querySelector(".popup__edit_user_name") //профиль юзер нейм
+const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
 
 //______________________Добавление новых карточек____________________________
 //кнопки картинок
 const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
 const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
-const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки
-
+// const submitButtonImage = document.querySelector(".popup__accept_image") // сабмит картинки // получается не нужная кнопка раз я с помощью события формы отправляю
+//форма пользовательских картинок
+const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
 //инпуты картинок
 const formImage = document.querySelector(".popup__edit_image_place") // форма картино тоже х3 зачем но пусть будет
 const editImagePlace = document.querySelector(".popup__edit_image_place")
 const editImageUrl = document.querySelector(".popup__edit_image_url")
 const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
 
-//_______________________Темплейты___________________________________________
-const template = document.querySelector(".template")
-const templateCard = document.querySelector(".element__card") // див карточки
-const templateItem = document.querySelector(".element__cards-item") //сама картинка
-const templateTitel = document.querySelector(".element__title") //тайтл
-const templateBin = document.querySelector(".template__bin")
-const templateHeart = document.querySelector(".template__heart-botton")
-
+//_____________________Развёрнутое модальное окно(полная картинка)__________
 // кнопка фулл
 const closeImageFullButton = document.querySelector(".popup__close_images_full")
 
 //селкеторы полного попапа
 const imagePopup = document.querySelector(".popup__image")
 const captionPopup = document.querySelector(".popup__caption")
+
+//_______________________Темплейты___________________________________________
+const template = document.querySelector(".template") // контейнер темплейта
+const templateCard = document.querySelector(".element__card") // див карточки
+const templateItem = document.querySelector(".element__cards-item") //сама картинка
+const templateTitel = document.querySelector(".element__title") //тайтл
+const templateBin = document.querySelector(".template__bin") // бин темплейта
+const templateHeart = document.querySelector(".template__heart-botton") //темплейт лайк
+
+
+
 // const form = document.querySelectorAll(".popup__form")
 
 //________________________Массивы________________________________________________
@@ -116,10 +121,14 @@ closeButton.addEventListener("click", () => closePopup(popupContainer)); //сл�
 closeImageButton.addEventListener("click", () => closePopup(imageContainer)); //слухатерь закрывает попап картинок
 editButton.addEventListener("click", () => openPopup()) // слухатерь открывает попап с  профилем
 addButtonImage.addEventListener("click", () => openImagePopup()) // слухатерь открывае попап с картинкам
-submitProfileButton.addEventListener("click", formSubmitHandler)
-//submitProfileButton.addeventlistener("click", () => {formSubmitHandler(event); closePopup(popupContainer)}) не забыть потыкать
-submitButtonImage.addEventListener("click", () => intermediateArray()); // слухатерь сабмита добавления картинок
 closeImageFullButton.addEventListener("click", () => closePopup(fullImagespopup)); //слухатерь фулки
+
+// сабмиты форм
+formProfileUser.addEventListener("submit", formSubmitHandler)
+//submitProfileButton.addeventlistener("click", () => {formSubmitHandler(event); closePopup(popupContainer)}) не забыть потыкать
+//formUserAdd.addEventListener("submit", () => {intermediateArray(evt)}); // слухатерь сабмита добавления картинок
+formUserAdd.addEventListener("submit", intermediateArray) //рабочий вариант слухатерь сабмита добавления картинок
+
 
 function formSubmitHandler(evt) {
    evt.preventDefault()
@@ -167,7 +176,7 @@ function showCards() {
 
 // работа с новым массивом для рендера пользовательских карточек
 function intermediateArray(evt) {
-   // evt.preventDefault();
+   evt.preventDefault();
    const addimg = template.content.querySelector(".element__card").cloneNode(true)
    addimg.querySelector(".element__cards-item").alt = editImagePlace.value
    addimg.querySelector(".element__cards-item").src = editImageUrl.value
