@@ -3,23 +3,13 @@
 // P.S они даже будут петь "лук эт ми айем а бьютифал крича". https://www.youtube.com/watch?v=84LBjXaeKk4
 
 
-// Обращение к ревьюеру
-// Здравствуйте Геннадий, к сожалению я не сделал до конца, я понимаю что я не сделал до конца, но мне нужно ещё одно ревью, я слишком сильно перекопал свой код и уже путаюсь в нём. Мне нужно ревью чтобы собрать мозги в кучку
-// По поводу 2х массивов, добавление же в начала массива, если мы используем один, это перезапись всего массива и это тормозит код, в теории чётко давалось что лучше всего работать с конечным элементом массива, чек лист написан не нечеловеческом языке, порой я вообще не понимаю чего просят.
-// вот это что такое Функция выполняет только одну задачу, например возвращает разметку карточки. Я не понимаю, не понимаю... Насколько я понял Вы хотите чтоб я свалил всё в 1 кучу, но тут как бы написано наоборот...
-// про то что я не могу использовать 2 массива в чек листе ни слова
-// Так же вы написали в прошлый раз чтоб консоль не содержала ошибок, она у меня и не содержала и сейчас не содержит, если есть ошибки прошу указать место.
-// Данное обращение не содержит вопросов или просьбы о помощи, мне нужен пинок в правильном направлении...
-
-
-
 //░░░░░░░░░░░░░░░░░░░░ПЕРЕМЕННЫЕ░░░░░░░░░░░░░░░░░░░░
 // попапы
-const popupContainer = document.querySelector(".popup__profile") // модалка профиля
-const imageContainer = document.querySelector(".popup_images") // модалка добавления карточек
-const fullImagespopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
+const profilePopup = document.querySelector(".popup__profile") // модалка профиля
+const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
+const fullImagesPopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
 
-const elementsCard = document.querySelector(".elements") //контейнер для подготовленых картинок 
+const elementsContainer = document.querySelector(".elements") //контейнер для подготовленых картинок 
 
 //_____________________Профиль_____________________________________________
 const profileName = document.querySelector(".profile__name") // Имя в профиле
@@ -43,7 +33,6 @@ const formUserAdd = document.querySelector(".popup__form_image") // форма �
 //инпуты картинок
 const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
 const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
-// const templateImage = document.querySelector(".template__card") // заготовка для картинок, может id использовать а не класс? или мы за единобразие кода?
 
 //_____________________Развёрнутое модальное окно(полная картинка)__________
 // кнопка фулл
@@ -106,27 +95,78 @@ function closePopup(popup) {
 }
 
 // слушатели
-closeButtonProfile.addEventListener("click", () => closePopup(popupContainer)) //слухатерь закрывает попап профиля
-closeImageButton.addEventListener("click", () => closePopup(imageContainer)) //слухатерь закрывает попап картинок
-editButtonProfile.addEventListener("click", () => openPopup(popupContainer)) // слухатерь открывает попап с  профилем
-addButtonImage.addEventListener("click", () => openPopup(imageContainer)) // слухатерь открывае попап с картинкам
-closeImageFullButton.addEventListener("click", () => closePopup(fullImagespopup)) //слухатерь фулки
+closeButtonProfile.addEventListener("click", () => closePopup(profilePopup)) //слухатерь закрывает попап профиля
+closeImageButton.addEventListener("click", () => closePopup(imageUserPopup)) //слухатерь закрывает попап картинок
+editButtonProfile.addEventListener("click", () => openPopup(profilePopup)) // слухатерь открывает попап с  профилем
+addButtonImage.addEventListener("click", () => openPopup(imageUserPopup)) // слухатерь открывае попап с картинкам
+closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)) //слухатерь фулки
 
 // сабмиты форм
-formProfileUser.addEventListener("submit", receiveInputProfile) //слушатель формы профайла
+formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 
 
 
-function receiveInputProfile(evt) {
+function handleProfileFormSubmit(evt) {
    evt.preventDefault()
    profileName.textContent = editUserName.value
    profileText.textContent = editUserDescription.value
-   closePopup(popupContainer)
+   closePopup(profilePopup)
 }
 
+// function likeTogge(evt ) {
+//    evt.target.classList.toggle("element__heart-botton_active")
+// }
+
+// function deleteCard(evt) {
+
+// }
+function showCard(evt) {
+   evt.preventDefault()
+   initialCards.forEach(card => {
+      elementsContainer.append(createCard(card["link"], card["name"]))
+   })
+}
+
+function showUserCard(evt) {
+   evt.preventDefault()
+   elementsContainer.prepend(createCard(editImageUrl["link"], editImagePlace["name"]))
+   closePopup(imageUserPopup)
+}
+
+function createCard(link, name) {
+   const preform = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+   const url = preform.querySelector(".element__cards-item")
+   const titel = preform.querySelector(".element__title")
+   const alt = preform.querySelector(".element__title")
+   const likeButton = preform.querySelector(".element__heart-botton")
+   const binButton = preform.querySelector(".element__bin")
+
+   url.scr = link
+   alt.alt = name
+   titel.textContent = name
+
+   // лайкает
+   likeButton.addEventListener('click', (evt) => {
+      evt.target.classList.toggle("element__heart-botton_active")
+   })
+   // удаляет
+   binButton.addEventListener("click", () => {
+      preform.remove()
+   })
+   // открывает на фулл
+   openImg.addEventListener("click", () => {
+      imagePopup.src = card["link"]
+      imagePopup.alt = card["alt"]
+      captionPopup.textContent = card["name"]
+
+      openPopup(fullImagesPopup)
+   })
+
+   return preform
+}
 
 // работа с подготовленными карточками
-function createCard() {
+function showsCard() {
    initialCards.forEach(card => {
 
       // это отрисовывает
@@ -143,12 +183,13 @@ function createCard() {
          imagePopup.alt = card["alt"]
          captionPopup.textContent = card["name"]
 
-         openPopup(fullImagespopup)
+         openPopup(fullImagesPopup)
       })
 
       // это удаляет
       const binButton = img.querySelector(".element__bin")
       binButton.addEventListener("click", () => {
+         console.log(img)
          img.remove()
       })
 
@@ -157,65 +198,61 @@ function createCard() {
       img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
          evt.target.classList.toggle("element__heart-botton_active")
       })
-      elementsCard.appendChild(img)
+      elementsContainer.appendChild(img)
    })
-
-   formUserAdd.addEventListener("submit", intermediateArray) //слушатель формы пользовательской карточки
-
-   //обновление формы
-   function intermediateArray(evt) {
-      evt.preventDefault()
-      const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-      img.querySelector(".element__cards-item").alt = editImagePlace.value
-      img.querySelector(".element__cards-item").src = editImageUrl.value
-      img.querySelector(".element__title").textContent = editImagePlace.value
-      let alt = img.querySelector(".element__cards-item").alt
-      let link = img.querySelector(".element__cards-item").src
-      let name = img.querySelector(".element__title").textContent
-      newRenderArray.push({ name, link, alt })
-      newRenderArray = [newRenderArray.pop()]
-      showUserCard()
-      editImageUrl.value = ""
-      editImagePlace.value = ""
-   }
-
-   // отображает добавленые карточки
-   function showUserCard() {
-      newRenderArray.map(card => {
-         const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-         img.querySelector(".element__cards-item").alt = card["alt"]
-         img.querySelector(".element__cards-item").src = card["link"]
-         img.querySelector(".element__title").textContent = card["name"]
-
-         //открывает на фулл
-         const openImg = img.querySelector(".element__cards-item")
-
-         openImg.addEventListener("click", () => {
-            imagePopup.alt = card["alt"]
-            imagePopup.src = card["link"]
-            captionPopup.textContent = card["name"]
-            openPopup(fullImagespopup)
-         })
-
-         // это удаляет карточку
-         const binButton = img.querySelector(".element__bin")
-         binButton.addEventListener("click", () => {
-            img.remove()
-         })
-
-         // лайкает
-         img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-            evt.target.classList.toggle("element__heart-botton_active")
-         })
-
-         elementsCard.prepend(img)
-         closePopup(imageContainer)
-      })
-   }
 }
 
+formUserAdd.addEventListener("submit", intermediateArray) //слушатель формы пользовательской карточки
 
-createCard()
+//обновление формы
+function intermediateArray(evt) {
+   evt.preventDefault()
+   const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+   img.querySelector(".element__cards-item").alt = editImagePlace.value
+   img.querySelector(".element__cards-item").src = editImageUrl.value
+   img.querySelector(".element__title").textContent = editImagePlace.value
+   let alt = img.querySelector(".element__cards-item").alt
+   let link = img.querySelector(".element__cards-item").src
+   let name = img.querySelector(".element__title").textContent
+   newRenderArray.push({ name, link, alt })
+   newRenderArray = [newRenderArray.pop()]
+   showUserCards()
+   editImageUrl.value = ""
+   editImagePlace.value = ""
+}
+
+// отображает добавленые карточки
+function showUserCards() {
+   newRenderArray.map(card => {
+      //это отрисовывает
+      const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+      img.querySelector(".element__cards-item").alt = card["alt"]
+      img.querySelector(".element__cards-item").src = card["link"]
+      img.querySelector(".element__title").textContent = card["name"]
+
+      //открывает на фулл
+      const openImg = img.querySelector(".element__cards-item")
+      openImg.addEventListener("click", () => {
+         imagePopup.alt = card["alt"]
+         imagePopup.src = card["link"]
+         captionPopup.textContent = card["name"]
+         openPopup(fullImagesPopup)
+      })
+      // это удаляет карточку
+      const binButton = img.querySelector(".element__bin")
+      binButton.addEventListener("click", () => {
+         img.remove()
+      })
+      // лайкает
+      img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+         evt.target.classList.toggle("element__heart-botton_active")
+      })
+      elementsContainer.prepend(img)
+      closePopup(imageUserPopup)
+   })
+}
+
+showsCard()
 
 // говорят чем больше программист напишет кода тем лучше, поэтому вот
 
