@@ -2,7 +2,11 @@
 // Здесь я буду создавать таких чудовищ Myкрича("🐉" $[`+`] }🦛{)! что последние творения профессора Преображенского будет завидовать мне!
 // P.S они даже будут петь "лук эт ми айем а бьютифал крича". https://www.youtube.com/watch?v=84LBjXaeKk4
 
-// Обращение к Геннадию. Пожалуйста без шаблонов, по русски. Если я не сделал, что-то, это значит. Я не понял чего Вы просите. У меня всё работает, в консоли нет ошибок, код нигде не повторяется. Все названия переменных с вашими утончёнными вкусами я поправил.
+// реализовано
+// корректный плейсхолдер в профиле
+// редактирование профиля подхватывает текущие имя из описания, редактирование начинается с конечной буквы, если стереть строку до конца, проявляется плейсхолдер
+// исправлены синтаксические ошибки
+// корректное заполнение альта в карточках
 
 
 //░░░░░░░░░░░░░░░░░░░░ПЕРЕМЕННЫЕ░░░░░░░░░░░░░░░░░░░░
@@ -49,32 +53,32 @@ const initialCards = [
    {
       name: 'Большая голубая дыра',
       link: 'images/place/Big-Blue-Hole.jpg',
-      alt: "Большa голубоa дырa",
+      // alt: "Большa голубоa дырa",
    },
    {
       name: 'Амазонка',
       link: 'images/place/mole.jpg',
-      alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
+      // alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
    },
    {
       name: 'Большой Барьерный риф',
       link: 'images/place/Great_Barrier_Reef.jpg',
-      alt: "Больщой Барьерный риф",
+      // alt: "Больщой Барьерный риф",
    },
    {
       name: 'Клуб Орлиного глаза',
       link: 'images/place/клуб-орлиного-глаза.jpg',
-      alt: "Вуаэристы",
+      // alt: "Вуаэристы",
    },
    {
       name: 'Морейн',
       link: 'images/place/Moraine_Lake.jpg',
-      alt: "озеро Морейн",
+      // alt: "озеро Морейн",
    },
    {
       name: 'что-то',
       link: 'images/place/Great-Barrier-Reef.jpg',
-      alt: "эта карточка ещё не заполнена",
+      // alt: "эта карточка ещё не заполнена",
    },
 ]
 
@@ -100,6 +104,8 @@ closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)
 formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 formUserAdd.addEventListener("submit", showUserCard) //слушатель формы пользовательской карточки
 
+console.log(editUserName.value, editUserDescription.value)
+
 function handleProfileFormSubmit(evt) {
    evt.preventDefault()
    profileName.textContent = editUserName.value
@@ -108,7 +114,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 // показать заранее подготовленые карточки
-function showCard() {
+function showCards() {
    initialCards.forEach(card => {
       elementsContainer.append(createCard(card["link"], card["name"]))
    })
@@ -125,16 +131,16 @@ function showUserCard(evt) {
 
 //создание карточки
 function createCard(link, name) {
-   const preform = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-   const url = preform.querySelector(".element__cards-item")
-   const titel = preform.querySelector(".element__title")
-   const alt = preform.querySelector(".element__title")
-   const likeButton = preform.querySelector(".element__heart-botton")
-   const binButton = preform.querySelector(".element__bin")
+   const cardElement = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+   const url = cardElement.querySelector(".element__cards-item")
+   const title = cardElement.querySelector(".element__title")
+   // const alt = cardElement.querySelector(".element__title")
+   const likeButton = cardElement.querySelector(".element__heart-botton")
+   const binButton = cardElement.querySelector(".element__bin")
 
    url.src = link
-   alt.alt = name
-   titel.textContent = name
+   url.alt = name
+   title.textContent = name
 
    // лайкает
    likeButton.addEventListener('click', (evt) => {
@@ -143,7 +149,7 @@ function createCard(link, name) {
 
    // удаляет
    binButton.addEventListener("click", () => {
-      preform.remove()
+      cardElement.remove()
    })
 
    // открывает на фулл
@@ -154,7 +160,7 @@ function createCard(link, name) {
       openPopup(fullImagesPopup)
    })
 
-   return preform
+   return cardElement
 }
 
-showCard()
+showCards()
