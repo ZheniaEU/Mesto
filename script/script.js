@@ -120,8 +120,8 @@ function handleProfileFormSubmit(evt) {
 // function deleteCard(evt) {
 
 // }
-function showCard(evt) {
-   evt.preventDefault()
+function showCard() {
+   // evt.preventDefault()
    initialCards.forEach(card => {
       elementsContainer.append(createCard(card["link"], card["name"]))
    })
@@ -141,9 +141,10 @@ function createCard(link, name) {
    const likeButton = preform.querySelector(".element__heart-botton")
    const binButton = preform.querySelector(".element__bin")
 
-   url.scr = link
+   url.src = link
    alt.alt = name
    titel.textContent = name
+   console.log(link, name)
 
    // лайкает
    likeButton.addEventListener('click', (evt) => {
@@ -154,10 +155,13 @@ function createCard(link, name) {
       preform.remove()
    })
    // открывает на фулл
+
+   const openImg = url
+
    openImg.addEventListener("click", () => {
-      imagePopup.src = card["link"]
-      imagePopup.alt = card["alt"]
-      captionPopup.textContent = card["name"]
+      imagePopup.src = link
+      imagePopup.alt = name
+      captionPopup.textContent = name
 
       openPopup(fullImagesPopup)
    })
@@ -165,94 +169,96 @@ function createCard(link, name) {
    return preform
 }
 
+showCard()
+
 // работа с подготовленными карточками
-function showsCard() {
-   initialCards.forEach(card => {
+// function showsCard() {
+//    initialCards.forEach(card => {
 
-      // это отрисовывает
-      const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-      img.querySelector(".element__cards-item").alt = card["alt"]
-      img.querySelector(".element__cards-item").src = card["link"]
-      img.querySelector(".element__title").textContent = card["name"]
+//       // это отрисовывает
+//       const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+//       img.querySelector(".element__cards-item").alt = card["alt"]
+//       img.querySelector(".element__cards-item").src = card["link"]
+//       img.querySelector(".element__title").textContent = card["name"]
 
-      // открывает на фулл
-      const openImg = img.querySelector(".element__cards-item")
+//       // открывает на фулл
+//       const openImg = img.querySelector(".element__cards-item")
 
-      openImg.addEventListener("click", () => {
-         imagePopup.src = card["link"]
-         imagePopup.alt = card["alt"]
-         captionPopup.textContent = card["name"]
+//       openImg.addEventListener("click", () => {
+//          imagePopup.src = card["link"]
+//          imagePopup.alt = card["alt"]
+//          captionPopup.textContent = card["name"]
 
-         openPopup(fullImagesPopup)
-      })
+//          openPopup(fullImagesPopup)
+//       })
 
-      // это удаляет
-      const binButton = img.querySelector(".element__bin")
-      binButton.addEventListener("click", () => {
-         console.log(img)
-         img.remove()
-      })
+//       // это удаляет
+//       const binButton = img.querySelector(".element__bin")
+//       binButton.addEventListener("click", () => {
+//          console.log(img)
+//          img.remove()
+//       })
 
 
-      // это лайкает
-      img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-         evt.target.classList.toggle("element__heart-botton_active")
-      })
-      elementsContainer.appendChild(img)
-   })
-}
+//       // это лайкает
+//       img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+//          evt.target.classList.toggle("element__heart-botton_active")
+//       })
+//       elementsContainer.appendChild(img)
+//    })
+// }
 
-formUserAdd.addEventListener("submit", intermediateArray) //слушатель формы пользовательской карточки
+// formUserAdd.addEventListener("submit", intermediateArray) //слушатель формы пользовательской карточки
 
-//обновление формы
-function intermediateArray(evt) {
-   evt.preventDefault()
-   const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-   img.querySelector(".element__cards-item").alt = editImagePlace.value
-   img.querySelector(".element__cards-item").src = editImageUrl.value
-   img.querySelector(".element__title").textContent = editImagePlace.value
-   let alt = img.querySelector(".element__cards-item").alt
-   let link = img.querySelector(".element__cards-item").src
-   let name = img.querySelector(".element__title").textContent
-   newRenderArray.push({ name, link, alt })
-   newRenderArray = [newRenderArray.pop()]
-   showUserCards()
-   editImageUrl.value = ""
-   editImagePlace.value = ""
-}
+// //обновление формы
+// function intermediateArray(evt) {
+//    evt.preventDefault()
+//    const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+//    img.querySelector(".element__cards-item").alt = editImagePlace.value
+//    img.querySelector(".element__cards-item").src = editImageUrl.value
+//    img.querySelector(".element__title").textContent = editImagePlace.value
+//    let alt = img.querySelector(".element__cards-item").alt
+//    let link = img.querySelector(".element__cards-item").src
+//    let name = img.querySelector(".element__title").textContent
+//    newRenderArray.push({ name, link, alt })
+//    newRenderArray = [newRenderArray.pop()]
+//    showUserCards()
+//    editImageUrl.value = ""
+//    editImagePlace.value = ""
+// }
 
-// отображает добавленые карточки
-function showUserCards() {
-   newRenderArray.map(card => {
-      //это отрисовывает
-      const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-      img.querySelector(".element__cards-item").alt = card["alt"]
-      img.querySelector(".element__cards-item").src = card["link"]
-      img.querySelector(".element__title").textContent = card["name"]
+// // отображает добавленые карточки
+// function showUserCards() {
+//    newRenderArray.map(card => {
+//       //это отрисовывает
+//       const img = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
+//       img.querySelector(".element__cards-item").alt = card["alt"]
+//       img.querySelector(".element__cards-item").src = card["link"]
+//       img.querySelector(".element__title").textContent = card["name"]
 
-      //открывает на фулл
-      const openImg = img.querySelector(".element__cards-item")
-      openImg.addEventListener("click", () => {
-         imagePopup.alt = card["alt"]
-         imagePopup.src = card["link"]
-         captionPopup.textContent = card["name"]
-         openPopup(fullImagesPopup)
-      })
-      // это удаляет карточку
-      const binButton = img.querySelector(".element__bin")
-      binButton.addEventListener("click", () => {
-         img.remove()
-      })
-      // лайкает
-      img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
-         evt.target.classList.toggle("element__heart-botton_active")
-      })
-      elementsContainer.prepend(img)
-      closePopup(imageUserPopup)
-   })
-}
+//       //открывает на фулл
+//       const openImg = img.querySelector(".element__cards-item")
+//       openImg.addEventListener("click", () => {
+//          imagePopup.alt = card["alt"]
+//          imagePopup.src = card["link"]
+//          captionPopup.textContent = card["name"]
+//          openPopup(fullImagesPopup)
+//       })
+//       // это удаляет карточку
+//       const binButton = img.querySelector(".element__bin")
+//       binButton.addEventListener("click", () => {
+//          img.remove()
+//       })
+//       // лайкает
+//       img.querySelector(".element__heart-botton").addEventListener('click', (evt) => {
+//          evt.target.classList.toggle("element__heart-botton_active")
+//       })
+//       elementsContainer.prepend(img)
+//       closePopup(imageUserPopup)
+//    })
+// }
 
-showsCard()
+// showsCard()
 
 // говорят чем больше программист напишет кода тем лучше, поэтому вот
 
