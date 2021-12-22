@@ -2,12 +2,6 @@
 // Здесь я буду создавать таких чудовищ Myкрича("🐉" $[`+`] }🦛{)! что последние творения профессора Преображенского будет завидовать мне!
 // P.S они даже будут петь "лук эт ми айем а бьютифал крича". https://www.youtube.com/watch?v=84LBjXaeKk4
 
-// реализовано
-// корректный плейсхолдер в профиле
-// редактирование профиля подхватывает текущие имя из описания, редактирование начинается с конечной буквы, если стереть строку до конца, проявляется плейсхолдер
-// исправлены синтаксические ошибки
-// корректное заполнение альта в карточках
-
 
 //░░░░░░░░░░░░░░░░░░░░ПЕРЕМЕННЫЕ░░░░░░░░░░░░░░░░░░░░
 // попапы
@@ -96,7 +90,7 @@ function closePopup(popup) {
 // слушатели
 closeButtonProfile.addEventListener("click", () => closePopup(profilePopup)) //слухатерь закрывает попап редактирования профиля
 closeImageButton.addEventListener("click", () => closePopup(imageUserPopup)) //слухатерь закрывает попап пользовательской карточки
-editButtonProfile.addEventListener("click", () => openPopup(profilePopup)) // слухатерь открывает попап редактирование профиля
+editButtonProfile.addEventListener("click", () => openProfilePopupHandler()) // слухатерь открывает попап редактирование профиля
 addButtonImage.addEventListener("click", () => openPopup(imageUserPopup)) // слухатерь открывае попап пользовательской карточки
 closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)) //слухатерь фулки
 
@@ -104,6 +98,14 @@ closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)
 formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 formUserAdd.addEventListener("submit", showUserCard) //слушатель формы пользовательской карточки
 
+// получает информацию профиля и открываю попап с ним
+function openProfilePopupHandler() {
+   editUserName.value = profileName.textContent
+   editUserDescription.value = profileText.textContent
+   openPopup(profilePopup)
+}
+
+// после редактирования профиля, закрываю попап
 function handleProfileFormSubmit(evt) {
    evt.preventDefault()
    profileName.textContent = editUserName.value
@@ -112,7 +114,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 // показать заранее подготовленые карточки
-function showCards() {
+function handleAddCardSubmit() {
    initialCards.forEach(card => {
       elementsContainer.append(createCard(card["link"], card["name"]))
    })
@@ -161,4 +163,4 @@ function createCard(link, name) {
    return cardElement
 }
 
-showCards()
+handleAddCardSubmit()
