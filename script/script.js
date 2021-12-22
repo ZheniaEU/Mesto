@@ -104,8 +104,6 @@ closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)
 formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 formUserAdd.addEventListener("submit", showUserCard) //слушатель формы пользовательской карточки
 
-console.log(editUserName.value, editUserDescription.value)
-
 function handleProfileFormSubmit(evt) {
    evt.preventDefault()
    profileName.textContent = editUserName.value
