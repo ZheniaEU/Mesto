@@ -96,7 +96,7 @@ closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)
 
 // сабмиты форм
 formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
-formUserAdd.addEventListener("submit", showUserCard) //слушатель формы пользовательской карточки
+formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель формы пользовательской карточки
 
 // получает информацию профиля и открываю попап с ним
 function openProfilePopupHandler() {
@@ -114,14 +114,14 @@ function handleProfileFormSubmit(evt) {
 }
 
 // показать заранее подготовленые карточки
-function handleAddCardSubmit() {
+function renderCards() {
    initialCards.forEach(card => {
       elementsContainer.append(createCard(card["link"], card["name"]))
    })
 }
 
 // добавить пользовательскую карточку
-function showUserCard(evt) {
+function handleAddCardSubmit(evt) {
    evt.preventDefault()
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
    closePopup(imageUserPopup)
@@ -132,14 +132,14 @@ function showUserCard(evt) {
 //создание карточки
 function createCard(link, name) {
    const cardElement = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
-   const url = cardElement.querySelector(".element__cards-item")
+   const cardImage = cardElement.querySelector(".element__cards-item")
    const title = cardElement.querySelector(".element__title")
    // const alt = cardElement.querySelector(".element__title")
    const likeButton = cardElement.querySelector(".element__heart-botton")
    const binButton = cardElement.querySelector(".element__bin")
 
-   url.src = link
-   url.alt = name
+   cardImage.src = link
+   cardImage.alt = name
    title.textContent = name
 
    // лайкает
@@ -153,7 +153,7 @@ function createCard(link, name) {
    })
 
    // открывает на фулл
-   url.addEventListener("click", () => {
+   cardImage.addEventListener("click", () => {
       imagePopup.src = link
       imagePopup.alt = name
       captionPopup.textContent = name
@@ -163,4 +163,4 @@ function createCard(link, name) {
    return cardElement
 }
 
-handleAddCardSubmit()
+renderCards()
