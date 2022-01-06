@@ -1,4 +1,4 @@
-.elements{
+/* .elements{
    display: grid;
    grid-template-columns: repeat(3, 282px);
    gap: 20px 17px;
@@ -21,7 +21,7 @@
       grid-template-rows: repeat(6, auto);
       margin: 0 auto;
    }
-}
+} */
 
 .elements{
    margin-top: 51px;

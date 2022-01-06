@@ -9,7 +9,7 @@ const profilePopup = document.querySelector(".popup__profile") // модалка
 const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 const fullImagesPopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
 
-const elementsContainer = document.querySelector(".elements") //контейнер для подготовленых картинок 
+const elementsContainer = document.querySelector(".element__list") //контейнер для подготовленых картинок 
 
 //_____________________Профиль_____________________________________________
 const profileName = document.querySelector(".profile__name") // Имя в профиле
