@@ -8,14 +8,14 @@
    <meta name="description" content="Третья проектная работа Mesto(в рамках второго и третьего спринта) в Яндексе Web+ потока 007">
    <meta name="keywords" content="Яндекс, oбучение, frontend">
    <meta name="author" content="Evgeny Kuznetsov">
-   <link rel="stylesheet" href="pages/index.css">
+   <!-- <link rel="stylesheet" href="pages/index.css"> -->
    <link rel="icon" type="image/ico" href="images/favicon/favicon.ico">
    <title>Mesto</title>
 </head>
 
 <body class="root">
    <header class="header">
-      <img class="header__logo" src="images/logo/logo.svg" alt="логотип">
+      <img class="header__logo" src="<%=require('./images/logo/logo.svg')%>" alt="логотип">
    </header>
 
    <main class="content">
@@ -23,7 +23,7 @@
       <!-- шикарно, шикарно, написав предыдущий комментарий и не закоментировав его, я искал какой же это крот даёт даёт растояние между хедером и профилем, вот оно как чёрный крот, на чёрном фоне 👀 -->
       <section class="profile">
          <article class="profile__info">
-            <img class="profile__avatar" src="images/avatar/avatar.png" alt="аватар">
+            <img class="profile__avatar" src="<%=require('./images/avatar/avatar.png')%>" alt="аватар">
             <!-- ох уж этот флекс бокс, в нём живут кроты:( ну почему мне так сложно передти на гриды? чтоб верстать, а не гонятся за кротами 😿 -->
             <div class="profile__box-text">
                <div class="profile__main">
@@ -81,7 +81,7 @@
       <div class="popup popup_images_open">
          <div class="popup__container_images_open">
             <button class="popup__close popup__close_images_full"></button>
-            <img class="popup__image"src="images/place/Big-Blue-Hole.jpg" alt="">
+            <img class="popup__image" src="images/place/Big-Blue-Hole.jpg" alt="">
             <p class="popup__caption">кто проживает на дне океана</p>
          </div>
       </div>

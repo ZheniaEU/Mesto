@@ -1,6 +1,6 @@
 {
-   "name": "praktikum",
-   "version": "0.0.1",
+   "name": "mesto",
+   "version": "sprint5_1",
    "description": "Learning platform",
    "main": "index.js",
    "scripts": {

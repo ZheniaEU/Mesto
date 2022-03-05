@@ -2,7 +2,7 @@
    display: flex;
    flex-wrap: wrap;
    justify-content: space-between;
-   align-content: start;
+   /* align-content: start; */ /*почему ругается?*/
    list-style: none;
    white-space: nowrap;
    text-overflow: ellipsis;
@@ -14,8 +14,5 @@
    margin: 0 auto;
    overflow: hidden;
    position: relative;
-   /*border-radius: 10px;*/
-   /*так как ревью я прополз предыдущие, скругление краёв я сделаю такое какое я хочу, такое как визуально в фигме в 13 px, а не такое которое отображается в свойствах в 10, я уверен что везде где 10px на части картинках проскакивают белые края, у меня они не проскакивают*/
-   border-radius: 13px;
-   /*его посмотреть но оно точно больше чем 10px, я проверил через пиксель пёрфект и жмакнул 13px https://i.imgur.com/xXve71u.png верхняя оригинал в фигме, снизу моё с 10px */
+   border-radius: 10px;
 }

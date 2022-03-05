@@ -1,77 +1,84 @@
 // ДА наконец-то JS, наконец-то я смогу бороться с кротами которые обладают не человеческими свойствами.
 // Здесь я буду создавать таких чудовищ Myкрича("🐉" $[`+`] }🦛{)! что последние творения профессора Преображенского будет завидовать мне!
 // P.S они даже будут петь "лук эт ми айем а бьютифал крича". https://www.youtube.com/watch?v=84LBjXaeKk4
-
+import "../styles/index.css"
 
 //░░░░░░░░░░░░░░░░░░░░ПЕРЕМЕННЫЕ░░░░░░░░░░░░░░░░░░░░
 // попапы
-const profilePopup = document.querySelector(".popup__profile") // модалка профиля
-const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
-const fullImagesPopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
+export const profilePopup = document.querySelector(".popup__profile") // модалка профиля
+export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
+export const fullImagesPopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
 
-const elementsContainer = document.querySelector(".element__list") //контейнер для подготовленых картинок 
+export const elementsContainer = document.querySelector(".element__list") //контейнер для подготовленых картинок 
 
 //_____________________Профиль_____________________________________________
-const profileName = document.querySelector(".profile__name") // Имя в профиле
-const profileText = document.querySelector(".profile__text") // Описание в профиле
+export const profileName = document.querySelector(".profile__name") // Имя в профиле
+export const profileText = document.querySelector(".profile__text") // Описание в профиле
 
 //кнопки профиля
-const editButtonProfile = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
-const closeButtonProfile = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
+export const editButtonProfile = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
+export const closeButtonProfile = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
 //форма профиля
-const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
+export const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
 //инпуты профиля
-const editUserName = document.querySelector(".popup__edit_user_name") //профиль юзер нейм
-const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
+export const editUserName = document.querySelector(".popup__edit_user_name") //профиль юзер нейм
+export const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
 
 //______________________Добавление новых карточек____________________________
 //кнопки картинок
-const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
-const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
+export const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
+export const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
 //форма пользовательских картинок
-const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
+export const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
 //инпуты картинок
-const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
-const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
+export const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
+export const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
 
 //_____________________Развёрнутое модальное окно(полная картинка)__________
 // кнопка фулл
-const closeImageFullButton = document.querySelector(".popup__close_images_full")
+export const closeImageFullButton = document.querySelector(".popup__close_images_full")
 
 //селкеторы полного попапа
-const imagePopup = document.querySelector(".popup__image")
-const captionPopup = document.querySelector(".popup__caption")
+export const imagePopup = document.querySelector(".popup__image")
+export const captionPopup = document.querySelector(".popup__caption")
 
-// ША! это мои альты никто не смеит их трогать! меня уже разок похвалили за то как я их заполняю, будем держать марку. https://i.imgur.com/dxgpYLQ.png
-const initialCards = [
+// картинки для webpack
+export const bigBlueHole = new URL("./../images/place/Big-Blue-Hole.jpg", import.meta.url)
+export const amazonka = new URL("./../images/place/mole.jpg", import.meta.url)
+export const greatBarrierReef = new URL("./../images/place/Great_Barrier_Reef.jpg", import.meta.url)
+export const clubOfAnEagleEye = new URL("./../images/place/клуб-орлиного-глаза.jpg", import.meta.url)
+export const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
+export const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
+
+export const initialCards = [
    {
-      name: 'Большая голубая дыра',
-      link: 'images/place/Big-Blue-Hole.jpg',
+      name: "Большая голубая дыра",
+      link: bigBlueHole
       // alt: "Большa голубоa дырa",
    },
    {
-      name: 'Амазонка',
-      link: 'images/place/mole.jpg',
+      name: "Амазонка",
+      link: amazonka
       // alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
    },
    {
-      name: 'Большой Барьерный риф',
-      link: 'images/place/Great_Barrier_Reef.jpg',
+      name: "Большой Барьерный риф",
+      link: greatBarrierReef
       // alt: "Больщой Барьерный риф",
    },
    {
-      name: 'Клуб Орлиного глаза',
-      link: 'images/place/клуб-орлиного-глаза.jpg',
+      name: "Клуб Орлиного глаза",
+      link: clubOfAnEagleEye
       // alt: "Вуаэристы",
    },
    {
-      name: 'Морейн',
-      link: 'images/place/Moraine_Lake.jpg',
+      name: "Морейн",
+      link: moraine
       // alt: "озеро Морейн",
    },
    {
-      name: 'что-то',
-      link: 'images/place/Great-Barrier-Reef.jpg',
+      name: "что-то",
+      link: x3
       // alt: "эта карточка ещё не заполнена",
    },
 ]
@@ -79,11 +86,11 @@ const initialCards = [
 //░░░░░░░░░░░░░░КОД░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 //_________Открытие и закрытие модальных окон____________________
-function openPopup(popup) {
+export function openPopup(popup) {
    popup.classList.add("popup_opened")
 }
 
-function closePopup(popup) {
+export function closePopup(popup) {
    popup.classList.remove("popup_opened")
 }
 
@@ -99,14 +106,14 @@ formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слуша
 formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель формы пользовательской карточки
 
 // получает информацию профиля и открываю попап с ним
-function openProfilePopupHandler() {
+export function openProfilePopupHandler() {
    editUserName.value = profileName.textContent
    editUserDescription.value = profileText.textContent
    openPopup(profilePopup)
 }
 
 // после редактирования профиля, закрываю попап
-function handleProfileFormSubmit(evt) {
+export function handleProfileFormSubmit(evt) {
    evt.preventDefault()
    profileName.textContent = editUserName.value
    profileText.textContent = editUserDescription.value
@@ -114,14 +121,14 @@ function handleProfileFormSubmit(evt) {
 }
 
 // показать заранее подготовленые карточки
-function renderCards() {
+export function renderCards() {
    initialCards.forEach(card => {
       elementsContainer.append(createCard(card["link"], card["name"]))
    })
 }
 
 // добавить пользовательскую карточку
-function handleAddCardSubmit(evt) {
+export function handleAddCardSubmit(evt) {
    evt.preventDefault()
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
    closePopup(imageUserPopup)
@@ -130,7 +137,7 @@ function handleAddCardSubmit(evt) {
 }
 
 //создание карточки
-function createCard(link, name) {
+export function createCard(link, name) {
    const cardElement = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
    const cardImage = cardElement.querySelector(".element__cards-item")
    const title = cardElement.querySelector(".element__title")
@@ -143,7 +150,7 @@ function createCard(link, name) {
    title.textContent = name
 
    // лайкает
-   likeButton.addEventListener('click', (evt) => {
+   likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
    })
 
