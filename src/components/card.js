@@ -1,12 +1,4 @@
-import {openPopup, closePopup,} from "./index.js"
-
-// картинки для webpack
-const bigBlueHole = new URL("./../images/place/Big-Blue-Hole.jpg", import.meta.url)
-const amazonka = new URL("./../images/place/mole.jpg", import.meta.url)
-const greatBarrierReef = new URL("./../images/place/Great_Barrier_Reef.jpg", import.meta.url)
-const clubOfAnEagleEye = new URL("./../images/place/клуб-орлиного-глаза.jpg", import.meta.url)
-const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
-const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
+import {openPopup, closePopup,} from "./modal"
 
 // попапы
 const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
@@ -22,52 +14,38 @@ const formUserAdd = document.querySelector(".popup__form_image") // форма �
 const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
 const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
 
+//_____________________Развёрнутое модальное окно(полная картинка)__________
+// кнопка фулл
+const closeImageFullButton = document.querySelector(".popup__close_images_full")
+
 //селкеторы полного попапа
 const imagePopup = document.querySelector(".popup__image")
 const captionPopup = document.querySelector(".popup__caption")
 
+// картинки для webpack
+const bigBlueHole = new URL("./../images/place/Big-Blue-Hole.jpg", import.meta.url)
+const amazonka = new URL("./../images/place/mole.jpg", import.meta.url)
+const greatBarrierReef = new URL("./../images/place/Great_Barrier_Reef.jpg", import.meta.url)
+const clubOfAnEagleEye = new URL("./../images/place/клуб-орлиного-глаза.jpg", import.meta.url)
+const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
+const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
+
 const initialCards = [
-   {
-      name: "Большая голубая дыра",
-      link: bigBlueHole
-      // alt: "Большa голубоa дырa",
-   },
-   {
-      name: "Амазонка",
-      link: amazonka
-      // alt: "данный участок кода захвачен кротами которые прошли вакцинацию",
-   },
-   {
-      name: "Большой Барьерный риф",
-      link: greatBarrierReef
-      // alt: "Больщой Барьерный риф",
-   },
-   {
-      name: "Клуб Орлиного глаза",
-      link: clubOfAnEagleEye
-      // alt: "Вуаэристы",
-   },
-   {
-      name: "Морейн",
-      link: moraine
-      // alt: "озеро Морейн",
-   },
-   {
-      name: "что-то",
-      link: x3
-      // alt: "эта карточка ещё не заполнена",
-   },
+   {name: "Большая голубая дыра", link: bigBlueHole},
+   {name: "Амазонка", link: amazonka},
+   {name: "Большой Барьерный риф", link: greatBarrierReef},
+   {name: "Клуб Орлиного глаза", link: clubOfAnEagleEye},
+   {name: "Морейн", link: moraine},
+   {name: "что-то", link: x3},
 ]
 
 // сабмиты форм
 // formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель формы пользовательской карточки
 
-//_____________________Развёрнутое модальное окно(полная картинка)__________
-// кнопка фулл
-const closeImageFullButton = document.querySelector(".popup__close_images_full")
 closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)) //слухатерь фулки
 
+// добавить пользовательскую карточку
 export function handleAddCardSubmit(evt) {
    evt.preventDefault()
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
@@ -76,6 +54,7 @@ export function handleAddCardSubmit(evt) {
    editImagePlace.value = ""
 }
 
+// показать заранее подготовленые карточки
 export function renderCards() {
    initialCards.forEach(card => {
       elementsContainer.append(createCard(card["link"], card["name"]))
@@ -115,6 +94,3 @@ export function createCard(link, name) {
 
    return cardElement
 }
-
-renderCards()
-
