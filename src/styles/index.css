@@ -1,20 +1,20 @@
 /*Нормируем!*/
 @import url(../vendors/normalize.css);
 
-/*Шрифтируем*/
+/*Шрифты*/
 @import url(../vendors/fonts.css);
 
-/*бодируем*/
+/*бади*/
 @import url(../blocks/root/root.css);
 
-/*хэдируем*/
+/*хэдер*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
-/*мейнируем*/
+/*мейн*/
 @import url(../blocks/content/content.css);
 
-/*профилируем*/
+/*профилиь*/
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -25,7 +25,7 @@
 @import url(../blocks/profile/__text/profile__text.css);
 @import url(../blocks/profile/__button-add/profile__button-add.css);
 
-/*элементируем*/
+/*элементы и карточки*/
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/element__list.css);
 @import url(../blocks/elements/__card/element__card.css);
@@ -35,11 +35,11 @@
 @import url(../blocks/elements/__heart-botton/element__heart-botton.css);
 @import url(../blocks/elements/__heart-botton/_active/element__heart-botton_active.css);
 
-/*футурируем*/
+/*футер*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-/*попапируем!*/
+/*попы!*/
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
@@ -47,9 +47,12 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__edit/popup__edit.css);
+@import url(../blocks/popup/__edit/_invalid/popup__edit_invalid.css);
+@import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__accept/popup__accept.css);
+@import url(../blocks/popup/__accept/_disabled/popup__accept_disabled.css);
 
-/* подолнительные 4 класса для инпута, мож иъ нужно было тупо по имени схватить? и зачем я подключаю пустые классы которые я пишу ради того чтобы окучить в js?*/
+/*инпуты попапов*/
 @import url(../blocks/popup/__edit/_user/popup__edit_user_name.css);
 @import url(../blocks/popup/__edit/_user/popup__edit_user_description.css);
 @import url(../blocks/popup/__edit/_image/popup__edit_image_place.css);

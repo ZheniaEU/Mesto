@@ -1,10 +1,9 @@
-import {openPopup, closePopup,} from "./modal"
+import {openPopup, closePopup, fullImagesPopup} from "./modal"
 
 // попапы
 const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
 // const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
-const fullImagesPopup = document.querySelector(".popup_images_open") // модалка полного изображения карточек
 const elementsContainer = document.querySelector(".element__list") //контейнер для подготовленых картинок 
 
 //______________________Добавление новых карточек____________________________
@@ -13,10 +12,6 @@ const formUserAdd = document.querySelector(".popup__form_image") // форма �
 //инпуты картинок
 const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
 const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
-
-//_____________________Развёрнутое модальное окно(полная картинка)__________
-// кнопка фулл
-const closeImageFullButton = document.querySelector(".popup__close_images_full")
 
 //селкеторы полного попапа
 const imagePopup = document.querySelector(".popup__image")
@@ -43,8 +38,6 @@ const initialCards = [
 // formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель формы пользовательской карточки
 
-closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)) //слухатерь фулки
-
 // добавить пользовательскую карточку
 export function handleAddCardSubmit(evt) {
    evt.preventDefault()
@@ -66,7 +59,6 @@ export function createCard(link, name) {
    const cardElement = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
    const cardImage = cardElement.querySelector(".element__cards-item")
    const title = cardElement.querySelector(".element__title")
-   // const alt = cardElement.querySelector(".element__title")
    const likeButton = cardElement.querySelector(".element__heart-botton")
    const binButton = cardElement.querySelector(".element__bin")
 

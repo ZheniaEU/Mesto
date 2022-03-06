@@ -1,11 +1,10 @@
 import "../styles/index.css"
 import {renderCards} from "./card"
-import {openPopup, closePopup,} from "./modal"
+import {openPopup, closePopup} from "./modal"
 
 // попапы
 const profilePopup = document.querySelector(".popup__profile") // модалка профиля
 const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
-
 
 //_____________________Профиль_____________________________________________
 const profileName = document.querySelector(".profile__name") // Имя в профиле
@@ -26,11 +25,11 @@ const addButtonImage = document.querySelector(".profile__button-add") // кно�
 const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
 
 // слушатели
-closeButtonProfile.addEventListener("click", () => closePopup(profilePopup)) //слухатерь закрывает попап редактирования профиля
-closeImageButton.addEventListener("click", () => closePopup(imageUserPopup)) //слухатерь закрывает попап пользовательской карточки
-editButtonProfile.addEventListener("click", () => openProfilePopupHandler()) // слухатерь открывает попап редактирование профиля
-addButtonImage.addEventListener("click", () => openPopup(imageUserPopup)) // слухатерь открывае попап пользовательской карточки
-// closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)) //слухатерь фулки
+closeButtonProfile.addEventListener("click", () => closePopup(profilePopup)) //слушатерь закрывает попап редактирования профиля
+closeImageButton.addEventListener("click", () => closePopup(imageUserPopup)) //слушатерь закрывает попап пользовательской карточки
+editButtonProfile.addEventListener("click", () => openProfilePopupHandler()) // слушатерь открывает попап редактирование профиля
+addButtonImage.addEventListener("click", () => openPopup(imageUserPopup)) // слушатерь открывае попап пользовательской карточки
+
 
 // сабмиты форм
 formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
@@ -51,4 +50,4 @@ export function handleProfileFormSubmit(evt) {
    closePopup(profilePopup)
 }
 
-renderCards()
+renderCards() //запускаем карточки

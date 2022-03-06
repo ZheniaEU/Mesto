@@ -1,5 +1,6 @@
 .popup__image{
-   display: block; /*у бераю зазор между текстом и картинкой*/
+   /* display: block; у бераю зазор между текстом и картинкой */
+   vertical-align: bottom;
    max-width: 75vw;
    max-height: 75vh;
 }
