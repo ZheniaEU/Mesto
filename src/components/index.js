@@ -1,9 +1,9 @@
 import "../styles/index.css"
-import {renderCards} from "./card"
-import {openPopup, closePopup} from "./modal"
+import { renderCards } from "./card"
+import { openPopup, closePopup } from "./modal"
 
 // попапы
-const profilePopup = document.querySelector(".popup__profile") // модалка профиля
+const profilePopup = document.querySelector(".popup_profile") // модалка профиля
 const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
 //_____________________Профиль_____________________________________________
@@ -51,3 +51,86 @@ export function handleProfileFormSubmit(evt) {
 }
 
 renderCards() //запускаем карточки
+
+//валидация
+
+const validationConfig = {
+   //формы
+   formSelector: ".popup__form",
+   //инпуты
+   InputSelector: ".popup__edit",
+}
+
+//функция валидации
+const enableValidation = (config) => {
+   //массив всех форм
+   const forms = Array.from(document.querySelectorAll(config.formSelector))
+
+   //проходимся по массиву чтобы повесить обработчик события сабмита
+   forms.forEach(formElement => {
+      //чтобы форма никуда не улетала
+      formElement.addEventListener("submit", event => {
+         event.preventDefault()
+         console.log("кнопка сабмит")
+      })
+      setEnventListeners(formElement, config)
+   })
+}
+
+//у каждой формы есть несколько инпутов и каждый нужно валидировать
+// вешаем обрабочики событий на каждый инпут
+const setEnventListeners = (formElement, config) => {
+   // массив инпутов
+   const inputList = Array.from(formElement.querySelectorAll(config.InputSelector))
+   console.log(inputList)
+
+   inputList.forEach(inputElement => {
+      inputElement.addEventListener("input", () => {
+         // проверка валидации этого inputElement
+         checkInputValidity(formElement, inputElement, config)
+         // проверка состоянии кнопки сабмита
+         console.log("любой инпут")
+      })
+   })
+}
+
+// работа с спаном
+const checkInputValidity = (formElement, inputElement, config) => {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+enableValidation(validationConfig)

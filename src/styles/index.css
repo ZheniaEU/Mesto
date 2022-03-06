@@ -27,7 +27,7 @@
 
 /*элементы и карточки*/
 @import url(../blocks/elements/elements.css);
-@import url(../blocks/elements/__list/element__list.css);
+@import url(../blocks/elements/__list/elements__list.css);
 @import url(../blocks/elements/__card/element__card.css);
 @import url(../blocks/elements/__cards-item/element__cards-item.css);
 @import url(../blocks/elements/__title/element__title.css);
@@ -63,3 +63,5 @@
 @import url(../blocks/popup/__container/_images/popup__container_images_open.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
 @import url(../blocks/popup/__image/popup__image.css);
+
+@import url(vse.css);

@@ -35,7 +35,7 @@
       </section>
 
       <section class="elements">
-         <ul class="element__list">
+         <ul class="elements__list">
          </ul>
       </section>
 
@@ -52,21 +52,21 @@
          </li>
       </template>
 
-      <!-- попап профиля -->
-      <div class="popup popup__profile">
+      <!-- попап профиля-->
+      <div class="popup popup_profile">
          <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form popup__form_character" name="character">
-               <label>
+            <form class="popup__form popup__form_character" name="character" novalidate>
+               <label class="popup__form-field">
                   <input class="popup__edit popup__edit_user_name" type="text" placeholder="Введите имя"
                      name="user-name" minlength="2" maxlength="40" required>
-                  <span class="popup__error popup__edit_user_name-error"></span>
+                  <span class="popup__error user-name-error"></span>
                </label>
-               <label>
+               <label class="popup__form-field">
                   <input class="popup__edit popup__edit_user_description" type="text"
                      placeholder="Введите род деятельности" name="user-description" min="2" max="200" required>
-                  <span class="popup__error "></span>
+                  <span class="popup__error user-description-error"></span>
                </label>
                <button class="popup__accept popup__accept_profile" type="submit">Сохранить</button>
             </form>
@@ -74,27 +74,28 @@
       </div>
 
       <!-- попап добавления карточек -->
+      <!-- popup__edit_invalid -->
       <div class="popup popup_images">
          <div class="popup__container">
             <button class="popup__close popup__close_images" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form popup__form_image" name="palace-image">
-               <label>
-                  <input class="popup__edit popup__edit_image_place popup__edit_invalid" type="text"
-                     placeholder="Название" name="image-place" minlength="2" maxlength="30" required>
-                  <span class="popup__error popup__edit_image_place-error"></span>
+            <form class="popup__form popup__form_image" name="palace-image" novalidate>
+               <label class="popup__form-field">
+                  <input class="popup__edit popup__edit_image_place" type="text" placeholder="Название"
+                     name="image-place" minlength="2" maxlength="30" required>
+                  <span class="popup__error image-place-error"></span>
                </label>
-               <label>
+               <label class="popup__form-field">
                   <input class="popup__edit popup__edit_image_url" type="url" placeholder="Ссылка на картинку"
                      name="image-url" required>
-                  <span class="popup__error popup__edit_image_url-error"></span>
+                  <span class="popup__error image-url-error"></span>
                </label>
                <button class="popup__accept popup__accept_image popup__accept_disabled" type="submit">Создать</button>
             </form>
          </div>
       </div>
 
-      <!-- попап на фулл -->
+      <!-- попап на фулл нужно зафиксить бэм popup__container_images_open-->
       <div class="popup popup_images_open">
          <div class="popup__container_images_open">
             <button class="popup__close popup__close_images_full"></button>

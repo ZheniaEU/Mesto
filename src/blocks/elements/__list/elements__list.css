@@ -1,4 +1,4 @@
-/* .element__list{
+/* .elements__list{
    display: grid;
    grid-template-columns: repeat(1, 282px);
    grid-template-rows: repeat(6, auto);
@@ -10,21 +10,21 @@
 } 
 
 @media screen and (min-width: 596px){
-   .element__list{
+   .elements__list{
       grid-template-columns: repeat(2, 282px);
       grid-template-rows: repeat(3, auto);
    }
 }
 
 @media screen and (min-width: 900px){
-   .element__list{
+   .elements__list{
      grid-template-columns: repeat(3, 282px);
    }
  } */
 
 /*мои попытки сверстать дестоп фёрст*/
 
-.element__list{
+.elements__list {
    display: grid;
    grid-template-columns: repeat(3, 282px);
    gap: 20px 17px;
@@ -33,16 +33,16 @@
    justify-content: center;
 }
 
-@media screen and (max-width: 900px){
-   .element__list{
+@media screen and (max-width: 900px) {
+   .elements__list {
       grid-template-columns: repeat(2, 282px);
       grid-template-rows: repeat(3, auto);
       margin: 0 auto;
    }
 }
 
-@media screen and (max-width: 596px){
-   .element__list{
+@media screen and (max-width: 596px) {
+   .elements__list {
       grid-template-columns: repeat(1, 282px);
       grid-template-rows: repeat(6, auto);
       margin: 0 auto;

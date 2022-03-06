@@ -1,10 +1,10 @@
-import {openPopup, closePopup, fullImagesPopup} from "./modal"
+import { openPopup, closePopup, fullImagesPopup } from "./modal"
 
 // попапы
 const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
 // const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
-const elementsContainer = document.querySelector(".element__list") //контейнер для подготовленых картинок 
+const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
 //______________________Добавление новых карточек____________________________
 //форма пользовательских картинок
@@ -26,12 +26,12 @@ const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
 const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
 
 const initialCards = [
-   {name: "Большая голубая дыра", link: bigBlueHole},
-   {name: "Амазонка", link: amazonka},
-   {name: "Большой Барьерный риф", link: greatBarrierReef},
-   {name: "Клуб Орлиного глаза", link: clubOfAnEagleEye},
-   {name: "Морейн", link: moraine},
-   {name: "что-то", link: x3},
+   { name: "Большая голубая дыра", link: bigBlueHole },
+   { name: "Амазонка", link: amazonka },
+   { name: "Большой Барьерный риф", link: greatBarrierReef },
+   { name: "Клуб Орлиного глаза", link: clubOfAnEagleEye },
+   { name: "Морейн", link: moraine },
+   { name: "что-то", link: x3 },
 ]
 
 // сабмиты форм
