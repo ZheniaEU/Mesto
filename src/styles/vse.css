@@ -1,0 +1,38 @@
+.popup__error{
+   font-size: 12px;
+   line-height: 15px;
+   color: #FF0000;
+   /* position: absolute; */
+   /* top: 143px; */
+   margin-top: 5px;
+   width: 358px;
+}
+
+@media screen and (max-width: 596px){
+   .popup__error{
+      width: 238px;
+      /* margin-top: 75px; */
+   }
+}
+
+.popup__form-field {
+   display: flex;
+   flex-direction: column;
+   height: 66.5px;
+   margin: 0px auto 0;
+}
+
+@media screen and (max-width: 596px){
+   .popup__form-field{
+      height: 79.5px;
+   }
+}
+
+.popup__edit:not(:first-child){
+   margin: 30px auto 0;
+}
+
+.popup__edit_invalid{
+   border-bottom: 1px solid #FF0000;
+}
+
