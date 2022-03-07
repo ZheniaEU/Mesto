@@ -64,7 +64,7 @@ const validationConfig = {
    //спаны
    InputInvalidClass: "popup__edit_invalid",
    //кнопки
-   buttonSelector: ".popup__accept",
+   buttonSelectorSubmit: ".popup__accept",
    //кнопки
    buttonDisabledClass: "popup__accept_disabled"
 
@@ -92,7 +92,7 @@ const enableValidation = (config) => {
 const setEnventListeners = (formElement, config) => {
    // массив инпутов
    const inputList = Array.from(formElement.querySelectorAll(config.InputSelector))
-   console.log(inputList)
+
 
    inputList.forEach(inputElement => {
       inputElement.addEventListener("input", () => {
@@ -107,30 +107,36 @@ const setEnventListeners = (formElement, config) => {
 
 // работа с состоянием кнопки сабмита
 const toggleButtonState = (formElement, inputList, config) => {
-   const buttonElement = formElement.querySelector(config.buttonSelector)
+   const buttonElement = formElement.querySelector(config.buttonSelectorSubmit)
 
-   if (hasInvelidInput(inputList)) {
-      disableButton(buttonElement, config)
+   if (hasInvelidInput(inputList) || findEmptyInputs(inputList)) {
+      buttonElement.classList.add(config.buttonDisabledClass)
+      buttonElement.disabled = true;
    } else {
-      enableButton(buttonElement, config)
+      buttonElement.classList.remove(config.buttonDisabledClass)
+      buttonElement.disabled = false;
    }
 }
 
-const disableButton = (buttonElement, config) => {
-   buttonElement.classList.add(config.buttonDisabledClass)
-   buttonElement.disabled = true;
-}
+// const disableButton = (buttonElement, config) => {
+//    buttonElement.classList.add(config.buttonDisabledClass)
+//    buttonElement.disabled = true;
+// }
 
-const enableButton = (buttonElement, config) => {
-   buttonElement.classList.remove(config.buttonDisabledClass)
-   buttonElement.disabled = false;
-}
+// const enableButton = (buttonElement, config) => {
+//    buttonElement.classList.remove(config.buttonDisabledClass)
+//    buttonElement.disabled = false;
+// }
 
-const hasInvelidInput = (inputList) => {
-   return inputList.some(inputElement => {
-      return !inputElement.validity.valid
-   })
-}
+// const hasInvelidInput = (inputList) => {
+//    return inputList.some(inputElement => {
+//       return !inputElement.validity.valid
+//    })
+// }
+
+const hasInvelidInput = (inputList) => inputList.some(inputElement => !inputElement.validity.valid)
+   
+
 
 // работа с спаном
 const checkInputValidity = (formElement, inputElement, config) => {
@@ -145,8 +151,6 @@ const checkInputValidity = (formElement, inputElement, config) => {
 const hideinputError = (inputElement, errorElement, config) => {
    inputElement.classList.remove(config.InputInvalidClass)
    console.log(inputElement)
-   // InputSelector.classList.add(config.popup__edit_invalid)
-   // tt.classList.add(config.popup__edit_invalid)
    errorElement.classList.remove(config.errorClass)
    errorElement.textContent = ""
 }
@@ -154,8 +158,6 @@ const hideinputError = (inputElement, errorElement, config) => {
 const showInputError = (inputElement, errorElement, errorMessage, config) => {
    inputElement.classList.add(config.InputInvalidClass)
    console.log(inputElement)
-   // InputSelector.classList.add(config.popup__edit_invalid)
-   // tt.classList.add(config.popup__edit_invalid)
    errorElement.classList.add(config.errorClass)
    errorElement.textContent = errorMessage
 }
