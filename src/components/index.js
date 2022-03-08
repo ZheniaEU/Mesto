@@ -24,11 +24,52 @@ const editUserDescription = document.querySelector(".popup__edit_user_descriptio
 const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
 const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
 
+
+//валидация
+
+const validationConfig = {
+   //формы
+   formSelector: ".popup__form",
+   //инпуты
+   InputSelector: ".popup__edit",
+   //спаны
+   errorClass: "popup__error",
+   //спаны
+   InputInvalidClass: "popup__edit_invalid",
+   //кнопки
+   buttonSelectorSubmit: ".popup__accept",
+   //кнопки
+   buttonDisabledClass: "popup__accept_disabled"
+}
+
+const t1 = profilePopup.querySelector(".popup__container")
+console.log(t1)
+const editProfileInputs = Array.from(t1.querySelectorAll(validationConfig.InputSelector))
+
+
+const t2 = imageUserPopup.querySelector(".popup__container")
+const editProfileInputs1 = Array.from(t1.querySelectorAll(validationConfig.InputSelector))
+
+// const popupProfileEdit = profilePopup.querySelector(".popup__form")
+// console.log(popupProfileEdit)
+
+
+
+
+
 // слушатели
 closeButtonProfile.addEventListener("click", () => closePopup(profilePopup)) //слушатерь закрывает попап редактирования профиля
 closeImageButton.addEventListener("click", () => closePopup(imageUserPopup)) //слушатерь закрывает попап пользовательской карточки
-editButtonProfile.addEventListener("click", () => openProfilePopupHandler()) // слушатерь открывает попап редактирование профиля
-addButtonImage.addEventListener("click", () => openPopup(imageUserPopup)) // слушатерь открывае попап пользовательской карточки
+editButtonProfile.addEventListener("click", function () {
+   openProfilePopupHandler()
+   toggleButtonState(t1, editProfileInputs, validationConfig)
+}) // слушатерь открывает попап редактирование профиля
+addButtonImage.addEventListener("click", function () {
+   openPopup(imageUserPopup)
+
+   toggleButtonState(t2, editProfileInputs1, validationConfig)
+   console.log(t2, editProfileInputs1, validationConfig)
+}) // слушатерь открывае попап пользовательской карточки
 
 
 // сабмиты форм
@@ -52,79 +93,107 @@ export function handleProfileFormSubmit(evt) {
 
 renderCards() //запускаем карточки
 
-//валидация
 
-const validationConfig = {
-   //формы
-   formSelector: ".popup__form",
-   //инпуты
-   InputSelector: ".popup__edit",
-   //спаны
-   errorClass: "popup__error",
-   //спаны
-   InputInvalidClass: "popup__edit_invalid",
-   //кнопки
-   buttonSelectorSubmit: ".popup__accept",
-   //кнопки
-   buttonDisabledClass: "popup__accept_disabled"
-
-}
 // popup__error
 // popup__edit_invalid
 //функция валидации
-const enableValidation = (config) => {
-   //массив всех форм
-   const forms = Array.from(document.querySelectorAll(config.formSelector))
+const enableValidation = (validationConfig) => {
 
+   //массив всех форм
+   const forms = Array.from(document.querySelectorAll(validationConfig.formSelector))
+   // console.log(forms)
    //проходимся по массиву чтобы повесить обработчик события сабмита
    forms.forEach(formElement => {
       //чтобы форма никуда не улетала
       formElement.addEventListener("submit", event => {
          event.preventDefault()
-         console.log("кнопка сабмит")
+         // console.log("кнопка сабмит")
       })
-      setEnventListeners(formElement, config)
+      setEnventListeners(formElement, validationConfig)
+      // console.log(formElement, validationConfig)
    })
 }
 
+
+
 //у каждой формы есть несколько инпутов и каждый нужно валидировать
 // вешаем обрабочики событий на каждый инпут
-const setEnventListeners = (formElement, config) => {
+const setEnventListeners = (formElement, validationConfig) => {
    // массив инпутов
-   const inputList = Array.from(formElement.querySelectorAll(config.InputSelector))
+   const inputList = Array.from(formElement.querySelectorAll(validationConfig.InputSelector))
 
 
    inputList.forEach(inputElement => {
       inputElement.addEventListener("input", () => {
          // проверка валидации этого inputElement
-         checkInputValidity(formElement, inputElement, config)
+         checkInputValidity(formElement, inputElement, validationConfig)
          // проверка состоянии кнопки сабмита
-         toggleButtonState(formElement, inputList, config)
+         toggleButtonState(formElement, inputList, validationConfig)
+
       })
    })
-   toggleButtonState(formElement, inputList, config)
+   // toggleButtonState(formElement, inputList, validationConfig)
 }
 
 // работа с состоянием кнопки сабмита
-const toggleButtonState = (formElement, inputList, config) => {
-   const buttonElement = formElement.querySelector(config.buttonSelectorSubmit)
+const toggleButtonState = (formElement, inputList, validationConfig) => {
+   const buttonElement = formElement.querySelector(validationConfig.buttonSelectorSubmit)
 
-   if (hasInvelidInput(inputList) || findEmptyInputs(inputList)) {
-      buttonElement.classList.add(config.buttonDisabledClass)
+   if (hasInvelidInput(inputList)) {
+      buttonElement.classList.add(validationConfig.buttonDisabledClass)
       buttonElement.disabled = true;
    } else {
-      buttonElement.classList.remove(config.buttonDisabledClass)
+      buttonElement.classList.remove(validationConfig.buttonDisabledClass)
       buttonElement.disabled = false;
    }
 }
 
-// const disableButton = (buttonElement, config) => {
-//    buttonElement.classList.add(config.buttonDisabledClass)
+const hasInvelidInput = (inputList) => inputList.some(inputElement => !inputElement.validity.valid)
+
+// работа с спаном
+const checkInputValidity = (formElement, inputElement, validationConfig) => {
+   const errorElement = formElement.querySelector(`.${inputElement.name}-error`)
+   if (inputElement.validity.valid) {
+      hideinputError(inputElement, errorElement, validationConfig)
+   } else {
+      showInputError(inputElement, errorElement, inputElement.validationMessage, validationConfig)
+   }
+}
+
+const hideinputError = (inputElement, errorElement, validationConfig) => {
+   inputElement.classList.remove(validationConfig.InputInvalidClass)
+   errorElement.classList.remove(validationConfig.errorClass)
+   errorElement.textContent = ""
+}
+
+const showInputError = (inputElement, errorElement, errorMessage, validationConfig) => {
+   inputElement.classList.add(validationConfig.InputInvalidClass)
+   errorElement.classList.add(validationConfig.errorClass)
+   errorElement.textContent = errorMessage
+}
+
+enableValidation(validationConfig)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const disableButton = (buttonElement, validationConfig) => {
+//    buttonElement.classList.add(validationConfig.buttonDisabledClass)
 //    buttonElement.disabled = true;
 // }
 
-// const enableButton = (buttonElement, config) => {
-//    buttonElement.classList.remove(config.buttonDisabledClass)
+// const enableButton = (buttonElement, validationConfig) => {
+//    buttonElement.classList.remove(validationConfig.buttonDisabledClass)
 //    buttonElement.disabled = false;
 // }
 
@@ -134,33 +203,6 @@ const toggleButtonState = (formElement, inputList, config) => {
 //    })
 // }
 
-const hasInvelidInput = (inputList) => inputList.some(inputElement => !inputElement.validity.valid)
-   
-
-
-// работа с спаном
-const checkInputValidity = (formElement, inputElement, config) => {
-   const errorElement = formElement.querySelector(`.${inputElement.name}-error`)
-   if (inputElement.validity.valid) {
-      hideinputError(inputElement, errorElement, config)
-   } else {
-      showInputError(inputElement, errorElement, inputElement.validationMessage, config)
-   }
-}
-
-const hideinputError = (inputElement, errorElement, config) => {
-   inputElement.classList.remove(config.InputInvalidClass)
-   console.log(inputElement)
-   errorElement.classList.remove(config.errorClass)
-   errorElement.textContent = ""
-}
-
-const showInputError = (inputElement, errorElement, errorMessage, config) => {
-   inputElement.classList.add(config.InputInvalidClass)
-   console.log(inputElement)
-   errorElement.classList.add(config.errorClass)
-   errorElement.textContent = errorMessage
-}
 
 
 
@@ -177,21 +219,3 @@ const showInputError = (inputElement, errorElement, errorMessage, config) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-enableValidation(validationConfig)
