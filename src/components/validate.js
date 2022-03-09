@@ -19,8 +19,8 @@ export const enableValidation = (validationConfig) => {
 
    //проходимся по массиву чтобы повесить обработчик события сабмита
    forms.forEach(formElement => {
-      formElement.addEventListener("submit", event => {
-         event.preventDefault()
+      formElement.addEventListener("submit", evt => {
+         evt.preventDefault()
       })
       setEnventListeners(formElement, validationConfig)
       // console.log(formElement, validationConfig)
