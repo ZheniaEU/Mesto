@@ -1,4 +1,4 @@
-import "../styles/index.css"
+import "../pages/index.css"
 import { renderCards, imageUserPopup } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState} from "./validate"

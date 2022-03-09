@@ -17,9 +17,9 @@
    }
 }
 
-/* .popup__edit:not(:first-child){
+.popup__edit:not(:first-child){
    margin: 30px auto 0;
-} */
+}
 
 /* стилизовал чутка плейсхолдер*/
 .popup__edit::placeholder {
