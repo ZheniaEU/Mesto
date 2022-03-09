@@ -1,9 +1,7 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { toggleButtonState } from "./index"
 // попапы
-const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
+export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
-// const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
 //______________________Добавление новых карточек____________________________

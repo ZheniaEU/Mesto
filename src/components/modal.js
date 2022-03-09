@@ -8,13 +8,13 @@ export const fullImagesPopup = document.querySelector(".popup_images_open") // �
 //открытие модального окна
 export function openPopup(popup) {
    popup.classList.add("popup_opened")
-   window.addEventListener('keydown', handleModalEscPress)
+   window.addEventListener("keydown", handleModalEscPress)
 }
 
 //закрытие модального окна
 export function closePopup(popup) {
    popup.classList.remove("popup_opened")
-   window.addEventListener('keydown', handleModalEscPress)
+   window.addEventListener("keydown", handleModalEscPress)
 }
 
 closeImageFullButton.addEventListener("click", () => closePopup(fullImagesPopup)) //разворачивает карточку в полное модальное окно
@@ -38,8 +38,8 @@ function handleModalEscPress(evt) {
 //закрытие модального при клике за его пределами
 popups.forEach((popup) => {
    popup.addEventListener("click", (evt) => {
-     if (evt.target.classList.contains("popup_opened")) {
-       closePopup(popup)
-     }
+      if (evt.target.classList.contains("popup_opened")) {
+         closePopup(popup)
+      }
    })
 })
