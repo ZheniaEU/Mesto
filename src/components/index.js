@@ -1,6 +1,7 @@
 import "../styles/index.css"
 import { renderCards } from "./card"
 import { openPopup, closePopup } from "./modal"
+import {  } from "./validate"
 
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
@@ -43,33 +44,36 @@ const validationConfig = {
 }
 
 const t1 = profilePopup.querySelector(".popup__container")
-console.log(t1)
+
 const editProfileInputs = Array.from(t1.querySelectorAll(validationConfig.InputSelector))
 
 
 const t2 = imageUserPopup.querySelector(".popup__container")
 const editProfileInputs1 = Array.from(t1.querySelectorAll(validationConfig.InputSelector))
 
-// const popupProfileEdit = profilePopup.querySelector(".popup__form")
-// console.log(popupProfileEdit)
-
-
-
-
 
 // слушатели
-closeButtonProfile.addEventListener("click", () => closePopup(profilePopup)) //слушатерь закрывает попап редактирования профиля
-closeImageButton.addEventListener("click", () => closePopup(imageUserPopup)) //слушатерь закрывает попап пользовательской карточки
+//слушатерь закрывает попап редактирования профиля
+closeButtonProfile.addEventListener("click", function () {
+   closePopup(profilePopup)
+})
+
+ //слушатерь закрывает попап пользовательской карточки
+closeImageButton.addEventListener("click", function () {
+   closePopup(imageUserPopup)
+})
+
+ // слушатерь открывает попап редактирование профиля
 editButtonProfile.addEventListener("click", function () {
    openProfilePopupHandler()
    toggleButtonState(t1, editProfileInputs, validationConfig)
-}) // слушатерь открывает попап редактирование профиля
+})
+
+ // слушатерь открывае попап пользовательской карточки
 addButtonImage.addEventListener("click", function () {
    openPopup(imageUserPopup)
-
    toggleButtonState(t2, editProfileInputs1, validationConfig)
-   console.log(t2, editProfileInputs1, validationConfig)
-}) // слушатерь открывае попап пользовательской карточки
+})
 
 
 // сабмиты форм
@@ -91,23 +95,16 @@ export function handleProfileFormSubmit(evt) {
    closePopup(profilePopup)
 }
 
-renderCards() //запускаем карточки
-
-
 // popup__error
 // popup__edit_invalid
 //функция валидации
 const enableValidation = (validationConfig) => {
-
-   //массив всех форм
    const forms = Array.from(document.querySelectorAll(validationConfig.formSelector))
-   // console.log(forms)
+
    //проходимся по массиву чтобы повесить обработчик события сабмита
    forms.forEach(formElement => {
-      //чтобы форма никуда не улетала
       formElement.addEventListener("submit", event => {
          event.preventDefault()
-         // console.log("кнопка сабмит")
       })
       setEnventListeners(formElement, validationConfig)
       // console.log(formElement, validationConfig)
@@ -129,10 +126,8 @@ const setEnventListeners = (formElement, validationConfig) => {
          checkInputValidity(formElement, inputElement, validationConfig)
          // проверка состоянии кнопки сабмита
          toggleButtonState(formElement, inputList, validationConfig)
-
       })
    })
-   // toggleButtonState(formElement, inputList, validationConfig)
 }
 
 // работа с состоянием кнопки сабмита
@@ -141,14 +136,18 @@ const toggleButtonState = (formElement, inputList, validationConfig) => {
 
    if (hasInvelidInput(inputList)) {
       buttonElement.classList.add(validationConfig.buttonDisabledClass)
-      buttonElement.disabled = true;
+      buttonElement.disabled = true
    } else {
       buttonElement.classList.remove(validationConfig.buttonDisabledClass)
-      buttonElement.disabled = false;
+      buttonElement.disabled = false
    }
 }
 
-const hasInvelidInput = (inputList) => inputList.some(inputElement => !inputElement.validity.valid)
+const hasInvelidInput = (inputList) => {
+   return inputList.some(inputElement => {
+      return !inputElement.validity.valid
+   })
+}
 
 // работа с спаном
 const checkInputValidity = (formElement, inputElement, validationConfig) => {
@@ -160,41 +159,34 @@ const checkInputValidity = (formElement, inputElement, validationConfig) => {
    }
 }
 
+//скрываем ошибки
 const hideinputError = (inputElement, errorElement, validationConfig) => {
    inputElement.classList.remove(validationConfig.InputInvalidClass)
    errorElement.classList.remove(validationConfig.errorClass)
    errorElement.textContent = ""
 }
 
+//показываем ошибки
 const showInputError = (inputElement, errorElement, errorMessage, validationConfig) => {
    inputElement.classList.add(validationConfig.InputInvalidClass)
    errorElement.classList.add(validationConfig.errorClass)
    errorElement.textContent = errorMessage
 }
 
-enableValidation(validationConfig)
+renderCards() //запускаем отображение карточек
 
-
-
-
-
-
-
-
-
-
-
+enableValidation(validationConfig) // запуск валидации
 
 
 
 // const disableButton = (buttonElement, validationConfig) => {
 //    buttonElement.classList.add(validationConfig.buttonDisabledClass)
-//    buttonElement.disabled = true;
+//    buttonElement.disabled = true
 // }
 
 // const enableButton = (buttonElement, validationConfig) => {
 //    buttonElement.classList.remove(validationConfig.buttonDisabledClass)
-//    buttonElement.disabled = false;
+//    buttonElement.disabled = false
 // }
 
 // const hasInvelidInput = (inputList) => {
@@ -202,20 +194,3 @@ enableValidation(validationConfig)
 //       return !inputElement.validity.valid
 //    })
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
