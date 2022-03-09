@@ -25,6 +25,6 @@
    opacity: 60%;
 }
 
-.popup__close:focus {
+/* .popup__close:focus:active {
    outline: 3px solid dodgerblue; /*ну почему бы и нет?*/ /*я вот люблю жамкать табом*/ /*и цвет мне такой тоже нравится в аутлайне на кнопках*/
-}
+/*} */

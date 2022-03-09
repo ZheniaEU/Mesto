@@ -27,7 +27,7 @@ export const enableValidation = (validationConfig) => {
    })
 }
 
-//у каждой формы есть несколько инпутов и каждый нужно валидировать
+//в каждой форме есть несколько инпутов и каждый нужно валидировать
 // вешаем обрабочики событий на каждый инпут
 const setEnventListeners = (formElement, validationConfig) => {
    // массив инпутов
@@ -86,20 +86,3 @@ const showInputError = (inputElement, errorElement, errorMessage, validationConf
    errorElement.classList.add(validationConfig.errorClass)
    errorElement.textContent = errorMessage
 }
-
-
-// const disableButton = (buttonElement, validationConfig) => {
-//    buttonElement.classList.add(validationConfig.buttonDisabledClass)
-//    buttonElement.disabled = true
-// }
-
-// const enableButton = (buttonElement, validationConfig) => {
-//    buttonElement.classList.remove(validationConfig.buttonDisabledClass)
-//    buttonElement.disabled = false
-// }
-
-// const hasInvelidInput = (inputList) => {
-//    return inputList.some(inputElement => {
-//       return !inputElement.validity.valid
-//    })
-// }
