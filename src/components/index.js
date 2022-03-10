@@ -5,7 +5,6 @@ import { enableValidation, validationConfig, toggleButtonState, checkInputValidi
 
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
-// const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
 //_____________________Профиль_____________________________________________
 const profileName = document.querySelector(".profile__name") // Имя в профиле
@@ -13,7 +12,7 @@ const profileText = document.querySelector(".profile__text") // Описание
 
 //кнопки профиля
 const editButtonProfile = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
-// const closeButtonProfile = document.querySelector(".popup__close") // кнопка закрытие попапа профиля
+
 //форма профиля
 const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
 // console.log(formProfileUser)
@@ -28,29 +27,25 @@ const addButtonImage = document.querySelector(".profile__button-add") // кно�
 // const closeImageButton = document.querySelector(".popup__close_images") //кнопка закрытия попапа с картинками
 
 //_____________________Переменные для валидации ____________________________
-const popupContainer = profilePopup.querySelector(".popup__container")
-const editProfileInputs = Array.from(popupContainer.querySelectorAll(validationConfig.InputSelector))
-// console.log(editProfileInputs)
-
-const popupContainerImage = imageUserPopup.querySelector(".popup__container")
-const editImageInputs = Array.from(popupContainer.querySelectorAll(validationConfig.InputSelector))
-// console.log(editImageInputs)
+//юзер
+const popupContainerProfile = document.querySelector(".popup__container-profile-js")
+const profileEditIntuts = Array.from(popupContainerProfile.querySelectorAll(validationConfig.InputSelector))
+//карточки
+const popupContainerimage = document.querySelector(".popup__container-cards-js")
+const ImageEditIntuts = Array.from(popupContainerimage.querySelectorAll(validationConfig.InputSelector))
 
 // слушатерь открывает попап редактирование профиля
 editButtonProfile.addEventListener("click", function () {
    openProfilePopup()
-   // checkInputValidity(formProfileUser, editProfileInputs, validationConfig)
-   toggleButtonState(popupContainer, editProfileInputs, validationConfig)
-   // console.log(popupContainer)
-   // console.log(editProfileInputs)
-   // console.log(validationConfig)
+   checkInputValidity(formProfileUser, editUserName, validationConfig)
+   checkInputValidity(formProfileUser, editUserDescription, validationConfig)
+   toggleButtonState(popupContainerProfile, profileEditIntuts, validationConfig)
 })
 
 // слушатерь открывае попап пользовательской карточки
 addButtonImage.addEventListener("click", function () {
    openPopup(imageUserPopup)
-   // checkInputValidity(popupContainerImage, editImageInputs, validationConfig)
-   toggleButtonState(popupContainerImage, editImageInputs, validationConfig)
+   toggleButtonState(popupContainerimage, ImageEditIntuts, validationConfig)
 })
 
 // сабмиты форм

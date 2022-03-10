@@ -5,8 +5,6 @@
 // модалка полного изображения карточек
 export const fullImagesPopup = document.querySelector(".popup_images_open")
 
-//ловим открытый попап
-const openedPopup = document.querySelector(".popup_opened")
 
 //открытие модального окна
 export function openPopup(popup) {
@@ -23,6 +21,7 @@ export function closePopup(popup) {
 //закрытие модального окна по эскейпу
 function handleModalEscPress(evt) {
    if (evt.key === "Escape") {
+      const openedPopup = document.querySelector(".popup_opened")
       closePopup(openedPopup)
    }
 }

@@ -41,8 +41,9 @@ export function handleAddCardSubmit(evt) {
    evt.preventDefault()
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
    closePopup(imageUserPopup)
-   editImageUrl.value = ""
-   editImagePlace.value = ""
+   formUserAdd.reset()
+   // editImageUrl.value = ""
+   // editImagePlace.value = ""
 }
 
 // показать заранее подготовленые карточки
