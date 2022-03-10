@@ -48,7 +48,7 @@ export function handleAddCardSubmit(evt) {
 // показать заранее подготовленые карточки
 export function renderCards() {
    initialCards.forEach(card => {
-      elementsContainer.append(createCard(card["link"], card["name"]))
+      elementsContainer.append(createCard(card.link, card.name))
    })
 }
 

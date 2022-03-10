@@ -23,7 +23,6 @@ export const enableValidation = (validationConfig) => {
          evt.preventDefault()
       })
       setEnventListeners(formElement, validationConfig)
-      // console.log(formElement, validationConfig)
    })
 }
 
@@ -32,7 +31,6 @@ export const enableValidation = (validationConfig) => {
 const setEnventListeners = (formElement, validationConfig) => {
    // массив инпутов
    const inputList = Array.from(formElement.querySelectorAll(validationConfig.InputSelector))
-
 
    inputList.forEach(inputElement => {
       inputElement.addEventListener("input", () => {
@@ -64,7 +62,8 @@ const hasInvelidInput = (inputList) => {
 }
 
 // работа с спаном
-const checkInputValidity = (formElement, inputElement, validationConfig) => {
+export const checkInputValidity = (formElement, inputElement, validationConfig) => {
+   // console.log(inputElement)
    const errorElement = formElement.querySelector(`.${inputElement.name}-error`)
    if (inputElement.validity.valid) {
       hideinputError(inputElement, errorElement, validationConfig)
