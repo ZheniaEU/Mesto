@@ -1,0 +1,29 @@
+.profile__button-add {
+   align-self: center;
+   width: 150px;
+   height: 50px;
+   margin-bottom: 0;
+   margin-left: auto; /*ааа какое хитрое свойство позволяет отодвинуть 4ый блок без дополнительной обёртки 1 2 3 элемента флекс блока! https://i.imgur.com/0xqcqyo.png*/
+   padding: 0;
+   background-color: #000;
+   background-image: url(../../../../images/Button-add.svg);
+   background-size: cover;
+   cursor: pointer;
+   border: none;
+}
+
+@media screen and (max-width: 651px) {
+   .profile__button-add {
+      margin: 34px auto 0;
+      width: 282px;
+      background-image: url(../../../../images/Button-add2.svg);
+   }
+}
+
+.profile__button-add:hover {
+   opacity: 60%;
+}
+
+.profile__button-add:focus {
+   outline: 3px solid dodgerblue;
+}

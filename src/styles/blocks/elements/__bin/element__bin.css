@@ -1,0 +1,22 @@
+.element__bin {
+   width: 18px;
+   height: 19px;
+   padding: 0;
+   background: rgba(
+      0,
+      0,
+      0,
+      0
+   ); /* чё с кнопкой то? пришлось этого крота накормить прозрачным кормом, ни на какую другую еду он из своего гнезда не вылазил*/
+   background-image: url(../../../../images/Button-bin.svg);
+   background-size: cover;
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   border: none;
+   cursor: pointer;
+}
+
+.element__bin:hover {
+   opacity: 60%;
+}

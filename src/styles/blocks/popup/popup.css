@@ -1,0 +1,21 @@
+.popup{
+   display: flex;  /* о да, оно!*/
+   align-items: center; /*удалить этоту дичь после ревью и по человечьи выровнить контент, а не по центру*/
+   justify-content: center; /* :?%;№%; *?:;%?*:%"№;, чтоб у дизайнера дети в магазин через соседний город ходили за хлебом с таким дизайном https://i.imgur.com/zODBg8z.png*/
+   max-height: 100%;
+   margin: 0 auto;
+   position: fixed;
+   top: 0;
+   right: 0;
+   left: 0;
+   bottom: 0; /* какие-то титанические усилия потребывались выгнать попа наулицу погулять за пределы квартиры, я ему даже денег давал он отказывался*/
+   /* border-radius: 10px; ошибся контейнером, но эфект получился неплохой в купе с outline: 2px sandybrown solid; */
+   /* background-color: black; */
+   /* opacity: 50%; выгнал товыгнал, но он дверь входную не закрыл, нужно закрыть */
+   background-color: rgba(0, 0, 0, 0.5);
+   z-index: 1;
+   visibility: hidden;
+   opacity: 0;
+   transition: all 0.3s ease 0.1s;
+   transform: perspective(600px) translate(0px, -100%) rotate(355deg); /* вертел я эти попапы!*/
+}

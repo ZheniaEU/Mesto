@@ -1,0 +1,10 @@
+.profile__box-text{
+   display: flex;
+}
+
+@media screen and (max-width: 651px){
+   .profile__box-text{
+      justify-content: center;
+      margin-left: 26px; /*поправка на ветер*/
+   }
+}

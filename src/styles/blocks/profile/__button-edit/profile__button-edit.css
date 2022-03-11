@@ -1,0 +1,30 @@
+.profile__button-edit {
+   width: 24px;
+   height: 24px;
+   margin-top: 37px;
+   margin-bottom: 0;
+   padding: 0;
+   background-color: #000;
+   background-image: url(../../../../images/Button-edit.svg);
+   background-size: cover;
+   cursor: pointer;
+   border: none;
+}
+
+/* яб на мобильном экране сделал кнопку бы побольше, да кому я вру, ещё меньше бы сделал, пусть страдают 😋*/
+/*кнопки поменьше, рекламы побольше, хорошего должно быть много 🤣*/
+@media screen and (max-width: 651px) {
+   .profile__button-edit {
+      width: 18px;
+      height: 18px;
+      margin-top: 34px;
+   }
+}
+
+.profile__button-edit:hover {
+   opacity: 60%;
+}
+
+.profile__button-edit:focus {
+   outline: 3px solid dodgerblue;
+}
