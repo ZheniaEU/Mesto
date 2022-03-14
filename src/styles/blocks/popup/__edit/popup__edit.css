@@ -2,12 +2,14 @@
    font-size: 14px;
    line-height: 17px;
    font-weight: 400; /* вот хоть бейте меня сапогом в фигме в описании указан 400, но пофакту там 500, я поставил 500. Вот сравнения толщены шрифта https://i.imgur.com/S7AxYEh.png верхняя 400 нижняя это макет фигмы. */ /*но может есть какой-то крот который подгрызает каким-то свойством шрифт о котором я не знаю*/
-   margin: 49px auto 0;
-   padding: 0 0 9px;
+   margin: 20px auto 0;
+   padding: 9px 0;
    width: 358px;
    border: none;
    border-bottom: 1px solid rgba(0, 0, 0, 20%);
    outline: none;
+   /* padding-left: 10px;
+   padding-right: 10px; */
 }
 
 @media screen and (max-width: 596px){

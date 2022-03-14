@@ -67,3 +67,5 @@
 
 /*кнопка для полной картинки попапа*/
 @import url(../styles/blocks/popup/__container-images/popup__container-images.css);
+
+@import url(../styles/blocks/profile/__avatar-edit/__avatar-edit.css);

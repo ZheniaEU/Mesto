@@ -1,0 +1,25 @@
+.profile__avatar-edit {
+   width: 120px;
+   height: 120px;
+   padding: 0px;
+   background-color: rgba(0, 0, 0, 0.8);
+   background-image: url(../../../../images/pensil.svg);
+   background-repeat: no-repeat;
+   background-position: center;
+   border: 0px;
+   opacity: 0%;
+   cursor: pointer;
+   position: absolute;
+   border-radius: 47%;
+}
+
+@media screen and (max-width: 651px) {
+   .profile__avatar-edit {
+      top: 0;
+      right: calc(50% - 120px / 2);
+   }
+}
+
+.profile__avatar-edit:hover {
+   opacity: 100%;
+}

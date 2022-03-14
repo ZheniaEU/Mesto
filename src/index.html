@@ -22,6 +22,7 @@
       <section class="profile">
          <article class="profile__info">
             <img class="profile__avatar" src="<%=require('./images/avatar/avatar.png')%>" alt="аватар">
+            <button class="profile__avatar-edit"></button>
             <div class="profile__box-text">
                <div class="profile__main">
                   <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -71,6 +72,22 @@
             </form>
          </div>
       </div>
+
+            <!-- попап редактирования аватара -->
+            <div class="popup popup_avatar popup_opened">
+               <div class="popup__container popup__container-avatar-js">
+                  <button class="popup__close" type="button"></button>
+                  <h2 class="popup__title">Обновить аватар</h2>
+                  <form class="popup__form popup__form_avatar" name="avatar" novalidate>
+                     <label class="popup__form-field">
+                        <input class="popup__edit popup__edit_user_avatar" type="url" placeholder="Ссылка на картинку"
+                           name="user-avatar" required>
+                        <span class="popup__error user-avatar-error"></span>
+                     </label>
+                     <button class="popup__accept popup__accept_profile" type="submit">Сохранить</button>
+                  </form>
+               </div>
+            </div>
 
       <!-- попап добавления карточек -->
       <div class="popup popup_images">
