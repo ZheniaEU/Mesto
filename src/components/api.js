@@ -1,4 +1,4 @@
-import { createCard } from "./card"
+import { createCard, renderCards } from "./card"
 
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
@@ -31,11 +31,15 @@ const getCards = () => {
 
 Promise.all([
    getCards()
-]).then(cards => {
+]).then(function([cards])  {
+   // const d1 = cards
+   console.log(cards)
+   // createCard(cards.link, cards.name )
+   // console.log(cards, cards.link, cards.name )
    renderCards2(cards)
-   cards.forEach(card => {
-      elementsContainer.append(createCard(card.link, card.name))
-   })
+   // d1.forEach(card => {
+   //    elementsContainer.append(createCard(card.link, card.name))
+   // })
 })
 
 export function renderCards2(cards) {

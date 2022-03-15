@@ -75,6 +75,6 @@ export function handleProfileFormSubmit(evt) {
    closePopup(profilePopup)
 }
 
-renderCards() //запускаем отображение карточек
+// renderCards() //запускаем отображение карточек
 
 enableValidation(validationConfig) // запуск валидации
