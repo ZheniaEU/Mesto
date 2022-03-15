@@ -32,8 +32,10 @@
 @import url(../styles/blocks/elements/__cards-item/element__cards-item.css);
 @import url(../styles/blocks/elements/__title/element__title.css);
 @import url(../styles/blocks/elements/__bin/element__bin.css);
+@import url(../styles/blocks/elements/__box-like/element__box-like.css);
 @import url(../styles/blocks/elements/__heart-botton/element__heart-botton.css);
 @import url(../styles/blocks/elements/__heart-botton/_active/element__heart-botton_active.css);
+@import url(../styles/blocks/elements/__like/element__like.css);
 
 /*футер*/
 @import url(../styles/blocks/footer/footer.css);

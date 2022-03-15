@@ -2,6 +2,8 @@ import "../pages/index.css"
 import { renderCards, imageUserPopup } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
+import { zaraza } from "./api"
+// zaraza()
 
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
@@ -9,9 +11,11 @@ const profilePopup = document.querySelector(".popup_profile") // модалка 
 //_____________________Профиль_____________________________________________
 const profileName = document.querySelector(".profile__name") // Имя в профиле
 const profileText = document.querySelector(".profile__text") // Описание в профиле
+const profileAvatar = document.querySelector(".popup_avatar")
 
 //кнопки профиля
 const editButtonProfile = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
+const editAvatar = document.querySelector(".profile__avatar-edit")
 
 //форма профиля
 const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
@@ -40,6 +44,11 @@ editButtonProfile.addEventListener("click", function () {
    checkInputValidity(formProfileUser, editUserName, validationConfig)
    checkInputValidity(formProfileUser, editUserDescription, validationConfig)
    toggleButtonState(popupContainerProfile, profileEditIntuts, validationConfig)
+})
+
+// слушатель открывает попап редактирования аватара без валидации и проверки кнопки состояния
+editAvatar.addEventListener("click", function (){
+   openPopup(profileAvatar)
 })
 
 // слушатерь открывае попап пользовательской карточки
