@@ -62,8 +62,8 @@ formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слуша
 
 // получает информацию профиля и открываю попап с ним
 export function openProfilePopup() {
-   editUserName.value = profileName.textContent
-   editUserDescription.value = profileText.textContent
+   // editUserName.value = profileName.textContent
+   // editUserDescription.value = profileText.textContent
    openPopup(profilePopup)
 }
 
