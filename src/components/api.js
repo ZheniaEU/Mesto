@@ -1,10 +1,24 @@
+import { createCard } from "./card"
+
+const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
+
 const myApi = {
    site: "https://mesto.nomoreparties.co/v1/plus-cohort7",
    authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1",
    contentType: "application/json"
 }
-//получаем карточки
-function getCards() {
+
+//обработка ошибки
+const checkResponse = (response) => {
+   if (response.ok) {
+      return response.json()
+   } else {
+      return Promise.reject(`Обнаружен запуск ядерной ракеты: ${response.status}`)
+   }
+}
+
+
+const getCards = () => {
    return fetch("https://mesto.nomoreparties.co/v1/plus-cohort7/cards", {
       method: "GET",
       headers: {
@@ -12,12 +26,65 @@ function getCards() {
          "Content-Type": myApi.contentType
       }
    })
-      .then(res => res.json())
-      .then((result) => {
-         console.log(result)
-      })
+      .then(checkResponse)
 }
 
+Promise.all([
+   getCards()
+]).then(cards => {
+   renderCards2(cards)
+   cards.forEach(card => {
+      elementsContainer.append(createCard(card.link, card.name))
+   })
+})
+
+export function renderCards2(cards) {
+   cards.forEach(card => {
+      elementsContainer.append(createCard(card.link, card.name))
+   })
+}
+// .then((res) => {
+//    console.log(res)
+// })
+// .then(checkResponse)
+// .catch((res) => {
+//    console.log("что-то пошло не так", res)
+// });
+
+//)
+// console.log(p)
+
+
+// cards.forEach(function(card) {
+//    renderCards2(card, userId);
+//  })
+
+
+
+// p.then(function([cards]){
+//    console.log(cards)
+//    userId = profileData._id;
+//    cards.forEach(function(card) {
+//       renderCards2(card, userId)
+//       console.log(renderCards2(card, userId))
+//     })
+// })
+// p.catch((res) => {
+//    console.log("что-то пошло не так", res)
+// })
+// p.then((res) => {
+//    console.log(res.status)
+// })
+
+// p.then(checkResponse)
+// function renderError(err) {
+//    error.textContent = err;
+//    result.textContent = "";
+//  }
+// function renderCards(err) {
+//    error.textContent = err;
+//    result.textContent = "";
+//  }
 //Используйте этот массив при отображении предзагруженных карточек, а от предыдущего способа отображения первоначальных
 // карточек избавьтесь.
 //У каждой карточки есть свойства name и link — это заголовок и ссылка на картинку — они понадобятся
@@ -26,7 +93,7 @@ function getCards() {
 
 //получаем профиль
 export function getProfile() {
-   return fetch("https://mesto.nomoreparties.co/v1/plus-cohort7/users/me", {
+   return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort7/users/me`, {
       method: "GET",
       headers: {
          authorization: myApi.authorization,
@@ -34,9 +101,9 @@ export function getProfile() {
       }
    })
       .then(res => res.json())
-      .then((result) => {
-         console.log(result);
-      })
+   // .then((result) => {
+   //    console.log(result);
+   // })
 }
 
 //{   "name": "Jacques Cousteau","about": "Sailor, researcher","avatar": "https://pictures.s3.yandex.net/frontend-developer/ava.jpg",
@@ -46,12 +113,12 @@ export function getProfile() {
 
 
 //отправляем профиль
-function giveProgile() {
-   fetch('https://nomoreparties.co/v1/plus-cohort7/users/me', {
-      method: 'PATCH',
+function giveProfile() {
+   fetch("https://nomoreparties.co/v1/plus-cohort7/users/me", {
+      method: "PATCH",
       headers: {
          authorization: myApi.authorization,
-         'Content-Type': "application/json"
+         "Content-Type": "application/json"
       },
       body: JSON.stringify({
          name: "Катан",
@@ -60,10 +127,36 @@ function giveProgile() {
    })
 }
 //мур-мур-мур мы любим гламур
-getCards()
+
+//!тестовая функция не вызывать
+function giveCards() {
+   fetch("https://nomoreparties.co/v1/plus-cohort7/cards", {
+      method: "PATCH",
+      headers: {
+         authorization: myApi.authorization,
+         "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+         "likes": [],
+         "_id": "5d1f0611d321eb4bdcd707dd",
+         "name": "Байкал",
+         "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+         "owner": {
+            "name": "Jacques Cousteau",
+            "about": "Sailor, researcher",
+            "avatar": "https://pictures.s3.yandex.net/frontend-developer/ava.jpg",
+            "_id": "ef5f7423f7f5e22bef4ad607",
+            "cohort": "local"
+         },
+         "createdAt": "2019-07-05T08:10:57.741Z"
+      })
+   })
+}
+
+// getCards()
 
 getProfile()
 
-giveProgile()
+giveProfile()
 
-//вопросы наставнику, что такое v1?
+//?вопросы наставнику, что такое v1?

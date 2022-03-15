@@ -46,6 +46,10 @@ export function handleAddCardSubmit(evt) {
    // editImagePlace.value = ""
 }
 
+// export function renderCards2() {
+
+// }
+
 // показать заранее подготовленые карточки
 export function renderCards() {
    initialCards.forEach(card => {
