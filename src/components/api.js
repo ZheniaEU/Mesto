@@ -18,7 +18,7 @@ const checkResponse = (response) => {
 }
 
 
-const getCards = () => {
+const receiveCards = () => {
    return fetch("https://mesto.nomoreparties.co/v1/plus-cohort7/cards", {
       method: "GET",
       headers: {
@@ -30,7 +30,7 @@ const getCards = () => {
 }
 
 Promise.all([
-   getCards()
+   receiveCards()
 ]).then(function ([cards]) {
    // const d1 = cards
    console.log(cards)
@@ -96,7 +96,7 @@ export function renderCards2(cards) {
 //Как видите, у карточки также есть идентификатор — свойство _id. Сейчас он вам не нужен, но скоро понадобится.
 
 //получаем профиль
-export function getProfile() {
+export function receiveProfile() {
    return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort7/users/me`, {
       method: "GET",
       headers: {
@@ -113,7 +113,7 @@ const profileText = document.querySelector(".profile__text") // Описание
 
 
 Promise.all([
-   getProfile()
+   receiveProfile()
 ]).then(function ([profile]) {
    console.log(profile)
    profileRender(profile) //рендерит профиль имя и дескрипшен
@@ -140,7 +140,7 @@ export function giveProfile() {
       method: "PATCH",
       headers: {
          authorization: myApi.authorization,
-         "Content-Type": "application/json"
+         "Content-Type": myApi.contentType
       },
       body: JSON.stringify({
          name: editUserName.value,
@@ -151,34 +151,38 @@ export function giveProfile() {
 
 //мур-мур-мур мы любим гламур
 
-//!тестовая функция не вызывать
-function giveCards() {
+//инпуты картинок
+const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
+const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
+
+//отправка пользовательской карточки
+export function giveCards() {
    fetch("https://nomoreparties.co/v1/plus-cohort7/cards", {
-      method: "PATCH",
+      method: "POST",
       headers: {
          authorization: myApi.authorization,
-         "Content-Type": "application/json"
+         "Content-Type": myApi.contentType
       },
       body: JSON.stringify({
          "likes": [],
          "_id": "5d1f0611d321eb4bdcd707dd",
-         "name": "Байкал",
-         "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+         "name": editImagePlace.value,
+         "link": editImageUrl.value,
          "owner": {
-            "name": "Jacques Cousteau",
-            "about": "Sailor, researcher",
+            "name": profileName.textContent,
+            "about": profileText.textContent,
             "avatar": "https://pictures.s3.yandex.net/frontend-developer/ava.jpg",
             "_id": "ef5f7423f7f5e22bef4ad607",
             "cohort": "local"
          },
-         "createdAt": "2019-07-05T08:10:57.741Z"
+         "createdAt": ""
       })
    })
 }
 
-// getCards()
+// receiveCards()
 
-// getProfile()
+// receiveProfile()
 
 // giveProfile()
 

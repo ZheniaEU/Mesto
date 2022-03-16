@@ -1,4 +1,5 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
+import { giveProfile, giveCards } from "./api"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
@@ -39,6 +40,7 @@ formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель
 // добавить пользовательскую карточку
 export function handleAddCardSubmit(evt) {
    evt.preventDefault()
+   giveCards() // отправить пользовательскую карточку
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
    closePopup(imageUserPopup)
    formUserAdd.reset()

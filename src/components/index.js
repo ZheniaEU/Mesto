@@ -2,7 +2,7 @@ import "../pages/index.css"
 import { renderCards, imageUserPopup } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
-import { giveProfile } from "./api"
+import { giveProfile, giveCards } from "./api"
 // zaraza()
 
 // попапы
