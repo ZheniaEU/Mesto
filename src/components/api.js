@@ -1,8 +1,8 @@
-import { createCard, renderCards } from "./card"
+import { createCard, renderCards} from "./card"
 
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
-const myApi = {
+export const myApi = {
    site: "https://mesto.nomoreparties.co/v1/plus-cohort7",
    authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1",
    contentType: "application/json"
@@ -116,15 +116,14 @@ Promise.all([
    getProfile()
 ]).then(function ([profile]) {
    console.log(profile)
-   profileRender(profile)
+   profileRender(profile) //рендерит профиль имя и дескрипшен
 })
 
 function profileRender(profile) {
    profileName.textContent = profile.name
    profileText.textContent = profile.about
-   editUserName.value = profileName.textContent
-   editUserDescription.value = profileText.textContent
-   giveProfile()
+   // editUserName.value = profileName.textContent
+   // editUserDescription.value = profileText.textContent
 }
 //{   "name": "Jacques Cousteau","about": "Sailor, researcher","avatar": "https://pictures.s3.yandex.net/frontend-developer/ava.jpg",
 //   "_id": "e20537ed11237f86bbb20ccb","cohort": "cohort0"} 
@@ -136,7 +135,7 @@ const editUserName = document.querySelector(".popup__edit_user_name") //проф
 const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
 
 //отправляем профиль
-function giveProfile() {
+export function giveProfile() {
    fetch("https://nomoreparties.co/v1/plus-cohort7/users/me", {
       method: "PATCH",
       headers: {
@@ -144,8 +143,8 @@ function giveProfile() {
          "Content-Type": "application/json"
       },
       body: JSON.stringify({
-         name: profileName.textContent,
-         about: profileText.textContent
+         name: editUserName.value,
+         about: editUserDescription.value
       })
    })
 }
@@ -179,8 +178,22 @@ function giveCards() {
 
 // getCards()
 
-getProfile()
+// getProfile()
 
 // giveProfile()
 
 //?вопросы наставнику, что такое v1?
+
+// export function giveProfiles() {
+//    fetch("https://nomoreparties.co/v1/plus-cohort7/users/me", {
+//       method: "PATCH",
+//       headers: {
+//          authorization: myApi.authorization,
+//          "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({
+//          name: editUserName.value,
+//          about: editUserDescription.value
+//       })
+//    })
+// }

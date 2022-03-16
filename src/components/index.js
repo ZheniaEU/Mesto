@@ -2,7 +2,7 @@ import "../pages/index.css"
 import { renderCards, imageUserPopup } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
-import { zaraza } from "./api"
+import { giveProfile } from "./api"
 // zaraza()
 
 // попапы
@@ -62,8 +62,8 @@ formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слуша
 
 // получает информацию профиля и открываю попап с ним
 export function openProfilePopup() {
-   // editUserName.value = profileName.textContent
-   // editUserDescription.value = profileText.textContent
+   editUserName.value = profileName.textContent
+   editUserDescription.value = profileText.textContent
    openPopup(profilePopup)
 }
 
@@ -73,8 +73,12 @@ export function handleProfileFormSubmit(evt) {
    profileName.textContent = editUserName.value
    profileText.textContent = editUserDescription.value
    closePopup(profilePopup)
+   giveProfile()
 }
 
 // renderCards() //запускаем отображение карточек
 
 enableValidation(validationConfig) // запуск валидации
+
+// const tt = document.querySelector(".popup__accept_profile")
+// tt.addEventListener("click", giveProfile)
