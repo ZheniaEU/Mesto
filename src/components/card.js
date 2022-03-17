@@ -1,5 +1,5 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { giveProfile, giveCards } from "./api"
+import { giveProfile, giveCards, myApi, deleteCard } from "./api"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
@@ -43,7 +43,7 @@ export function handleAddCardSubmit(evt) {
    giveCards() // отправить пользовательскую карточку
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
    closePopup(imageUserPopup)
-   formUserAdd.reset()
+   formUserAdd.reset() // сбросить инпуты  в форме
    // editImageUrl.value = ""
    // editImagePlace.value = ""
 }
@@ -60,25 +60,37 @@ export function renderCards() {
 }
 
 //создание карточки
-export function createCard(link, name) {
+export function createCard(link, name, likes, userId, nubmerOfCard) {
    const cardElement = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
    const cardImage = cardElement.querySelector(".element__cards-item")
    const title = cardElement.querySelector(".element__title")
    const likeButton = cardElement.querySelector(".element__heart-botton")
    const binButton = cardElement.querySelector(".element__bin")
+   const like = cardElement.querySelector(".element__like")
+   const bin = cardElement.querySelector(".element__bin")
+   // const nubmerOfCard = cardElement.getElementById(id) //пытаюсь зацепить id
 
    cardImage.src = link
    cardImage.alt = name
    title.textContent = name
+   //like.textContent = likes.length
 
-   // лайкает
    likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
    })
 
+   // likeButton.addEventListener()
+   if (likeButton.classList.contains("element__heart-botton_active")) {
+      likes.length = likes.length + 1
+      console.log(this.likes.length)
+   }
+
+   like.textContent = likes.length
+
    // удаляет
    binButton.addEventListener("click", () => {
       cardElement.remove()
+      deleteCard(nubmerOfCard)
    })
 
    // открывает на фулл
@@ -88,6 +100,12 @@ export function createCard(link, name) {
       captionPopup.textContent = name
       openPopup(fullImagesPopup)
    })
+   // показывает бины на карточке пользователя
+   //я вообще безпонятия откуда я должен был знать что "1857d95644e3d5336aa91bb2" это я, но я вытащил этот id из своих созданных карточек
+   if (userId == "1857d95644e3d5336aa91bb2") {
+      bin.classList.add("element__bin_active")
+   }
 
    return cardElement
 }
+

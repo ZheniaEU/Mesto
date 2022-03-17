@@ -2,12 +2,7 @@
    width: 18px;
    height: 19px;
    padding: 0;
-   background: rgba(
-      0,
-      0,
-      0,
-      0
-   ); /* чё с кнопкой то? пришлось этого крота накормить прозрачным кормом, ни на какую другую еду он из своего гнезда не вылазил*/
+   background: rgba(0, 0, 0, 0);
    background-image: url(../../../../images/Button-bin.svg);
    background-size: cover;
    position: absolute;
@@ -15,6 +10,7 @@
    right: 20px;
    border: none;
    cursor: pointer;
+   visibility: hidden;
 }
 
 .element__bin:hover {
