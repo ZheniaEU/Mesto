@@ -1,5 +1,5 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { giveProfile, giveCards, myApi, deleteCard } from "./api"
+import { giveProfile, giveCards, myApi, deleteCard, givelike, deletelike } from "./api"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
@@ -40,8 +40,10 @@ formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель
 // добавить пользовательскую карточку
 export function handleAddCardSubmit(evt) {
    evt.preventDefault()
+   const like = []
+   const userId = "1857d95644e3d5336aa91bb2"
    giveCards() // отправить пользовательскую карточку
-   elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value))
+   elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value, like, userId))
    closePopup(imageUserPopup)
    formUserAdd.reset() // сбросить инпуты  в форме
    // editImageUrl.value = ""
@@ -68,24 +70,34 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    const binButton = cardElement.querySelector(".element__bin")
    const like = cardElement.querySelector(".element__like")
    const bin = cardElement.querySelector(".element__bin")
-   // const nubmerOfCard = cardElement.getElementById(id) //пытаюсь зацепить id
 
    cardImage.src = link
    cardImage.alt = name
    title.textContent = name
-   //like.textContent = likes.length
+   like.textContent = likes.length
+
+   function tt(likes) {
+      for (let i = 0; i < likes.length; i++) {
+         if (likes[i]._id == "1857d95644e3d5336aa91bb2") {
+            likeButton.classList.add("element__heart-botton_active")
+         }
+      }
+   }
+   tt(likes)
+   // like.forEach(function(){
+   //    likeButton.classList.add("element__heart-botton_active")
+   // })
 
    likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
+      if (likeButton.classList.contains("element__heart-botton_active")) {
+         givelike(nubmerOfCard)
+         like.textContent = like.textContent * 1 + 1
+      } else {
+         deletelike(nubmerOfCard)
+         like.textContent = like.textContent * 1 + -1
+      }
    })
-
-   // likeButton.addEventListener()
-   if (likeButton.classList.contains("element__heart-botton_active")) {
-      likes.length = likes.length + 1
-      console.log(this.likes.length)
-   }
-
-   like.textContent = likes.length
 
    // удаляет
    binButton.addEventListener("click", () => {
@@ -108,4 +120,3 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
 
    return cardElement
 }
-

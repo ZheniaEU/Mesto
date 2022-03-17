@@ -32,12 +32,13 @@ const receiveCards = () => {
 Promise.all([
    receiveCards()
 ]).then(function ([cards]) {
+   console.log(cards)
    renderCards2(cards)
 })
 
 export function renderCards2(cards) {
    cards.forEach(card => {
-      // console.log(card.owner._id)
+      // console.log(card)
       elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
    })
 }
@@ -150,6 +151,39 @@ export function deleteCard(nubmerOfCard) {
       .then(checkResponse)
 }
 
+// запрос на добавление лайка
+export function givelike(nubmerOfCard) {
+   const cardId = nubmerOfCard
+   fetch(`${myApi.website}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: {
+         authorization: myApi.authorization,
+         "Content-Type": myApi.contentType
+      },
+      body: JSON.stringify({
+         name: editUserName.value,
+         about: editUserDescription.value
+      })
+   })
+      .then(checkResponse)
+}
+
+// запрос на удаление лайка
+export function deletelike(nubmerOfCard) {
+   const cardId = nubmerOfCard
+   fetch(`${myApi.website}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: {
+         authorization: myApi.authorization,
+         "Content-Type": myApi.contentType
+      },
+      body: JSON.stringify({
+         name: editUserName.value,
+         about: editUserDescription.value
+      })
+   })
+      .then(checkResponse)
+}
 // .then((res) => {
 //    console.log(res)
 // })
