@@ -2,7 +2,7 @@ import "../pages/index.css"
 import { renderCards, imageUserPopup } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
-import { giveProfile, giveCards } from "./api"
+import { giveProfile, giveCards, giveAvatar, tt, renderAvatar } from "./api"
 // zaraza()
 
 // попапы
@@ -11,11 +11,10 @@ const profilePopup = document.querySelector(".popup_profile") // модалка 
 //_____________________Профиль_____________________________________________
 const profileName = document.querySelector(".profile__name") // Имя в профиле
 const profileText = document.querySelector(".profile__text") // Описание в профиле
-const profileAvatar = document.querySelector(".popup_avatar")
 
 //кнопки профиля
 const editButtonProfile = document.querySelector(".profile__button-edit") // кнопка редактирования профиля
-const editAvatar = document.querySelector(".profile__avatar-edit")
+const profileAvatar = document.querySelector(".popup_avatar") //открываю попап с аватаром
 
 //форма профиля
 const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
@@ -46,10 +45,25 @@ editButtonProfile.addEventListener("click", function () {
    toggleButtonState(popupContainerProfile, profileEditIntuts, validationConfig)
 })
 
-// слушатель открывает попап редактирования аватара без валидации и проверки кнопки состояния
-editAvatar.addEventListener("click", function (){
+
+const popupAvatar = document.querySelector(".profile__avatar-edit")
+const editAvatar = document.querySelector(".popup__form_avatar")
+
+const inputAvatar = document.querySelector(".popup__edit_user_avatar")
+
+// слушатель открывает попап редактирования аватара
+popupAvatar.addEventListener("click", function () {
    openPopup(profileAvatar)
 })
+
+//!слушатель отправки аватара, нужно отвалидировать колбэк
+editAvatar.addEventListener("submit", handleAvatarFormSubmit)
+
+function handleAvatarFormSubmit() {
+   giveAvatar(inputAvatar.value)
+   closePopup(profileAvatar)
+   renderAvatar(tt)
+}
 
 // слушатерь открывае попап пользовательской карточки
 addButtonImage.addEventListener("click", function () {

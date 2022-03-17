@@ -46,8 +46,6 @@ export function handleAddCardSubmit(evt) {
    elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value, like, userId))
    closePopup(imageUserPopup)
    formUserAdd.reset() // сбросить инпуты  в форме
-   // editImageUrl.value = ""
-   // editImagePlace.value = ""
 }
 
 // export function renderCards2() {
@@ -76,17 +74,15 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    title.textContent = name
    like.textContent = likes.length
 
-   function tt(likes) {
+   //проверяю поставил ли я жопку карьше карточке, если поставил, отображаю
+   function chekLikes(likes) {
       for (let i = 0; i < likes.length; i++) {
          if (likes[i]._id == "1857d95644e3d5336aa91bb2") {
             likeButton.classList.add("element__heart-botton_active")
          }
       }
    }
-   tt(likes)
-   // like.forEach(function(){
-   //    likeButton.classList.add("element__heart-botton_active")
-   // })
+   chekLikes(likes)
 
    likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")

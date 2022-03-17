@@ -1,4 +1,5 @@
 import { createCard, renderCards } from "./card"
+import { } from "./index"
 
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
@@ -61,17 +62,26 @@ export function receiveProfile() {
 const profileName = document.querySelector(".profile__name") // Имя в профиле
 const profileText = document.querySelector(".profile__text") // Описание в профиле
 
+export let tt = ""
 
 Promise.all([
    receiveProfile()
 ]).then(function ([profile]) {
-   // console.log(profile)
    profileRender(profile) //рендерит профиль имя и дескрипшен
+   renderAvatar(profile.avatar)
+   tt = profile.avatar
 })
 
 function profileRender(profile) {
    profileName.textContent = profile.name
    profileText.textContent = profile.about
+}
+
+const avatar = document.querySelector(".profile__avatar")
+
+export function renderAvatar(avatars) {
+   avatar.scr = avatars
+   console.log(avatar.scr)
 }
 
 //инпуты профиля
@@ -126,12 +136,6 @@ export function giveCards() {
       .then(checkResponse)
 }
 
-// receiveCards()
-
-// receiveProfile()
-
-// giveProfile()
-
 //?вопросы наставнику, что такое v1?
 // запрос на удаление карточки пользователя
 export function deleteCard(nubmerOfCard) {
@@ -184,45 +188,21 @@ export function deletelike(nubmerOfCard) {
    })
       .then(checkResponse)
 }
-// .then((res) => {
-//    console.log(res)
-// })
-// .then(checkResponse)
-// .catch((res) => {
-//    console.log("что-то пошло не так", res)
-// });
 
-//)
-// console.log(p)
+// обновление аватара
+export function giveAvatar(url) {
+   console.log(url)
+   fetch(`${myApi.website}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+         authorization: myApi.authorization,
+         "Content-Type": myApi.contentType
+      },
+      body: JSON.stringify({
+         avatar: url
+      })
+   })
+      .then(checkResponse)
+}
 
 
-// cards.forEach(function(card) {
-//    renderCards2(card, userId);
-//  })
-
-
-
-// p.then(function([cards]){
-//    console.log(cards)
-//    userId = profileData._id;
-//    cards.forEach(function(card) {
-//       renderCards2(card, userId)
-//       console.log(renderCards2(card, userId))
-//     })
-// })
-// p.catch((res) => {
-//    console.log("что-то пошло не так", res)
-// })
-// p.then((res) => {
-//    console.log(res.status)
-// })
-
-// p.then(checkResponse)
-// function renderError(err) {
-//    error.textContent = err;
-//    result.textContent = "";
-//  }
-// function renderCards(err) {
-//    error.textContent = err;
-//    result.textContent = "";
-//  }
