@@ -39,7 +39,10 @@ const profileEditIntuts = Array.from(popupContainerProfile.querySelectorAll(vali
 //карточки
 const popupContainerimage = document.querySelector(".popup__container-cards-js")
 const ImageEditIntuts = Array.from(popupContainerimage.querySelectorAll(validationConfig.InputSelector))
-
+//аватар
+const popupContaineAvatar = document.querySelector(".popup__container-avatar-js")
+const avatarEditIntut = Array.from(popupContaineAvatar.querySelectorAll(validationConfig.InputSelector))
+// const avatarEditIntut = document.querySelector(".popup__edit_user_avatar")
 // слушатерь открывает попап редактирование профиля
 editButtonProfile.addEventListener("click", function () {
    openProfilePopup()
@@ -107,19 +110,18 @@ function renderAvatar(avatars) {
 
 const buttonAvatarSubmit = document.querySelector(".popup__accept_avatar")
 
-//!слушатель отправки аватара, нужно отвалидировать колбэк
 editAvatar.addEventListener("submit", handleAvatarFormSubmit) //слушатель весит на форме с колбеком
 
 function handleAvatarFormSubmit(evt) {// сам колбэк
    evt.preventDefault()//прерываю стандарное действие
-
+   toggleButtonState(popupContaineAvatar, avatarEditIntut, validationConfig)
    renderLoading(true, buttonAvatarSubmit) // поставить загрузку
-
+   toggleButtonState(popupContaineAvatar, avatarEditIntut, validationConfig)
    giveAvatar(inputAvatar.value) //отдать аватар на сервер
       .then((profile) => {
          renderAvatar(profile.avatar) //отобразить аватар
          closePopup(profileAvatar) //закрыть попап
-         //по идеи тут ещё нужно отвалидировать поле url
+         toggleButtonState(popupContaineAvatar, avatarEditIntut, validationConfig) //валидация
       })
       .catch(err => { console.log(err) })
       .finally(() => {

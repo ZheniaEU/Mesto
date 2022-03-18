@@ -1,6 +1,6 @@
 {
    "name": "mesto",
-   "version": "sprint5_1",
+   "version": "sprint5_2",
    "description": "Learning platform",
    "main": "index.js",
    "scripts": {
