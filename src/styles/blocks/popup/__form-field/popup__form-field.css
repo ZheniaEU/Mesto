@@ -1,12 +1,17 @@
 .popup__form-field {
    display: flex;
    flex-direction: column;
-   height: 66.5px;
-   margin: 0px auto 0;
+   align-items: center;
+   height: 56.5px;
+   margin: 0px auto 0px;
 }
 
-@media screen and (max-width: 596px){
-   .popup__form-field{
-      height: 79.5px;
+@media screen and (max-width: 596px) {
+   .popup__form-field {
+      height: 55.5px;
    }
+   .popup__form-field:first-child{
+      margin-top: 26px;
+   }
+
 }
