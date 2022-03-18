@@ -31,7 +31,7 @@ export function receiveProfile() {
 
 //отправляем профиль
 export function giveProfile() {
-   fetch(`${myApi.baseUrl}/users/me`, {
+   return fetch(`${myApi.baseUrl}/users/me`, {
       method: "PATCH",
       headers: myApi.headers,
       body: JSON.stringify({
@@ -44,9 +44,9 @@ export function giveProfile() {
 
 //отправка пользовательской карточки
 export function giveCards() {
-   fetch(`${myApi.baseUrl}/cards`, {
+   return fetch(`${myApi.baseUrl}/cards`, {
       method: "POST",
-   //   headers: myApi.headers, так не пропускает
+      //   headers: myApi.headers, так не пропускает
       headers: { //а так пропускает
          authorization: myApi.authorization,
          "Content-Type": myApi.contentType
@@ -73,7 +73,7 @@ export function giveCards() {
 export function deleteCard(nubmerOfCard) {
    const cardId = nubmerOfCard
    // console.log(nubmerOfCard)
-   fetch(`${myApi.baseUrl}/cards/${cardId}`, {
+   return fetch(`${myApi.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: myApi.headers,
       body: JSON.stringify({
@@ -87,7 +87,7 @@ export function deleteCard(nubmerOfCard) {
 // запрос на добавление лайка
 export function givelike(nubmerOfCard) {
    const cardId = nubmerOfCard
-   fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
+   return fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: myApi.headers,
       body: JSON.stringify({
@@ -101,7 +101,7 @@ export function givelike(nubmerOfCard) {
 // запрос на удаление лайка
 export function deletelike(nubmerOfCard) {
    const cardId = nubmerOfCard
-   fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
+   return fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: myApi.headers,
       body: JSON.stringify({
@@ -114,8 +114,7 @@ export function deletelike(nubmerOfCard) {
 
 // обновление аватара
 export function giveAvatar(url) {
-   // console.log(url)
-   fetch(`${myApi.baseUrl}/users/me/avatar`, {
+   return fetch(`${myApi.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
          authorization: myApi.authorization,

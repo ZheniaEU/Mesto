@@ -1,5 +1,5 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { giveProfile, giveCards, myApi, deleteCard, givelike, deletelike, receiveCards, checkResponse } from "./api"
+import { giveCards, deleteCard, givelike, deletelike, receiveCards } from "./api"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
@@ -17,21 +17,21 @@ const imagePopup = document.querySelector(".popup__image")
 const captionPopup = document.querySelector(".popup__caption")
 
 // картинки для webpack
-const bigBlueHole = new URL("./../images/place/Big-Blue-Hole.jpg", import.meta.url)
-const amazonka = new URL("./../images/place/mole.jpg", import.meta.url)
-const greatBarrierReef = new URL("./../images/place/Great_Barrier_Reef.jpg", import.meta.url)
-const clubOfAnEagleEye = new URL("./../images/place/клуб-орлиного-глаза.jpg", import.meta.url)
-const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
-const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
+// const bigBlueHole = new URL("./../images/place/Big-Blue-Hole.jpg", import.meta.url)
+// const amazonka = new URL("./../images/place/mole.jpg", import.meta.url)
+// const greatBarrierReef = new URL("./../images/place/Great_Barrier_Reef.jpg", import.meta.url)
+// const clubOfAnEagleEye = new URL("./../images/place/клуб-орлиного-глаза.jpg", import.meta.url)
+// const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
+// const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
 
-const initialCards = [
-   { name: "Большая голубая дыра", link: bigBlueHole },
-   { name: "Амазонка", link: amazonka },
-   { name: "Большой Барьерный риф", link: greatBarrierReef },
-   { name: "Клуб Орлиного глаза", link: clubOfAnEagleEye },
-   { name: "Морейн", link: moraine },
-   { name: "что-то", link: x3 },
-]
+// const initialCards = [
+//    { name: "Большая голубая дыра", link: bigBlueHole },
+//    { name: "Амазонка", link: amazonka },
+//    { name: "Большой Барьерный риф", link: greatBarrierReef },
+//    { name: "Клуб Орлиного глаза", link: clubOfAnEagleEye },
+//    { name: "Морейн", link: moraine },
+//    { name: "что-то", link: x3 },
+// ]
 
 // сабмиты форм
 // formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
@@ -47,10 +47,6 @@ export function handleAddCardSubmit(evt) {
    closePopup(imageUserPopup)
    formUserAdd.reset() // сбросить инпуты  в форме
 }
-
-// export function renderCards2() {
-
-// }
 
 // показать заранее подготовленые карточки
 export function renderCards() {
@@ -117,17 +113,15 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    return cardElement
 }
 
-
+//промисы карточек
 Promise.all([
    receiveCards()
 ]).then(function ([cards]) {
-   // console.log(cards)
    renderOthersUsersCards(cards)
 })
 
 function renderOthersUsersCards(cards) {
    cards.forEach(card => {
-      // console.log(card)
       elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
    })
 }

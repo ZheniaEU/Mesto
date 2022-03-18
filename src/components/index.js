@@ -24,6 +24,9 @@ const formProfileUser = document.querySelector(".popup__form_character") // фо
 export const editUserName = document.querySelector(".popup__edit_user_name") //профиль юзер нейм
 export const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
 
+//аватар
+const userAvatar = document.querySelector(".profile__avatar")
+
 //______________________Добавление новых карточек____________________________
 //кнопки картинок
 const addButtonImage = document.querySelector(".profile__button-add") // кнопка открытия картинок
@@ -56,8 +59,6 @@ popupAvatar.addEventListener("click", function () {
    openPopup(profileAvatar)
 })
 
-
-
 // слушатерь открывае попап пользовательской карточки
 addButtonImage.addEventListener("click", function () {
    openPopup(imageUserPopup)
@@ -83,36 +84,26 @@ export function handleProfileFormSubmit(evt) {
    giveProfile()
 }
 
-// renderCards() //запускаем отображение карточек
-
 enableValidation(validationConfig) // запуск валидации
 
-let userId
-
+//промисы профайла
 Promise.all([receiveProfile()])
    .then(function ([profile]) {
-
-      userId = profile
-      // console.log(userId)
-// console.log(profile.avatar)
-      profileRender(profile) //рендерит профиль имя и дескрипшен
       renderAvatar(profile.avatar)
-
-
+      profileRender(profile) //рендерит профиль имя и дескрипшен
    })
-   .catch(console.log("у нас отшибочка"))
+   .catch(err => { console.log(`Отшиб__очка ${err}`) })
 
+//меняем ник и описание
 function profileRender(profile) {
    profileName.textContent = profile.name
    profileText.textContent = profile.about
 }
 
-const userAvatar = document.querySelector(".profile__avatar")
-
+//меняем аватарку
 function renderAvatar(avatars) {
    userAvatar.src = avatars
 }
-
 
 const buttonAvatarSubmit = document.querySelector(".popup__accept_avatar")
 
@@ -130,22 +121,13 @@ function handleAvatarFormSubmit(evt) {// сам колбэк
          closePopup(profileAvatar) //закрыть попап
          //по идеи тут ещё нужно отвалидировать поле url
       })
-      .catch(console.log("Ошибка"))
+      .catch(err => { console.log(err) })
       .finally(() => {
          renderLoading(false, buttonAvatarSubmit, "Сохранить") //убрать загрузку
       })
-
 }
 
-// .then(function (userId) {
-//    console.log(userId)
-
-
-
-
-
-
-//функция загрузки
+//отображение загрузки
 function renderLoading(isLoading, button, text) {
    const loadingText = text + "..."
    const buttonSubmit = button
@@ -155,3 +137,5 @@ function renderLoading(isLoading, button, text) {
       buttonSubmit.textContent = text
    }
 }
+
+// renderCards() //запускаем отображение карточек
