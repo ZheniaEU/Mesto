@@ -1,101 +1,39 @@
-import { createCard, renderCards } from "./card"
-import { } from "./index"
-
-const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
+import { editImagePlace, editImageUrl } from "./card"
+import { profileName, profileText, editUserName, editUserDescription } from "./index"
 
 export const myApi = {
-   website: "https://mesto.nomoreparties.co/v1/plus-cohort7",//`${myApi.website}`
-   authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1",
+   baseUrl: "https://mesto.nomoreparties.co/v1/plus-cohort7",//`${myApi.baseUrl}`
+   headers: {
+      authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1",//myApi.headers
+      contentType: "application/json"
+   },
+   authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1", //фикс для чего там, не позволяет отправлять карточки через myApi.headers , чёто связано с касперским пишет мне, что нельзя передавать заголовок именно в функции function giveCards вот в таком виде myApi.headers
    contentType: "application/json"
 }
 
-//обработка ошибки
-const checkResponse = (response) => {
-   if (response.ok) {
-      return response.json()
-   } else {
-      return Promise.reject(`Обнаружен запуск ядерной ракеты: ${response.status}`)
-   }
-}
-
-
-const receiveCards = () => {
-   return fetch(`${myApi.website}/cards`, {
+//получаем от сервера карточки
+export const receiveCards = () => {
+   return fetch(`${myApi.baseUrl}/cards`, {
       method: "GET",
-      headers: {
-         authorization: myApi.authorization,
-         "Content-Type": myApi.contentType
-      }
+      headers: myApi.headers
    })
       .then(checkResponse)
 }
 
-Promise.all([
-   receiveCards()
-]).then(function ([cards]) {
-   console.log(cards)
-   renderCards2(cards)
-})
-
-export function renderCards2(cards) {
-   cards.forEach(card => {
-      // console.log(card)
-      elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
-   })
-}
-
-
-
-//получаем профиль
+//получаем от сервера профиль
 export function receiveProfile() {
-   return fetch(`${myApi.website}/users/me`, {
+   return fetch(`${myApi.baseUrl}/users/me`, {
       method: "GET",
-      headers: {
-         authorization: myApi.authorization,
-         "Content-Type": myApi.contentType
-      }
+      headers: myApi.headers
    })
       .then(checkResponse)
 }
-
-//_____________________Профиль_____________________________________________
-const profileName = document.querySelector(".profile__name") // Имя в профиле
-const profileText = document.querySelector(".profile__text") // Описание в профиле
-
-export let tt = ""
-
-Promise.all([
-   receiveProfile()
-]).then(function ([profile]) {
-   profileRender(profile) //рендерит профиль имя и дескрипшен
-   renderAvatar(profile.avatar)
-   tt = profile.avatar
-})
-
-function profileRender(profile) {
-   profileName.textContent = profile.name
-   profileText.textContent = profile.about
-}
-
-const avatar = document.querySelector(".profile__avatar")
-
-export function renderAvatar(avatars) {
-   avatar.scr = avatars
-   console.log(avatar.scr)
-}
-
-//инпуты профиля
-const editUserName = document.querySelector(".popup__edit_user_name") //профиль юзер нейм
-const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
 
 //отправляем профиль
 export function giveProfile() {
-   fetch(`${myApi.website}/users/me`, {
+   fetch(`${myApi.baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-         authorization: myApi.authorization,
-         "Content-Type": myApi.contentType
-      },
+      headers: myApi.headers,
       body: JSON.stringify({
          name: editUserName.value,
          about: editUserDescription.value
@@ -104,17 +42,12 @@ export function giveProfile() {
       .then(checkResponse)
 }
 
-//мур-мур-мур мы любим гламур
-
-//инпуты картинок
-const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
-const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
-
 //отправка пользовательской карточки
 export function giveCards() {
-   fetch(`${myApi.website}/cards`, {
+   fetch(`${myApi.baseUrl}/cards`, {
       method: "POST",
-      headers: {
+   //   headers: myApi.headers, так не пропускает
+      headers: { //а так пропускает
          authorization: myApi.authorization,
          "Content-Type": myApi.contentType
       },
@@ -136,17 +69,13 @@ export function giveCards() {
       .then(checkResponse)
 }
 
-//?вопросы наставнику, что такое v1?
 // запрос на удаление карточки пользователя
 export function deleteCard(nubmerOfCard) {
    const cardId = nubmerOfCard
-   console.log(nubmerOfCard)
-   fetch(`${myApi.website}/cards/${cardId}`, {
+   // console.log(nubmerOfCard)
+   fetch(`${myApi.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-         authorization: myApi.authorization,
-         "Content-Type": myApi.contentType
-      },
+      headers: myApi.headers,
       body: JSON.stringify({
          name: editUserName.value,
          about: editUserDescription.value
@@ -158,12 +87,9 @@ export function deleteCard(nubmerOfCard) {
 // запрос на добавление лайка
 export function givelike(nubmerOfCard) {
    const cardId = nubmerOfCard
-   fetch(`${myApi.website}/cards/likes/${cardId}`, {
+   fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: {
-         authorization: myApi.authorization,
-         "Content-Type": myApi.contentType
-      },
+      headers: myApi.headers,
       body: JSON.stringify({
          name: editUserName.value,
          about: editUserDescription.value
@@ -175,12 +101,9 @@ export function givelike(nubmerOfCard) {
 // запрос на удаление лайка
 export function deletelike(nubmerOfCard) {
    const cardId = nubmerOfCard
-   fetch(`${myApi.website}/cards/likes/${cardId}`, {
+   fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: {
-         authorization: myApi.authorization,
-         "Content-Type": myApi.contentType
-      },
+      headers: myApi.headers,
       body: JSON.stringify({
          name: editUserName.value,
          about: editUserDescription.value
@@ -191,8 +114,8 @@ export function deletelike(nubmerOfCard) {
 
 // обновление аватара
 export function giveAvatar(url) {
-   console.log(url)
-   fetch(`${myApi.website}/users/me/avatar`, {
+   // console.log(url)
+   fetch(`${myApi.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
          authorization: myApi.authorization,
@@ -205,4 +128,11 @@ export function giveAvatar(url) {
       .then(checkResponse)
 }
 
-
+//обработка ошибки
+export const checkResponse = function (response) {
+   if (response.ok) {
+      return response.json()
+   } else {
+      return Promise.reject(`Обнаружен запуск ядерной ракеты: ${response.status}`)
+   }
+}

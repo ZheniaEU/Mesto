@@ -1,5 +1,5 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { giveProfile, giveCards, myApi, deleteCard, givelike, deletelike } from "./api"
+import { giveProfile, giveCards, myApi, deleteCard, givelike, deletelike, receiveCards, checkResponse } from "./api"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
@@ -9,8 +9,8 @@ const elementsContainer = document.querySelector(".elements__list") //конте
 //форма пользовательских картинок
 const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
 //инпуты картинок
-const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
-const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
+export const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
+export const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
 
 //селкеторы полного попапа
 const imagePopup = document.querySelector(".popup__image")
@@ -115,4 +115,19 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    }
 
    return cardElement
+}
+
+
+Promise.all([
+   receiveCards()
+]).then(function ([cards]) {
+   // console.log(cards)
+   renderOthersUsersCards(cards)
+})
+
+function renderOthersUsersCards(cards) {
+   cards.forEach(card => {
+      // console.log(card)
+      elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
+   })
 }
