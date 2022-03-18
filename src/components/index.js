@@ -113,7 +113,7 @@ editAvatar.addEventListener("submit", handleAvatarFormSubmit) //слушател
 function handleAvatarFormSubmit(evt) {// сам колбэк
    evt.preventDefault()//прерываю стандарное действие
 
-   renderLoading(true, buttonAvatarSubmit, "Сохранить") // поставить загрузку
+   renderLoading(true, buttonAvatarSubmit) // поставить загрузку
 
    giveAvatar(inputAvatar.value) //отдать аватар на сервер
       .then((profile) => {
@@ -123,18 +123,18 @@ function handleAvatarFormSubmit(evt) {// сам колбэк
       })
       .catch(err => { console.log(err) })
       .finally(() => {
-         renderLoading(false, buttonAvatarSubmit, "Сохранить") //убрать загрузку
+         renderLoading(false, buttonAvatarSubmit) //убрать загрузку
       })
 }
 
 //отображение загрузки
-function renderLoading(isLoading, button, text) {
-   const loadingText = text + "..."
+function renderLoading(isLoading, button) {
+   const loadingText = button.textContent + "..."
    const buttonSubmit = button
-   if (isLoading == true) {
+   if (isLoading) {
       buttonSubmit.textContent = loadingText
    } else {
-      buttonSubmit.textContent = text
+      buttonSubmit.textContent = button.textContent
    }
 }
 
