@@ -79,15 +79,47 @@ export function openProfilePopup() {
    openPopup(profilePopup)
 }
 
+
+//_________________наш фронт работ________________________________
+
+
 // после редактирования профиля, закрываю попап
-export function handleProfileFormSubmit(evt) {// тут нужно переделать вен и кеч
+function handleProfileFormSubmit(evt) {// тут нужно переделать вен и кеч
    evt.preventDefault()
-   profileName.textContent = editUserName.value
-   profileText.textContent = editUserDescription.value
-   closePopup(profilePopup)
+
+   renderLoading(true, buttonAvatarSubmit) // поставить загрузку
+
    giveProfile(editUserName, editUserDescription)
+      .then((profile) => {
+         //меняю уже из ответа, поля профайла
+         profileName.textContent = profile.name
+         profileText.textContent = profile.about
+         closePopup(profilePopup)
+      })
+      .catch(err => { console.log(err) })
+      .finally(() => {
+         renderLoading(false, buttonAvatarSubmit) //убрать загрузку
+      })
+
    // вимо здесь должен быть вен и кеч
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 enableValidation(validationConfig) // запуск валидации
 
@@ -157,7 +189,6 @@ formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель
 //пробую передать кнопку
 const imageButtonAccept = document.querySelector(".popup__accept_image")
 
-//______________________________Наш фрон работа__________________________________________________________
 // добавить пользовательскую карточку
 function handleAddCardSubmit(evt) {
    evt.preventDefault()// сбрасываем тандартное поведени
@@ -176,34 +207,7 @@ function handleAddCardSubmit(evt) {
       })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
-
-// Promise.all([receiveProfile(), receiveCards()])
-//    .then(function ([profile, cards]) {
-//       //профиль
-//       renderAvatar(profile.avatar) //рендерит аватар
-//       profileRender(profile) //рендерит профиль имя и дескрипшен
-//       //карточки
-//       renderOthersUsersCards(cards) //рендерит карточки 
-//    })
-//    .catch(err => { console.log(`У нас тут ошибка ${err}`) })
 
 function renderOthersUsersCards(cards, profile) {
    cards.forEach(card => {
