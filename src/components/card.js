@@ -1,3 +1,4 @@
+// import { handleDeleteCard } from "./index"
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
 import { deleteCard, givelike, deletelike, receiveCards } from "./api"
 // попапы
@@ -45,15 +46,18 @@ const editUserDescription = document.querySelector(".popup__edit_user_descriptio
 
 
 
-// показать заранее подготовленые карточки
-export function renderCards() {
-   initialCards.forEach(card => {
-      elementsContainer.append(createCard(card.link, card.name))
-   })
-}
+
+
+
+// // показать заранее подготовленые карточки
+// export function renderCards() {
+//    initialCards.forEach(card => {
+//       elementsContainer.append(createCard(card.link, card.name))
+//    })
+// }
 
 //создание карточки
-export function createCard(link, name, likes, userId, nubmerOfCard) {
+export function createCard(link, name, likes, userId, profile, card) {
    const cardElement = document.querySelector(".template").content.querySelector(".element__card").cloneNode(true)
    const cardImage = cardElement.querySelector(".element__cards-item")
    const title = cardElement.querySelector(".element__title")
@@ -80,10 +84,10 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
       if (likeButton.classList.contains("element__heart-botton_active")) {
-         givelike(nubmerOfCard, editUserName, editUserDescription)
+         givelike(card._id, editUserName, editUserDescription)
          like.textContent = like.textContent * 1 + 1
       } else {
-         deletelike(nubmerOfCard, editUserName, editUserDescription)
+         deletelike(card._id, editUserName, editUserDescription)
          like.textContent = like.textContent * 1 + -1
       }
    })
@@ -91,8 +95,9 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    // удаляет
    binButton.addEventListener("click", () => {
       cardElement.remove()
-      deleteCard(nubmerOfCard, editUserName, editUserDescription)
+      deleteCard(card._id, editUserName, editUserDescription)
    })
+
 
    // открывает на фулл
    cardImage.addEventListener("click", () => {

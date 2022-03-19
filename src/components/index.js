@@ -2,7 +2,7 @@ import "../pages/index.css"
 import { createCard, imageUserPopup } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
-import { giveProfile, giveAvatar, receiveProfile, giveCards, receiveCards} from "./api"
+import { giveProfile, giveAvatar, receiveProfile, giveCards, receiveCards } from "./api"
 
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
@@ -128,17 +128,18 @@ function handleAvatarFormSubmit(evt) {// сам колбэк
 
 //отображение загрузки
 function renderLoading(isLoading, button) {
-   const loadingText = button.textContent + "..."
+   const loadingText = "Сохранение..."
    const buttonSubmit = button
    if (isLoading) {
       buttonSubmit.textContent = loadingText
    } else {
-      buttonSubmit.textContent = button.textContent
+      if (button == buttonAvatarSubmit) {
+         buttonSubmit.textContent = "Сохранить"
+      } else {
+         buttonSubmit.textContent = "Создать"
+      }
    }
 }
-
-// renderCards() //запускаем отображение карточек
-
 
 //______________________Добавление новых карточек____________________________
 //форма пользовательских картинок
@@ -164,45 +165,39 @@ function handleAddCardSubmit(evt) {
 
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
-Promise.all([receiveProfile(), receiveCards()])
-   .then(function ([profile, cards])  {
-      //профиль
-      renderAvatar(profile.avatar) //рендерит аватар
-      profileRender(profile) //рендерит профиль имя и дескрипшен
-      //карточки
-      renderOthersUsersCards(cards) //рендерит карточки 
-   })
-   .catch(err => { console.log(`Отшиб__очка ${err}`) })
-
-function renderOthersUsersCards(cards) {
-   cards.forEach(card => {
-      elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
-   })
-}
-
 // Promise.all([receiveProfile(), receiveCards()])
-//    .then(function ([profile, cards])  {
+//    .then(function ([profile, cards]) {
 //       //профиль
 //       renderAvatar(profile.avatar) //рендерит аватар
 //       profileRender(profile) //рендерит профиль имя и дескрипшен
 //       //карточки
 //       renderOthersUsersCards(cards) //рендерит карточки 
 //    })
-//    .catch(err => { console.log(`Отшиб__очка ${err}`) })
+//    .catch(err => { console.log(`У нас тут ошибка ${err}`) })
+
+function renderOthersUsersCards(profile, cards) {
+   cards.forEach(card => {
+      console.log(card._id)
+      elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, profile, card))
+   })
+}
 
 
-// //промисы профайла
-// Promise.all([receiveProfile(), receiveCards()])
-//    .then(function ([profile])  {
-//       renderAvatar(profile.avatar)
-//       profileRender(profile) //рендерит профиль имя и дескрипшен
-//    })
-//    .catch(err => { console.log(`Отшиб__очка ${err}`) })
+Promise.all([receiveProfile(), receiveCards()])
+   .then(function ([profile, cards]) {
 
+      //профиль
+      renderAvatar(profile.avatar) //рендерит аватар
+      profileRender(profile) //рендерит профиль имя и дескрипшен
+      //карточки
+      renderOthersUsersCards(profile, cards) //рендерит карточки
+   })
+   .catch(err => { console.log(`Отшиб__очка ${err}`) })
 
-// //промисы карточек
-// Promise.all([
-//    receiveCards()
-// ]).then(function ([cards]) {
-//    renderOthersUsersCards(cards)
-// })
+// // создаем DOM функцию удаления карточки
+// export const handleDeleteCard = function (card) {
+//    card.remove()
+//    card = null;
+// }
+
+// binButton.addEventListener('click', () => handleDeleteCard(cardElement, nubmerOfCard))
