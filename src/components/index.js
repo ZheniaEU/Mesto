@@ -53,10 +53,8 @@ const profileEditIntuts = Array.from(popupContainerProfile.querySelectorAll(vali
 const popupContainerimage = document.querySelector(".popup__container-cards-js")
 const imageEditIntuts = Array.from(popupContainerimage.querySelectorAll(validationConfig.InputSelector))
 //аватар
-// const popupContaineAvatar = document.querySelector(".popup__container-avatar-js")
-// const avatarEditIntut = Array.from(popupContaineAvatar.querySelectorAll(validationConfig.InputSelector))
-// const formAvatar = popupContaineAvatar.querySelector(".popup__form")
-// const avatarEditIntut = document.querySelector(".popup__form_avatar")
+const popupContaineAvatar = document.querySelector(".popup__container-avatar-js")
+const avatarEditIntut = Array.from(popupContaineAvatar.querySelectorAll(validationConfig.InputSelector))
 
 const popupAvatar = document.querySelector(".profile__avatar-edit") // попап аватара
 const editAvatar = document.querySelector(".popup__form_avatar") // форма аватара
@@ -74,6 +72,7 @@ editButtonProfile.addEventListener("click", function () {
 // слушатель открывает попап редактирования аватара
 popupAvatar.addEventListener("click", function () {
    openPopup(profileAvatar)
+   toggleButtonState(popupContaineAvatar, avatarEditIntut, validationConfig)
 })
 
 // слушатерь открывае попап пользовательской карточки
@@ -137,6 +136,7 @@ function handleAvatarFormSubmit(evt) {// сам колбэк
       .then((profile) => {
          renderAvatar(profile.avatar) //отобразить аватар
          closePopup(profileAvatar) //закрыть попап
+         editAvatar.reset() // сброс формы
       })
       .catch(err => { console.log(err) })
       .finally(() => {
