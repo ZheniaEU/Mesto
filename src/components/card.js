@@ -1,52 +1,49 @@
 import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { giveCards, deleteCard, givelike, deletelike, receiveCards } from "./api"
+import { deleteCard, givelike, deletelike, receiveCards } from "./api"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
-//______________________Добавление новых карточек____________________________
-//форма пользовательских картинок
-const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
-//инпуты картинок
-export const editImagePlace = document.querySelector(".popup__edit_image_place") // инпут места пользовательской карточки
-export const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
-
 //селкеторы полного попапа
 const imagePopup = document.querySelector(".popup__image")
 const captionPopup = document.querySelector(".popup__caption")
 
-// картинки для webpack
-// const bigBlueHole = new URL("./../images/place/Big-Blue-Hole.jpg", import.meta.url)
-// const amazonka = new URL("./../images/place/mole.jpg", import.meta.url)
-// const greatBarrierReef = new URL("./../images/place/Great_Barrier_Reef.jpg", import.meta.url)
-// const clubOfAnEagleEye = new URL("./../images/place/клуб-орлиного-глаза.jpg", import.meta.url)
-// const moraine = new URL("./../images/place/Moraine_Lake.jpg", import.meta.url)
-// const x3 = new URL("./../images/place/Great-Barrier-Reef.jpg", import.meta.url)
+//инпуты профиля
+const editUserName = document.querySelector(".popup__edit_user_name") //профиль юзер нейм
+const editUserDescription = document.querySelector(".popup__edit_user_description") //профиль дескрипшен
 
-// const initialCards = [
-//    { name: "Большая голубая дыра", link: bigBlueHole },
-//    { name: "Амазонка", link: amazonka },
-//    { name: "Большой Барьерный риф", link: greatBarrierReef },
-//    { name: "Клуб Орлиного глаза", link: clubOfAnEagleEye },
-//    { name: "Морейн", link: moraine },
-//    { name: "что-то", link: x3 },
-// ]
 
-// сабмиты форм
-// formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
-formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель формы пользовательской карточки
 
-// добавить пользовательскую карточку
-export function handleAddCardSubmit(evt) {
-   evt.preventDefault()
-   const like = []
-   const userId = "1857d95644e3d5336aa91bb2"
-   giveCards() // отправить пользовательскую карточку
-   elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value, like, userId))
-   closePopup(imageUserPopup)
-   formUserAdd.reset() // сбросить инпуты  в форме
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // показать заранее подготовленые карточки
 export function renderCards() {
@@ -83,10 +80,10 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
       if (likeButton.classList.contains("element__heart-botton_active")) {
-         givelike(nubmerOfCard)
+         givelike(nubmerOfCard, editUserName, editUserDescription)
          like.textContent = like.textContent * 1 + 1
       } else {
-         deletelike(nubmerOfCard)
+         deletelike(nubmerOfCard, editUserName, editUserDescription)
          like.textContent = like.textContent * 1 + -1
       }
    })
@@ -94,7 +91,7 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    // удаляет
    binButton.addEventListener("click", () => {
       cardElement.remove()
-      deleteCard(nubmerOfCard)
+      deleteCard(nubmerOfCard, editUserName, editUserDescription)
    })
 
    // открывает на фулл
@@ -113,15 +110,4 @@ export function createCard(link, name, likes, userId, nubmerOfCard) {
    return cardElement
 }
 
-//промисы карточек
-Promise.all([
-   receiveCards()
-]).then(function ([cards]) {
-   renderOthersUsersCards(cards)
-})
 
-function renderOthersUsersCards(cards) {
-   cards.forEach(card => {
-      elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
-   })
-}

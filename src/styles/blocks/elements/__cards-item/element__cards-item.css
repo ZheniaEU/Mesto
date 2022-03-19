@@ -4,6 +4,7 @@
    height: 282px;
    margin: 0;
    padding: 0;
+   cursor: pointer;
    border-top-left-radius: 0px; /* вот жеж я крысавчег обошлись без overflow: hidden; в карточке 🐀*/
    border-top-right-radius: 0px;
    overflow: hidden;
