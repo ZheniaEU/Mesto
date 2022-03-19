@@ -107,6 +107,8 @@ function renderAvatar(avatars) {
 const buttonAvatarSubmit = document.querySelector(".popup__accept_avatar")
 
 editAvatar.addEventListener("submit", handleAvatarFormSubmit) //слушатель весит на форме с колбеком
+//!Женя слушатель! слушатель нужно отвалидировать а не колбек
+
 
 function handleAvatarFormSubmit(evt) {// сам колбэк
    evt.preventDefault()//прерываю стандарное действие
@@ -117,7 +119,7 @@ function handleAvatarFormSubmit(evt) {// сам колбэк
       .then((profile) => {
          renderAvatar(profile.avatar) //отобразить аватар
          closePopup(profileAvatar) //закрыть попап
-         formAvatar.reset()
+         // formAvatar.reset()
          // toggleButtonState(formAvatar, avatarEditIntut , validationConfig) //валидация
       })
       .catch(err => { console.log(err) })
@@ -152,16 +154,44 @@ const editImageUrl = document.querySelector(".popup__edit_image_url") // инп�
 // formProfileUser.addEventListener("submit", handleProfileFormSubmit) //слушатель формы профайла
 formUserAdd.addEventListener("submit", handleAddCardSubmit) //слушатель формы пользовательской карточки
 
+//пробую передать кнопку
+const imageButtonAccept = document.querySelector(".popup__accept_image")
+
+//______________________________Наш фрон работа__________________________________________________________
 // добавить пользовательскую карточку
 function handleAddCardSubmit(evt) {
-   evt.preventDefault()
-   const like = []
-   const userId = "1857d95644e3d5336aa91bb2"
+   evt.preventDefault()// сбрасываем тандартное поведени
+
+   renderLoading(true, imageButtonAccept) //функия лоадинга
+
    giveCards(editImagePlace, editImageUrl) // отправить пользовательскую карточку
-   elementsContainer.prepend(createCard(editImageUrl.value, editImagePlace.value, like, userId))
-   closePopup(imageUserPopup)
-   formUserAdd.reset() // сбросить инпуты  в форме
+      .then(card => {
+         elementsContainer.prepend(createCard(card))
+         closePopup(imageUserPopup)
+         formUserAdd.reset() // сбросить инпуты  в форме
+      })
+      .catch(err => { console.log(err) })
+      .finally(() => {
+         renderLoading(false, imageButtonAccept) //убрать загрузку
+      })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const elementsContainer = document.querySelector(".elements__list") //контейнер для подготовленых картинок 
 
@@ -175,13 +205,11 @@ const elementsContainer = document.querySelector(".elements__list") //конте
 //    })
 //    .catch(err => { console.log(`У нас тут ошибка ${err}`) })
 
-function renderOthersUsersCards(profile, cards) {
+function renderOthersUsersCards(cards, profile) {
    cards.forEach(card => {
-      console.log(card._id)
-      elementsContainer.append(createCard(card.link, card.name, card.likes, card.owner._id, profile, card))
+      elementsContainer.append(createCard(card, profile))
    })
 }
-
 
 Promise.all([receiveProfile(), receiveCards()])
    .then(function ([profile, cards]) {
@@ -189,10 +217,11 @@ Promise.all([receiveProfile(), receiveCards()])
       //профиль
       renderAvatar(profile.avatar) //рендерит аватар
       profileRender(profile) //рендерит профиль имя и дескрипшен
+
       //карточки
-      renderOthersUsersCards(profile, cards) //рендерит карточки
+      renderOthersUsersCards(cards, profile) //рендерит карточки
    })
-   .catch(err => { console.log(`Отшиб__очка ${err}`) })
+   .catch(err => { console.log(`Отшиб__очка в промисс алл${err}`) })
 
 // // создаем DOM функцию удаления карточки
 // export const handleDeleteCard = function (card) {
