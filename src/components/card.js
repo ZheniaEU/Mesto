@@ -33,6 +33,7 @@ export function createCard(card, id) {
    }
    chekLikes(card.likes)
 
+   // лайкает
    likeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__heart-botton_active")
       if (likeButton.classList.contains("element__heart-botton_active")) {
@@ -55,8 +56,8 @@ export function createCard(card, id) {
       captionPopup.textContent = card.name
       openPopup(fullImagesPopup)
    })
-   // показывает бины на карточке пользователя
 
+   // показывает бины на карточке пользователя
    if (card.owner._id == id) {
       bin.classList.add("element__bin_active")
    }

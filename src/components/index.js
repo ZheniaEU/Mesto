@@ -17,7 +17,7 @@ const profileAvatar = document.querySelector(".popup_avatar") //открываю
 
 //форма профиля
 const formProfileUser = document.querySelector(".popup__form_character") // форма профиля пока
-const formuserAvatar = document.querySelector(".popup__form_avatar")
+// const formuserAvatar = document.querySelector(".popup__form_avatar")
 
 //форма пользовательских картинок
 const formUserAdd = document.querySelector(".popup__form_image") // форма пользовательских картинок
