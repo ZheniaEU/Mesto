@@ -52,43 +52,33 @@ export function giveCards(editImagePlace, editImageUrl) {
 }
 
 // запрос на удаление карточки пользователя
-export function deleteCard(nubmerOfCard, editUserName, editUserDescription) {
-   const cardId = nubmerOfCard
-   // console.log(nubmerOfCard)
+export function deleteCard(cardId) {
    return fetch(`${myApi.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: myApi.headers,
       body: JSON.stringify({
-         name: editUserName.value,
-         about: editUserDescription.value
       })
    })
       .then(checkResponse)
 }
 
 // запрос на добавление лайка
-export function givelike(nubmerOfCard, editUserName, editUserDescription) {
-   const cardId = nubmerOfCard
+export function givelike(cardId) {
    return fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: myApi.headers,
       body: JSON.stringify({
-         name: editUserName.value,
-         about: editUserDescription.value
       })
    })
       .then(checkResponse)
 }
 
 // запрос на удаление лайка
-export function deletelike(nubmerOfCard, editUserName, editUserDescription) {
-   const cardId = nubmerOfCard
+export function deletelike(cardId) {
    return fetch(`${myApi.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: myApi.headers,
       body: JSON.stringify({
-         name: editUserName.value,
-         about: editUserDescription.value
       })
    })
       .then(checkResponse)
