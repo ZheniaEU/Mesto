@@ -1,4 +1,4 @@
-import { likos, handleDeleteIconClick } from "./index"
+import { сhangeLikeState, handleDeleteIconClick } from "./index"
 import { openPopup, fullImagesPopup } from "./modal"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
@@ -26,7 +26,7 @@ export function createCard(card, id) {
    chekLikes(card.likes, likeButton, id)
 
    // лайкает
-   likeButton.addEventListener("click", () => likos(card._id, likeButton, like))
+   likeButton.addEventListener("click", () => сhangeLikeState(card._id, likeButton, like))
 
    // удаляет 
    binButton.addEventListener('click', () => handleDeleteIconClick(cardElement, card._id))
@@ -48,9 +48,9 @@ export function createCard(card, id) {
 }
 
 //проверяю поставил ли я жопку раньше карточке, если поставил, отображаю
-function chekLikes(likes, likeButton, id) {
-   for (let i = 0; i < likes.length; i++) {
-      if (likes[i]._id == id) {
+function chekLikes(like, likeButton, id) {
+   for (let i = 0; i < like.length; i++) {
+      if (like[i]._id == id) {
          likeButton.classList.add("element__heart-botton_active")
       }
    }

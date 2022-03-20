@@ -184,7 +184,7 @@ function renderOthersUsersCards(cards, profile) {
 }
 
 //функция лайка карточки
-export function likos(card_id, likeButton, like) {
+export function сhangeLikeState(card_id, likeButton, like) {
    likeButton.classList.toggle("element__heart-botton_active")
    if (likeButton.classList.contains("element__heart-botton_active")) {
       givelike(card_id)
