@@ -41,11 +41,13 @@ export function createCard(card, id) {
             .then(() => {
                like.textContent = like.textContent * 1 + 1
             })
+            .catch(err => { console.log(err) })
       } else {
          deletelike(card._id)
             .then(() => {
                like.textContent = like.textContent * 1 + -1
             })
+            .catch(err => { console.log(err) })
       }
    })
 
@@ -62,12 +64,13 @@ export function createCard(card, id) {
       bin.classList.add("element__bin_active")
    }
 
-   //удаляет
+   // удаляет
    binButton.addEventListener("click", () => {
       deleteCard(card._id)
          .then(() => {
             cardElement.remove()
          })
+         .catch(err => {console.log(err) })
    })
 
    return cardElement
