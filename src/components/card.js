@@ -1,6 +1,5 @@
-// import { handleDeleteCard } from "./index"
-import { openPopup, closePopup, fullImagesPopup } from "./modal"
-import { deleteCard, givelike, deletelike, receiveCards } from "./api"
+import { likos, handleDeleteIconClick } from "./index"
+import { openPopup, fullImagesPopup } from "./modal"
 // попапы
 export const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 
@@ -23,33 +22,14 @@ export function createCard(card, id) {
    title.textContent = card.name
    like.textContent = card.likes.length
 
-   //проверяю поставил ли я жопку раньше карточке, если поставил, отображаю
-   function chekLikes(likes) {
-      for (let i = 0; i < likes.length; i++) {
-         if (likes[i]._id == id) {
-            likeButton.classList.add("element__heart-botton_active")
-         }
-      }
-   }
-   chekLikes(card.likes)
+   //чекаем лайки
+   chekLikes(card.likes, likeButton, id)
 
    // лайкает
-   likeButton.addEventListener("click", (evt) => {
-      evt.target.classList.toggle("element__heart-botton_active")
-      if (likeButton.classList.contains("element__heart-botton_active")) {
-         givelike(card._id)
-            .then(() => {
-               like.textContent = like.textContent * 1 + 1
-            })
-            .catch(err => { console.log(err) })
-      } else {
-         deletelike(card._id)
-            .then(() => {
-               like.textContent = like.textContent * 1 + -1
-            })
-            .catch(err => { console.log(err) })
-      }
-   })
+   likeButton.addEventListener("click", () => likos(card._id, likeButton, like))
+
+   // удаляет 
+   binButton.addEventListener('click', () => handleDeleteIconClick(cardElement, card._id))
 
    // открывает на фулл
    cardImage.addEventListener("click", () => {
@@ -64,14 +44,20 @@ export function createCard(card, id) {
       bin.classList.add("element__bin_active")
    }
 
-   // удаляет
-   binButton.addEventListener("click", () => {
-      deleteCard(card._id)
-         .then(() => {
-            cardElement.remove()
-         })
-         .catch(err => {console.log(err) })
-   })
-
    return cardElement
+}
+
+//проверяю поставил ли я жопку раньше карточке, если поставил, отображаю
+function chekLikes(likes, likeButton, id) {
+   for (let i = 0; i < likes.length; i++) {
+      if (likes[i]._id == id) {
+         likeButton.classList.add("element__heart-botton_active")
+      }
+   }
+}
+
+//удаление карточки
+export function handleDeleteCard(card) {
+   card.remove()
+   card = null
 }

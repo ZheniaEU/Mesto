@@ -1,8 +1,8 @@
 import "../pages/index.css"
-import { createCard, imageUserPopup } from "./card"
+import { createCard, imageUserPopup, handleDeleteCard } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
-import { giveProfile, giveAvatar, receiveProfile, giveCards, receiveCards } from "./api"
+import { giveProfile, giveAvatar, receiveProfile, giveCards, receiveCards, deleteCard, givelike, deletelike } from "./api"
 
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
@@ -31,7 +31,7 @@ const editImagePlace = document.querySelector(".popup__edit_image_place") // и�
 const editImageUrl = document.querySelector(".popup__edit_image_url") // инпут url пользовательской карточки
 
 //контейнер для подготовленых картинок 
-const elementsContainer = document.querySelector(".elements__list") 
+const elementsContainer = document.querySelector(".elements__list")
 
 //аватар
 const userAvatar = document.querySelector(".profile__avatar")
@@ -182,6 +182,34 @@ function renderOthersUsersCards(cards, profile) {
       elementsContainer.append(createCard(card, profile))
    })
 }
+
+//функция лайка карточки
+export function likos(card_id, likeButton, like) {
+   likeButton.classList.toggle("element__heart-botton_active")
+   if (likeButton.classList.contains("element__heart-botton_active")) {
+      givelike(card_id)
+         .then(() => {
+            like.textContent = like.textContent * 1 + 1
+         })
+         .catch(err => { console.log(err) })
+   } else {
+      deletelike(card_id)
+         .then(() => {
+            like.textContent = like.textContent * 1 + -1
+         })
+         .catch(err => { console.log(err) })
+   }
+}
+
+//функция удаления карточки
+export function handleDeleteIconClick(cardElement, cardId) {
+   deleteCard(cardId)
+      .then(() => {
+         handleDeleteCard(cardElement);
+      })
+      .catch(err => { console.log(err) })
+}
+
 
 let id
 
