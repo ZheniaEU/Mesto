@@ -2,7 +2,7 @@ import "../pages/index.css"
 import { createCard, imageUserPopup, handleDeleteCard } from "./card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
-import { giveProfile, giveAvatar, receiveProfile, giveCards, receiveCards, deleteCard, givelike, deletelike } from "./api"
+import { Api } from "./Api"
 
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
@@ -61,6 +61,14 @@ const editAvatar = document.querySelector(".popup__form_avatar") // форма �
 
 const inputAvatar = document.querySelector(".popup__edit_user_avatar") //поля аватара
 
+const myApi = new Api ({
+   url: "https://mesto.nomoreparties.co/v1/plus-cohort7",
+   headers: {
+      authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1",
+      "Content-Type": "application/json"
+   }
+})
+
 // слушатерь открывает попап редактирование профиля
 editButtonProfile.addEventListener("click", function () {
    openProfilePopup()
@@ -98,7 +106,7 @@ function handleProfileFormSubmit(evt) {// тут нужно переделать
 
    renderLoading(true, buttonAvatarSubmit) // поставить загрузку
 
-   giveProfile(editUserName, editUserDescription)
+   myApi.giveProfile(editUserName, editUserDescription)
       .then((profile) => {
          //меняю уже из ответа, поля профайла
          profileRender(profile)
@@ -132,7 +140,7 @@ function handleAvatarFormSubmit(evt) {// сам колбэк
 
    renderLoading(true, buttonAvatarSubmit) // поставить загрузку
 
-   giveAvatar(inputAvatar.value) //отдать аватар на сервер
+   myApi.giveAvatar(inputAvatar.value) //отдать аватар на сервер
       .then((profile) => {
          renderAvatar(profile.avatar) //отобразить аватар
          closePopup(profileAvatar) //закрыть попап
@@ -165,7 +173,7 @@ function handleAddCardSubmit(evt) {
 
    renderLoading(true, imageButtonAccept) //функия лоадинга
 
-   giveCards(editImagePlace, editImageUrl) // отправить пользовательскую карточку
+   myApi.giveCards(editImagePlace, editImageUrl) // отправить пользовательскую карточку
       .then(card => {
          elementsContainer.prepend(createCard(card, id))
          closePopup(imageUserPopup)
@@ -184,18 +192,21 @@ function renderOthersUsersCards(cards, profile) {
 }
 
 //функция лайка карточки
+// почему я меняю статус своего лайка до того как пришёл ответ с сервера?
+// ответ это улучшает юзер экспиреенс, гораздо приятнее видеть отдачу без задержки.
+// Пускай даже если что-то пойдёт не так и мой лайк потеряется, это всё ровно лучше. Так же реализовано на youtube
 export function сhangeLikeState(card_id, likeButton, like) {
    likeButton.classList.toggle("element__heart-botton_active")
    if (likeButton.classList.contains("element__heart-botton_active")) {
-      givelike(card_id)
+      like.textContent = like.textContent * 1 + 1
+      myApi.givelike(card_id)
          .then(() => {
-            like.textContent = like.textContent * 1 + 1
          })
          .catch(err => { console.log(err) })
    } else {
-      deletelike(card_id)
+      like.textContent = like.textContent * 1 + -1
+      myApi.deletelike(card_id)
          .then(() => {
-            like.textContent = like.textContent * 1 + -1
          })
          .catch(err => { console.log(err) })
    }
@@ -203,7 +214,7 @@ export function сhangeLikeState(card_id, likeButton, like) {
 
 //функция удаления карточки
 export function handleDeleteIconClick(cardElement, cardId) {
-   deleteCard(cardId)
+   myApi.deleteCard(cardId)
       .then(() => {
          handleDeleteCard(cardElement);
       })
@@ -214,7 +225,7 @@ export function handleDeleteIconClick(cardElement, cardId) {
 let id
 
 //промисы проайла и карточки
-Promise.all([receiveProfile(), receiveCards()])
+Promise.all([myApi.receiveProfile(), myApi.receiveCards()])
    .then(function ([profile, cards]) {
 
       id = profile._id
