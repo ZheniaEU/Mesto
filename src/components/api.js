@@ -1,12 +1,3 @@
-// const myApi = {
-//    baseUrl: "https://mesto.nomoreparties.co/v1/plus-cohort7",//`${myApi.baseUrl}`
-//    headers: {
-//       authorization: "7ae2c7b1-ef91-4b42-9f75-558787176ab1",//myApi.headers
-//       "Content-Type": "application/json"
-//    }
-// }
-
-
 export class Api {
    constructor(options) {
       this._url = options.url

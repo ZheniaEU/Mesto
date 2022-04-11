@@ -1,9 +1,11 @@
 import "../pages/index.css"
-import { createCard, imageUserPopup, handleDeleteCard } from "./card"
+import { createCard, Card } from "./Card"
 import { openPopup, closePopup } from "./modal"
 import { enableValidation, validationConfig, toggleButtonState, checkInputValidity } from "./validate"
 import { Api } from "./Api"
 
+
+const imageUserPopup = document.querySelector(".popup_images") // модалка добавления карточек
 // попапы
 const profilePopup = document.querySelector(".popup_profile") // модалка профиля
 
@@ -68,6 +70,12 @@ const myApi = new Api ({
       "Content-Type": "application/json"
    }
 })
+
+   //удаление карточки
+ function  handleDeleteCard(card) {
+      card.remove()
+      card = null
+   }
 
 // слушатерь открывает попап редактирование профиля
 editButtonProfile.addEventListener("click", function () {
@@ -185,9 +193,9 @@ function handleAddCardSubmit(evt) {
       })
 }
 
-function renderOthersUsersCards(cards, profile) {
+function renderOthersUsersCards(cards, id) {
    cards.forEach(card => {
-      elementsContainer.append(createCard(card, profile))
+      elementsContainer.append(createCard(card, id))
    })
 }
 
@@ -223,18 +231,26 @@ export function handleDeleteIconClick(cardElement, cardId) {
 
 
 let id
+let card
+let ff = new Card({card , id})
+console.log(Card.tt)
+console.log (ff)
 
 //промисы проайла и карточки
 Promise.all([myApi.receiveProfile(), myApi.receiveCards()])
    .then(function ([profile, cards]) {
 
       id = profile._id
+      card = cards
+
+
       //профиль
       renderAvatar(profile.avatar) //рендерит аватар
       profileRender(profile) //рендерит профиль имя и дескрипшен
 
       //карточки
       renderOthersUsersCards(cards, id) //рендерит карточки
+
    })
    .catch(err => { console.log(`Отшиб__очка в промисс алл${err}`) })
 
